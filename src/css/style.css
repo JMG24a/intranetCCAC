@@ -1,0 +1,79 @@
+body {
+    background-color: #262629;
+}
+
+
+/* Login  */
+
+.login img{
+    width: 100%;
+}
+.login button{
+    background-color: #C0AB50;
+}
+.login button:hover{
+    background-color: #97873e;
+}
+
+
+/* Ver Clientes  */
+
+.verClientes h1{
+    color:#C0AB50;
+    font-weight: 700;
+}
+
+.verClientes .fondo{
+    background-color: #eceef0;
+    /* margin: 20px; */
+    padding: 20px;
+}
+.verClientes .fondo label{
+    font-size: 22px;
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+.verClientes .fondo input, select{
+    height: 35px;
+}
+
+.verClientes .table .btn{
+    background-color: #C0AB50;
+    color: black;
+    border: none;
+}
+
+/* Crear Clientes  */
+.crearCliente h1{
+    color:#C0AB50;
+    font-weight: 700;
+}
+.crearCliente .formu{
+    background-color: white;
+    padding: 2%;
+}
+
+.crearCliente label{
+    margin-top: 13px;
+}
+.crearCliente .fondo input, select{
+    height: 40px;
+}
+
+/* Editar Cliente  */
+
+.EditarCliente h1{
+    color:#C0AB50;
+    font-weight: 700;
+}
+.EditarCliente form{
+    background-color: white;
+    padding: 2%;
+}
+
+.EditarCliente label{
+    margin-top: 13px;
+}
+.EditarCliente .fondo input, select{
+    height: 40px;
+}
