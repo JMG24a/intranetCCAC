@@ -74,7 +74,7 @@ const Participantes = () => {
                             <th>F. Vacuna</th>
                             <th>Pasaporte</th>
                             <th>C. Vacuna</th>
-                            <th>Editar</th>
+                            <th colSpan="2">Editar</th>
                         </tr>
                     </thead>
                     <tbody>

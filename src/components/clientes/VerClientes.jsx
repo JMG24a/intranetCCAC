@@ -23,11 +23,116 @@ const VerClientes = () => {
     const [cotizaciones, setCotizaciones] = useState()
     const [kam, setKam] = useState()
     const [probabilidadCierre, setProbabilidadCierre] = useState()
+    const [inputHand, setInputHand] = useState()
+
+    const [estadoCount, setEstadoCount] = useState(0)
+    const [cotizacionEnviadaCount, setCotizacionEnviadaCount] = useState(0)
+    const [cotizacionDevuelto, setCotizacionDevuelto] = useState(0)
+    const [cotizacionPagado, setCotizacionPagado] = useState(0)
+
 
     const getClientesFiltro = ()=>{
+       
+            axios.get(`${process.env.REACT_APP_SERVIDOR}/api/clientes?limit=1000&offset=${page}&estado=Pendiente Enviar Cotizacion`,{
+                headers:{
+                    token:'JaRvIs92!',
+                    correo:'alecapo@gmail.com',
+                    password:'123456'
+                        }
+            })
+            .then(e=>setEstadoCount(e.data.length))
+            .catch(e=>console.log(e))
+           
+            axios.get(`${process.env.REACT_APP_SERVIDOR}/api/clientes?limit=1000&offset=${page}&estado=Cotizacion Enviada`,{
+                headers:{
+                    token:'JaRvIs92!',
+                    correo:'alecapo@gmail.com',
+                    password:'123456'
+                        }
+            })
+            .then(e=>setCotizacionEnviadaCount(e.data.length))
+            .catch(e=>console.log(e))
+           
+           
+            axios.get(`${process.env.REACT_APP_SERVIDOR}/api/clientes?limit=1000&offset=${page}&estado=Pendiente Enviar Informacion`,{
+                headers:{
+                    token:'JaRvIs92!',
+                    correo:'alecapo@gmail.com',
+                    password:'123456'
+                        }
+            })
+            .then(e=>setCotizacionDevuelto(e.data.length))
+            .catch(e=>console.log(e))
 
-        if(cotizaciones){
-            axios.get(`${process.env.REACT_APP_SERVIDOR}/api/clientes?limit=10&offset=${page}&cotizaciones=${cotizaciones}`,{
+
+            axios.get(`${process.env.REACT_APP_SERVIDOR}/api/clientes?limit=1000&offset=${page}&estado=Pagado`,{
+                headers:{
+                    token:'JaRvIs92!',
+                    correo:'alecapo@gmail.com',
+                    password:'123456'
+                        }
+            })
+            .then(e=>setCotizacionPagado(e.data.length))
+            .catch(e=>console.log(e))
+
+
+            axios.get(`${process.env.REACT_APP_SERVIDOR}/api/clientes?limit=10&offset=${page}`,{
+                headers:{
+                    token:'JaRvIs92!',
+                    correo:'alecapo@gmail.com',
+                    password:'123456'
+                }
+            })
+            .then(e=>setClientes(e.data))
+            .catch(e=>console.log(e))
+        
+    }
+
+    const selectHandler = (id, estado) =>{
+        console.log(id, estado)
+        const data = {id:id, estado:estado}
+
+        axios.put(`${process.env.REACT_APP_SERVIDOR}/api/clientes/${id}`, data, {
+            headers:{
+                token:'JaRvIs92!',
+                correo:'alecapo@gmail.com',
+                password:'123456'
+            }
+        })
+        .then(e=>console.log(e.data))
+        .catch(e=>console.log(e))
+    }
+
+    const deleteHandler = (id) =>{
+        axios.delete(`${process.env.REACT_APP_SERVIDOR}/api/clientes/${id}`,{
+            headers:{
+                token:'JaRvIs92!',
+                correo:'alecapo@gmail.com',
+                password:'123456'
+            }
+        }).then((e)=>{
+            alert('Eliminado Correctamente')
+            console.log(e)
+        })
+        getClientesFiltro();
+    }
+
+    const searchHand = () => {
+        if(estado && kam){
+            axios.get(`${process.env.REACT_APP_SERVIDOR}/api/clientes?limit=1000&offset=${page}&estado=${estado}&kam=${kam}`,{
+                headers:{
+                    token:'JaRvIs92!',
+                    correo:'alecapo@gmail.com',
+                    password:'123456'
+                        }
+            })
+            .then(e=>setClientes(e.data))
+            .catch(e=>console.log(e))
+            return;
+        }
+        
+        if(estado){
+            axios.get(`${process.env.REACT_APP_SERVIDOR}/api/clientes?limit=1000&offset=${page}&estado=${estado}`,{
                 headers:{
                     token:'JaRvIs92!',
                     correo:'alecapo@gmail.com',
@@ -37,6 +142,7 @@ const VerClientes = () => {
             .then(e=>setClientes(e.data))
             .catch(e=>console.log(e))
         }
+
         if(probabilidadCierre){
             axios.get(`${process.env.REACT_APP_SERVIDOR}/api/clientes?limit=10&offset=${page}&probabilidadCierre=${probabilidadCierre}`,{
                 headers:{
@@ -62,9 +168,8 @@ const VerClientes = () => {
             
         }
 
-
-        if(estado && categoria && subCategoria){
-            axios.get(`${process.env.REACT_APP_SERVIDOR}/api/clientes?limit=10&offset=${page}&estado=${estado}&categoria=${categoria}&subcategoria=${subCategoria}`,{
+        if(inputHand){
+            axios.get(`${process.env.REACT_APP_SERVIDOR}/api/clientes?limit=10&offset=${page}&searchValue=${inputHand}`,{
                 headers:{
                     token:'JaRvIs92!',
                     correo:'alecapo@gmail.com',
@@ -74,188 +179,98 @@ const VerClientes = () => {
             .then(e=>setClientes(e.data))
             .catch(e=>console.log(e))
         }
-        else if(estado && categoria){
-            axios.get(`${process.env.REACT_APP_SERVIDOR}/api/clientes?limit=10&offset=${page}&estado=${estado}&categoria=${categoria}`,{
-                headers:{
-                    token:'JaRvIs92!',
-                    correo:'alecapo@gmail.com',
-                    password:'123456'
-                        }
-            })
-            .then(e=>setClientes(e.data))
-            .catch(e=>console.log(e))
-        }
-        else if(subCategoria){
-            axios.get(`${process.env.REACT_APP_SERVIDOR}/api/clientes?limit=10&offset=${page}&subcategoria=${estado}`,{
-                headers:{
-                    token:'JaRvIs92!',
-                    correo:'alecapo@gmail.com',
-                    password:'123456'
-                        }
-            })
-            .then(e=>setClientes(e.data))
-            .catch(e=>console.log(e))
-        }else if(estado){
-            axios.get(`${process.env.REACT_APP_SERVIDOR}/api/clientes?limit=1000&offset=${page}&estado=${estado}`,{
-                headers:{
-                    token:'JaRvIs92!',
-                    correo:'alecapo@gmail.com',
-                    password:'123456'
-                        }
-            })
-            .then(e=>setClientes(e.data))
-            .catch(e=>console.log(e))
-        }else if(categoria){
-            axios.get(`${process.env.REACT_APP_SERVIDOR}/api/clientes?limit=10&offset=${page}&categoria=${categoria}`,{
-                headers:{
-                    token:'JaRvIs92!',
-                    correo:'alecapo@gmail.com',
-                    password:'123456'
-                        }
-            })
-            .then(e=>setClientes(e.data))
-            .catch(e=>console.log(e))
-        }else{
-            axios.get(`${process.env.REACT_APP_SERVIDOR}/api/clientes?limit=10&offset=${page}`,{
-                headers:{
-                    token:'JaRvIs92!',
-                    correo:'alecapo@gmail.com',
-                    password:'123456'
-                }
-            })
-            .then(e=>setClientes(e.data))
-            .catch(e=>console.log(e))
-        }
-    }
-
-    const selectHandler = (id, estado) =>{
-        console.log(id, estado)
-        const data = {id:id, estado:estado}
-
-        axios.put(`${process.env.REACT_APP_SERVIDOR}/api/clientes/${id}`, data, {
-            headers:{
-                token:'JaRvIs92!',
-                correo:'alecapo@gmail.com',
-                password:'123456'
-            }
-        })
-        .then(e=>console.log(e.data))
-        .catch(e=>console.log(e))
-    }
-    
-    const searchHandler = (e) => {
-        axios.get(`${process.env.REACT_APP_SERVIDOR}/api/clientes?limit=10&offset=${page}&searchValue=${e.target.value}`,{
-            headers:{
-                token:'JaRvIs92!',
-                correo:'alecapo@gmail.com',
-                password:'123456'
-                    }
-        })
-        .then(e=>setClientes(e.data))
-        .catch(e=>console.log(e))
-    }
-
-    const deleteHandler = (id) =>{
-        axios.delete(`${process.env.REACT_APP_SERVIDOR}/api/clientes/${id}`,{
-            headers:{
-                token:'JaRvIs92!',
-                correo:'alecapo@gmail.com',
-                password:'123456'
-            }
-        }).then((e)=>{
-            alert('Eliminado Correctamente')
-            console.log(e)
-        })
-        getClientesFiltro();
     }
 
     useEffect(() => {
         getClientesFiltro();
-    }, [page, estado, categoria, subCategoria, kam,probabilidadCierre])
+    }, [page, inputHand, estado, kam, probabilidadCierre])
     
     return (
         <div className='px-4 py-5 verClientes'>
             <h1 className="mb-4">INTRANET CCAC</h1>
-            <div className="row fondo">
-                <div className="col-md-6">
-                    <div className="form-group">
-                        <label htmlFor="esadoFiltro">Estado</label>
-                        <select name="estadoFiltro" id="estadoFiltro" className="form-control m-0 p-0" onChange={e=>setEstado(e.target.value)}>
-                            <option>- Seleccione Filtro -</option>
-                                <option value="Imposible de Contactar">Imposible de Contactar</option>
-                                <option value="Pendiente Enviar Informacion">Pendiente Enviar Informacion</option>
-                                <option value="Revision Informacion">Revision Informacion</option>
-                                <option value="Pendiente Enviar Cotizacion">Pendiente Enviar Cotizacion</option>
-                                <option value="Cotizacion Enviada">Cotizacion Enviada</option>
-                                <option value="Facturado">Facturado</option>
-                                <option value="Cerrado Perdido">Cerrado Perdido</option>
-                                <option value="Pagado">Pagado</option>
-                                <option value="Devuelto">Devuelto</option>
-                        </select>
-                    </div>
-                    <div className="form-group mt-3">
-                        <label htmlFor="categoria">Probabilidad De Cierre</label>
-                        <select name="categoria" id="categoria" className="form-control m-0 p-0" onChange={e=>setProbabilidadCierre(e.target.value)}>
-                        <option value="">- Seleccione -</option>
-                            <option value="Identificado">Identificado (0%)</option>
-                            <option value="Bajo">Bajo (40%)</option>
-                            <option value="Medio">Medio (40%-80%)</option>
-                            <option value="Alto">Alto (80% - 90%)</option>
-                            <option value="Cerrado Ganado">Cerrado Ganado</option>
-                            <option value="Cerrado Perdido">Cerrado Perdido</option>
-                        </select>
-                    </div>
-                    {/* <div className="form-group mt-3">
-                        <label htmlFor="subCategoria">Sub Categoria</label>
-                        <select name="subCategoria" id="subCategoria" className="form-control"  onChange={e=>setSubCategoria(e.target.value)}>
-                                            <option>- Seleccione Filtro -</option>
-                                            <option value="Comercio - agricultura">Comercio - agricultura</option>
-                                            <option value="Comercio - energia">Comercio - energia y mineria</option>
-                                            <option value="Comercio - textiles">Comercio - textiles</option>
-                                            <option value="Comercio - ganaderia">Comercio - ganaderia</option>
-                                            <option value="Comercio - negocios">Comercio - negocios y finanzas</option>
-                                            <option value="Comercio - aeroespacial">Comercio - aeroespacial</option>
-                                            <option value="Comercio - tecnologia">Comercio - tecnologia</option>
-                                            <option value="Comercio - camara">Comercio - camara de comercio</option>
-                                            <option value="Academia - ingenieria">Academia - ingenieria</option>
-                                            <option value="Academia - publicidad">Academia - publicidad y mercadeo</option>
-                                            <option value="Academia - administracion">Academia - administracion y negocios</option>
-                                            <option value="Academia - humanidades">Academia - humanidades</option>
-                                            <option value="Academia - arquitectura">Academia - arquitectura</option>
-                                            <option value="Academia - leyes">Academia - leyes</option>
-                                            <option value="Academia - medicina">Academia - medicina</option>
-                                            <option value="Gobierno - gobernacion">Gobierno - gobernacion</option>
-                                            <option value="Gobierno - alcaldia">Gobierno - alcaldia</option>
-                                            <option value="Gobierno - otro">Gobierno - otro</option>
-                                            <option value="Gobierno - Anm">Gobierno - Agencia Nacional Mineria</option>
-                                            <option value="Gobierno - Anm">Turismo</option>
-                                        </select>
-                    </div> */}
-                    <div className="form-group mt-3">
-                        <label htmlFor="categoria">KAM</label>
-                        <select name="categoria" id="categoria" className="form-control m-0 p-0" onChange={e=>setKam(e.target.value)}>
-                            <option>- Seleccione Filtro -</option>
-                            <option value="Leidy">Leidy</option>
-                            <option value="Alejandra">Alejandra</option>
-                            <option value="Alison">Alison</option>
-                            <option value="Natalia">Natalia</option>
-                            <option value="Jesus">Jesus</option>
-                            <option value="Cecilia">Cecilia</option>
-                            <option value="Nicolas">Nicolas</option>
-                        </select>
-                    </div>
-                    <div className="form-group mt-2">
-                        <label htmlFor="buscar">Buscar Valor</label>
-                        <input type="text" name="buscar" id="buscar" className="form-control" onChange={searchHandler} placeholder="Ingrese Empresa, Contacto o Nit para buscar"/>
-                    </div>
+            <div className="row my-4">
+                <div className="col-md-3">
+                    <h1 className="text-white text-center">{estadoCount}</h1>
+                    <h3 className="text-white text-center">Cotizaciones Pendientes</h3>
                 </div>
-                <div className="col-md-4"></div>
-                <div className="col-md-2 float-end">
-                    <Link to="/clientes/crear"><button className="btn btn-success my-4">Crear Nuevo Cliente</button></Link>
-                    <Link to="/participantes"><button className="btn btn-warning my-4">Pasajeros con Documentos</button></Link>
+                <div className="col-md-3">
+                     <h1 className="text-white text-center">{cotizacionEnviadaCount} </h1>
+                     <h3 className="text-white text-center">Cotizaciones Enviadas</h3>
+                </div>
+                <div className="col-md-3">
+                     <h1 className="text-white text-center">{cotizacionDevuelto}</h1>
+                     <h3 className="text-white text-center">Pendiente Enviar Informacion</h3>
+                </div>
+                <div className="col-md-3">
+                     <h1 className="text-white text-center">{cotizacionPagado} / 1.000</h1>
+                     <h3 className="text-white text-center">Pagados</h3>
                 </div>
             </div>
-          
+            <div className="row">
+            <div className="col-lg-7 col-sm-12">
+                <div className="row fondo">
+                    <div className="form-group mt-2">
+                        <label htmlFor="buscar">Buscar Valor</label>
+                        <input type="text" name="buscar" id="buscar" className="form-control" onChange={(e)=>setInputHand(e.target.value)} placeholder="Ingrese Empresa, Contacto o Nit para buscar"/>
+                    </div>
+                    <div className="col-md-4">
+                        <div className="form-group mt-3 text-center">
+                            <label htmlFor="esadoFiltro">Estado</label>
+                            <select name="estadoFiltro" id="estadoFiltro" className="form-control m-0 p-0 text-center" onChange={e=>setEstado(e.target.value)}>
+                                <option>- Seleccione Filtro -</option>
+                                    <option value="Imposible de Contactar">Imposible de Contactar</option>
+                                    <option value="Pendiente Enviar Informacion">Pendiente Enviar Informacion</option>
+                                    <option value="Revision Informacion">Revision Informacion</option>
+                                    <option value="Pendiente Enviar Cotizacion">Pendiente Enviar Cotizacion</option>
+                                    <option value="Cotizacion Enviada">Cotizacion Enviada</option>
+                                    <option value="Facturado">Facturado</option>
+                                    <option value="Cerrado Perdido">Cerrado Perdido</option>
+                                    <option value="Abonado">Abonado</option>
+                                    <option value="Pagado">Pagado</option>
+                                    <option value="Devuelto">Devuelto</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div className="col-md-4">
+                        <div className="form-group mt-3 text-center">
+                            <label htmlFor="categoria">Probabilidad De Cierre</label>
+                            <select name="categoria" id="categoria" className="form-control m-0 p-0 text-center" onChange={e=>setProbabilidadCierre(e.target.value)}>
+                            <option value="">- Seleccione -</option>
+                                <option value="Identificado">Identificado (0%)</option>
+                                <option value="Bajo">Bajo (40%)</option>
+                                <option value="Medio">Medio (40%-80%)</option>
+                                <option value="Alto">Alto (80% - 90%)</option>
+                                <option value="Cerrado Ganado">Cerrado Ganado</option>
+                                <option value="Cerrado Perdido">Cerrado Perdido</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div className="col-md-4">
+                        <div className="form-group mt-3 text-center">
+                            <label htmlFor="categoria">KAM</label>
+                            <select name="categoria" id="categoria" className="form-control m-0 p-0 text-center" onChange={e=>setKam(e.target.value)}>
+                                <option>- Seleccione Filtro -</option>
+                                <option value="Leidy">Leidy</option>
+                                <option value="Alejandra">Alejandra</option>
+                                <option value="Alison">Alison</option>
+                                <option value="Natalia">Natalia</option>
+                                <option value="Jesus">Jesus</option>
+                                <option value="Cecilia">Cecilia</option>
+                                <option value="Nicolas">Nicolas</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div className="col-md-4">
+                        <button className="btn btn-warning mt-4" onClick={searchHand}>Buscar</button>
+                        <button className="btn btn-danger ms-4 mt-4" onClick={()=>{setEstado(); setKam(); setProbabilidadCierre(); setInputHand();}}>Reiniciar Campos</button>
+                    </div>
+                </div>
+            </div>
+            <div className="col-lg-4 col-sm-12 float-end fondo">
+                <Link to="/clientes/crear"><button className="btn btn-success my-4">Crear Nuevo Cliente</button></Link>
+                <Link to="/participantes"><button className="btn btn-warning my-4 ms-4">Pasajeros con Documentos</button></Link>
+            </div>
+            </div>
             <div className="table-responsive my-4">
                 <table className="table table-light table-striped table-hover ">
                 <thead>
@@ -267,8 +282,6 @@ const VerClientes = () => {
                         <th>Fecha Llamada</th>
                         <th>Empresa</th>
                         <th>Contacto</th>
-                        {/* <th>Telefono</th> */}
-                        {/* <th>Celular1</th> */}
                         <th>Correo</th>
                         <th>Comentarios</th>
                         <th>Estado</th>
@@ -304,6 +317,7 @@ const VerClientes = () => {
                                             <option value="Cotizacion Enviada">Cotizacion Enviada</option>
                                             <option value="Facturado">Facturado</option>
                                             <option value="Cerrado Perdido">Cerrado Perdido</option>
+                                            <option value="Abonado">Abonado</option>
                                             <option value="Pagado">Pagado</option>
                                             <option value="Devuelto">Devuelto</option>
                                         </select>

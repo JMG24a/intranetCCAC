@@ -198,6 +198,9 @@ const CrearCliente = () => {
                                 <option value="Cotizacion Enviada">Cotizacion Enviada</option>
                                 <option value="Facturado">Facturado</option>
                                 <option value="Cerrado Perdido">Cerrado Perdido</option>
+                                <option value="Abonado">Abonado</option>
+                                <option value="Pagado">Pagado</option>
+                                <option value="Devuelto">Devuelto</option>
                             </select>
                         </div>
                         <div className="col-md-4 m-0">
