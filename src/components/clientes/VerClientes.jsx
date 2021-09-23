@@ -30,7 +30,7 @@ const VerClientes = () => {
     const [cotizacionEnviadaCount, setCotizacionEnviadaCount] = useState(0)
     const [cotizacionDevuelto, setCotizacionDevuelto] = useState(0)
     const [cotizacionPagado, setCotizacionPagado] = useState(0)
-
+    const [cotiDev, setCotiDev] = useState(0)
 
     const getClientesFiltro = ()=>{
        
@@ -74,6 +74,16 @@ const VerClientes = () => {
                         }
             })
             .then(e=>setCotizacionPagado(e.data.length))
+            .catch(e=>console.log(e))
+           
+            axios.get(`${process.env.REACT_APP_SERVIDOR}/api/clientes?limit=1000&offset=${page}&estado=Devuelto`,{
+                headers:{
+                    token:'JaRvIs92!',
+                    correo:'alecapo@gmail.com',
+                    password:'123456'
+                        }
+            })
+            .then(e=>setCotiDev(e.data.length))
             .catch(e=>console.log(e))
 
 
@@ -213,19 +223,27 @@ const VerClientes = () => {
         <div className='px-4 py-5 verClientes'>
             <h1 className="mb-4">INTRANET CCAC</h1>
             <div className="row my-4">
-                <div className="col-md-3">
+                <div className="col-md-2">
                     <h1 className="text-white text-center">{estadoCount}</h1>
                     <h3 className="text-white text-center">Cotizaciones Pendientes</h3>
                 </div>
-                <div className="col-md-3">
+                <div className="col-md-2">
                      <h1 className="text-white text-center">{cotizacionEnviadaCount} </h1>
                      <h3 className="text-white text-center">Cotizaciones Enviadas</h3>
                 </div>
-                <div className="col-md-3">
+                <div className="col-md-2">
                      <h1 className="text-white text-center">{cotizacionDevuelto}</h1>
                      <h3 className="text-white text-center">Variaciones</h3>
                 </div>
-                <div className="col-md-3">
+                <div className="col-md-2">
+                     <h1 className="text-white text-center">{cotizacionDevuelto}</h1>
+                     <h3 className="text-white text-center">Emitir Tiquetes</h3>
+                </div>
+                <div className="col-md-2">
+                     <h1 className="text-white text-center">{cotiDev}</h1>
+                     <h3 className="text-white text-center">Devueltos</h3>
+                </div>
+                <div className="col-md-2">
                      <h1 className="text-white text-center">{cotizacionPagado} / 70</h1>
                      <h3 className="text-white text-center">Pagados</h3>
                 </div>
