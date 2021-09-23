@@ -60,6 +60,7 @@ const EditarCliente = () => {
             observCoti:e.target['observCoti'].value,
             cantidad:e.target['cantidad'].value,
             vUnitario:e.target['vUnitario'].value,
+            grupo:e.target['grupo'].value,
             formaPago:e.target['formaPago'].value,
             total:e.target['total'].value,
             FechaInicioV:e.target['FechaInicioV'].value,
@@ -271,19 +272,55 @@ const EditarCliente = () => {
                                     <option value="Transferencia Davivienda">Transferencia Davivienda</option>
                                 </select>
                         </div>
-                        {/* <div className="col-md-3">
-                            <label htmlFor="grupo">Grupo</label>
-                                <select name="grupo" id="grupo" className="form-control">
-                                    <option value={cliente.grupo}>{cliente.grupo}</option>
-                                    <option value="Octubre">1</option>
-                                    <option value="Noviembre">2</option>
-                                    <option value="Diciembre">3</option>
-                                    <option value="Enero">4</option>
-                                    <option value="Febrero">5</option>
-                                    <option value="Marzo">6</option>
-                                    
-                                </select>
-                        </div> */}
+                            <div className="col-md-3">
+                                <label htmlFor="grupo">Grupo</label>
+                                    <select name="grupo" id="grupo" className="form-control">
+                                        <option value={cliente.grupo}>{cliente.grupo}</option>
+                                        <option value="1 GobernacionesX11 NOV">1 GobernacionesX11 NOV</option>
+                                        <option value="2 Gob de Casanare">2 Gob de Casanare</option>
+                                        <option value="3 Gob de BoyacaX11 NOV">3 Gob de BoyacaX11 NOV</option>
+                                        <option value="3A Gob de BoyacaX11 Acompañanate">3A Gob de BoyacaX11 Acompañanate</option>
+                                        <option value="4 GobernacionesX8">4 GobernacionesX8</option>
+                                        <option value="5 Comer PereiraX11 NOV">5 Comer PereiraX11 NOV</option>
+                                        <option value="6 Frisby PereiraX11 NOV">6 Frisby PereiraX11 NOV</option>
+                                        <option value="7 ANM ContratistasX9">7 ANM ContratistasX9</option>
+                                        <option value="8 ANM VIP InternoX10">8 ANM VIP InternoX10</option>
+                                        <option value="9 ANM VIP ExternoX10">9 ANM VIP ExternoX10</option>
+                                        <option value="10 ANM VIP ExternoX10 Sin TKTS">10 ANM VIP ExternoX10 Sin TKTS</option>
+                                        <option value="11A ANM ExternoX8">11A ANM ExternoX8</option>
+                                        <option value="11B ANM ExternoX8 Sin TKTS">11B ANM ExternoX8 Sin TKTS</option>
+                                        <option value="12A ANM ExternoX11">12A ANM ExternoX11</option>
+                                        <option value="12B ANM ExternoX11 Sin TKTS">12B ANM ExternoX11 Sin TKTS</option>
+                                        <option value="13 Academia IST X8">13 Academia IST X8</option>
+                                        <option value="14 Academia MAD X8">14 Academia MAD X8</option>
+                                        <option value="15 Academia SUE X 11">15 Academia SUE X 11</option>
+                                        <option value="16 Academica SUEX11 Acompañante">16 Academica SUEX11 Acompañante</option>
+                                        <option value="16A Academia SUE y Acompañante">16A Academia SUE y Acompañante</option>
+                                        <option value="17 Academia + Madrid X11">17 Academia + Madrid X11</option>
+                                        <option value="18 Academia + Cairo X12">18 Academia + Cairo X12</option>
+                                        <option value="18 Academia + Cairo X12 (acompañantes">18 Academia + Cairo X12 (acompañantes)</option>
+                                        <option value="18B Academia + Cairo X12">18B Academia + Cairo X12</option>
+                                        <option value="19 Academia+MAD+CAI X 13">19 Academia+MAD+CAI X 13</option>
+                                        <option value="19 Academia+MAD+CAI X 13 (Acomp">19 Academia+MAD+CAI X 13 (Acomp)</option>
+                                        <option value="20 Comercial S. Arquitectos X 11">20 Comercial S. Arquitectos X 11</option>
+                                        <option value="21 Turismo IST X 11">21 Turismo IST X 11</option>
+                                        <option value="22 CCPasto X 11 + DOH">22 CCPasto X 11 + DOH</option>
+                                        <option value="23 Comercial ICN X 15">23 Comercial ICN X 15</option>
+                                        <option value="24 Fenalco X 8">24 Fenalco X 8</option>
+                                        <option value="25 Multisectorial Tutorial X 11">25 Multisectorial Tutorial X 11</option>
+                                        <option value="26 CarboMax X 9">26 CarboMax X 9</option>
+                                        <option value="27 CarboMax VIP">27 CarboMax VIP</option>
+                                        <option value="28 VIP">28 VIP</option>
+                                        <option value="29 Gober Socha Ariporo X11 ">29 Gober Socha Ariporo X11 </option>
+                                        <option value="30 Unibolivar">30 Unibolivar</option>
+                                        <option value="31 Recetor">31 Recetor</option>
+                                        <option value="32 Univ. Eje IST+DBX+CAI x16">32 Univ. Eje IST+DBX+CAI x16</option>
+                                        <option value="33 Univ. Eje IST+DBX+CAI x15">33 Univ. Eje IST+DBX+CAI x15</option>
+                                        <option value="34 Turismo">34 Turismo</option>
+                                        <option value="35 UPTC x 10">35 UPTC x 10</option>
+                                        
+                                    </select>
+                            </div>
                     </div>
                     <div className="row my-4">
                         <div className="col-md-6">
@@ -333,8 +370,12 @@ const EditarCliente = () => {
                                 <option value="Cotizacion Enviada">Cotizacion Enviada</option>
                                 <option value="Facturado">Facturado</option>
                                 <option value="Cerrado Perdido">Cerrado Perdido</option>
+                                <option value="Abonado">Abonado</option>
                                 <option value="Pagado">Pagado</option>
                                 <option value="Devuelto">Devuelto</option>
+                                <option value="Variaciones">Variaciones</option>
+                                <option value="Emitir Tiquetes">Emitir Tiquetes</option>
+                                <option value="En Logistica">En Logistica</option>
                             </select>
                         </div>
                     </div>

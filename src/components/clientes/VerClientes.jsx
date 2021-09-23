@@ -24,6 +24,7 @@ const VerClientes = () => {
     const [kam, setKam] = useState()
     const [probabilidadCierre, setProbabilidadCierre] = useState()
     const [inputHand, setInputHand] = useState()
+    const [grupo, setGrupo] = useState([])
 
     const [estadoCount, setEstadoCount] = useState(0)
     const [cotizacionEnviadaCount, setCotizacionEnviadaCount] = useState(0)
@@ -54,7 +55,7 @@ const VerClientes = () => {
             .catch(e=>console.log(e))
            
            
-            axios.get(`${process.env.REACT_APP_SERVIDOR}/api/clientes?limit=1000&offset=${page}&estado=Pendiente Enviar Informacion`,{
+            axios.get(`${process.env.REACT_APP_SERVIDOR}/api/clientes?limit=1000&offset=${page}&estado=Variaciones`,{
                 headers:{
                     token:'JaRvIs92!',
                     correo:'alecapo@gmail.com',
@@ -144,7 +145,7 @@ const VerClientes = () => {
         }
 
         if(probabilidadCierre){
-            axios.get(`${process.env.REACT_APP_SERVIDOR}/api/clientes?limit=10&offset=${page}&probabilidadCierre=${probabilidadCierre}`,{
+            axios.get(`${process.env.REACT_APP_SERVIDOR}/api/clientes?limit=1000&offset=${page}&probabilidadCierre=${probabilidadCierre}`,{
                 headers:{
                     token:'JaRvIs92!',
                     correo:'alecapo@gmail.com',
@@ -169,7 +170,30 @@ const VerClientes = () => {
         }
 
         if(inputHand){
-            axios.get(`${process.env.REACT_APP_SERVIDOR}/api/clientes?limit=10&offset=${page}&searchValue=${inputHand}`,{
+            axios.get(`${process.env.REACT_APP_SERVIDOR}/api/clientes?limit=1000&offset=${page}&searchValue=${inputHand}`,{
+                headers:{
+                    token:'JaRvIs92!',
+                    correo:'alecapo@gmail.com',
+                    password:'123456'
+                        }
+            })
+            .then(e=>setClientes(e.data))
+            .catch(e=>console.log(e))
+        }
+        if(categoria){
+            axios.get(`${process.env.REACT_APP_SERVIDOR}/api/clientes?limit=1000&offset=${page}&categoria=${categoria}`,{
+                headers:{
+                    token:'JaRvIs92!',
+                    correo:'alecapo@gmail.com',
+                    password:'123456'
+                        }
+            })
+            .then(e=>setClientes(e.data))
+            .catch(e=>console.log(e))
+        }
+        if(grupo){
+            console.log(grupo)
+            axios.get(`${process.env.REACT_APP_SERVIDOR}/api/clientes?limit=1000&offset=${page}&grupo=${grupo}`,{
                 headers:{
                     token:'JaRvIs92!',
                     correo:'alecapo@gmail.com',
@@ -183,7 +207,7 @@ const VerClientes = () => {
 
     useEffect(() => {
         getClientesFiltro();
-    }, [page, inputHand, estado, kam, probabilidadCierre])
+    }, [page, inputHand, estado, kam, probabilidadCierre, categoria, grupo])
     
     return (
         <div className='px-4 py-5 verClientes'>
@@ -199,10 +223,10 @@ const VerClientes = () => {
                 </div>
                 <div className="col-md-3">
                      <h1 className="text-white text-center">{cotizacionDevuelto}</h1>
-                     <h3 className="text-white text-center">Pendiente Enviar Informacion</h3>
+                     <h3 className="text-white text-center">Variaciones</h3>
                 </div>
                 <div className="col-md-3">
-                     <h1 className="text-white text-center">{cotizacionPagado} / 1.000</h1>
+                     <h1 className="text-white text-center">{cotizacionPagado} / 70</h1>
                      <h3 className="text-white text-center">Pagados</h3>
                 </div>
             </div>
@@ -210,10 +234,10 @@ const VerClientes = () => {
             <div className="col-lg-7 col-sm-12">
                 <div className="row fondo">
                     <div className="form-group mt-2">
-                        <label htmlFor="buscar">Buscar Valor</label>
+                        <label htmlFor="buscar">Ingrese Nombre para buscar</label>
                         <input type="text" name="buscar" id="buscar" className="form-control" onChange={(e)=>setInputHand(e.target.value)} placeholder="Ingrese Empresa, Contacto o Nit para buscar"/>
                     </div>
-                    <div className="col-md-4">
+                    <div className="col-md-3">
                         <div className="form-group mt-3 text-center">
                             <label htmlFor="esadoFiltro">Estado</label>
                             <select name="estadoFiltro" id="estadoFiltro" className="form-control m-0 p-0 text-center" onChange={e=>setEstado(e.target.value)}>
@@ -228,14 +252,17 @@ const VerClientes = () => {
                                     <option value="Abonado">Abonado</option>
                                     <option value="Pagado">Pagado</option>
                                     <option value="Devuelto">Devuelto</option>
+                                    <option value="Variaciones">Variaciones</option>
+                                    <option value="Emitir Tiquetes">Emitir Tiquetes</option>
+                                    <option value="En Logistica">En Logistica</option>
                             </select>
                         </div>
                     </div>
-                    <div className="col-md-4">
+                    <div className="col-md-3">
                         <div className="form-group mt-3 text-center">
                             <label htmlFor="categoria">Probabilidad De Cierre</label>
                             <select name="categoria" id="categoria" className="form-control m-0 p-0 text-center" onChange={e=>setProbabilidadCierre(e.target.value)}>
-                            <option value="">- Seleccione -</option>
+                            <option value="">- Seleccione Filtro -</option>
                                 <option value="Identificado">Identificado (0%)</option>
                                 <option value="Bajo">Bajo (40%)</option>
                                 <option value="Medio">Medio (40%-80%)</option>
@@ -245,7 +272,7 @@ const VerClientes = () => {
                             </select>
                         </div>
                     </div>
-                    <div className="col-md-4">
+                    <div className="col-md-3">
                         <div className="form-group mt-3 text-center">
                             <label htmlFor="categoria">KAM</label>
                             <select name="categoria" id="categoria" className="form-control m-0 p-0 text-center" onChange={e=>setKam(e.target.value)}>
@@ -260,11 +287,76 @@ const VerClientes = () => {
                             </select>
                         </div>
                     </div>
+                    <div className="col-md-3">
+                        <div className="form-group mt-3 text-center">
+                            <label htmlFor="categoria">Categoria</label>
+                            <select name="categoria" id="categoria" className="form-control m-0 p-0 text-center" onChange={e=>setCategoria(e.target.value)}>
+                                <option>- Seleccione Filtro -</option>
+                                <option value="Comercio">Comercio</option>
+                                <option value="Cultura y Turismo">Cultura y Turismo</option>
+                                <option value="Academia">Academia</option>
+                                <option value="Gobierno">Gobierno</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div className="row">
+                    <div className="col-md-3">
+                        <div className="form-group mt-3 text-center">
+                            <label htmlFor="Grupo">Grupo</label>
+                            <select name="Grupo" id="Grupo" className="form-control m-0 p-0 text-center" onChange={e=>setGrupo(e.target.value)}>
+                                <option>- Seleccione Filtro -</option>
+                                <option value="1 GobernacionesX11 NOV">1 GobernacionesX11 NOV</option>
+                                <option value="2 Gob de Casanare">2 Gob de Casanare</option>
+                                <option value="3 Gob de BoyacaX11 NOV">3 Gob de BoyacaX11 NOV</option>
+                                <option value="3A Gob de BoyacaX11 Acompañanate">3A Gob de BoyacaX11 Acompañanate</option>
+                                <option value="4 GobernacionesX8">4 GobernacionesX8</option>
+                                <option value="5 Comer PereiraX11 NOV">5 Comer PereiraX11 NOV</option>
+                                <option value="6 Frisby PereiraX11 NOV">6 Frisby PereiraX11 NOV</option>
+                                <option value="7 ANM ContratistasX9">7 ANM ContratistasX9</option>
+                                <option value="8 ANM VIP InternoX10">8 ANM VIP InternoX10</option>
+                                <option value="9 ANM VIP ExternoX10">9 ANM VIP ExternoX10</option>
+                                <option value="10 ANM VIP ExternoX10 Sin TKTS">10 ANM VIP ExternoX10 Sin TKTS</option>
+                                <option value="11A ANM ExternoX8">11A ANM ExternoX8</option>
+                                <option value="11B ANM ExternoX8 Sin TKTS">11B ANM ExternoX8 Sin TKTS</option>
+                                <option value="12A ANM ExternoX11">12A ANM ExternoX11</option>
+                                <option value="12B ANM ExternoX11 Sin TKTS">12B ANM ExternoX11 Sin TKTS</option>
+                                <option value="13 Academia IST X8">13 Academia IST X8</option>
+                                <option value="14 Academia MAD X8">14 Academia MAD X8</option>
+                                <option value="15 Academia SUE X 11">15 Academia SUE X 11</option>
+                                <option value="16 Academica SUEX11 Acompañante">16 Academica SUEX11 Acompañante</option>
+                                <option value="16A Academia SUE y Acompañante">16A Academia SUE y Acompañante</option>
+                                <option value="17 Academia + Madrid X11">17 Academia + Madrid X11</option>
+                                <option value="18 Academia + Cairo X12">18 Academia + Cairo X12</option>
+                                <option value="18 Academia + Cairo X12 (acompañantes">18 Academia + Cairo X12 (acompañantes)</option>
+                                <option value="18B Academia + Cairo X12">18B Academia + Cairo X12</option>
+                                <option value="19 Academia+MAD+CAI X 13">19 Academia+MAD+CAI X 13</option>
+                                <option value="19 Academia+MAD+CAI X 13 (Acomp">19 Academia+MAD+CAI X 13 (Acomp)</option>
+                                <option value="20 Comercial S. Arquitectos X 11">20 Comercial S. Arquitectos X 11</option>
+                                <option value="21 Turismo IST X 11">21 Turismo IST X 11</option>
+                                <option value="22 CCPasto X 11 + DOH">22 CCPasto X 11 + DOH</option>
+                                <option value="23 Comercial ICN X 15">23 Comercial ICN X 15</option>
+                                <option value="24 Fenalco X 8">24 Fenalco X 8</option>
+                                <option value="25 Multisectorial Tutorial X 11">25 Multisectorial Tutorial X 11</option>
+                                <option value="26 CarboMax X 9">26 CarboMax X 9</option>
+                                <option value="27 CarboMax VIP">27 CarboMax VIP</option>
+                                <option value="28 VIP">28 VIP</option>
+                                <option value="29 Gober Socha Ariporo X11 ">29 Gober Socha Ariporo X11 </option>
+                                <option value="30 Unibolivar">30 Unibolivar</option>
+                                <option value="31 Recetor">31 Recetor</option>
+                                <option value="32 Univ. Eje IST+DBX+CAI x16">32 Univ. Eje IST+DBX+CAI x16</option>
+                                <option value="33 Univ. Eje IST+DBX+CAI x15">33 Univ. Eje IST+DBX+CAI x15</option>
+                                <option value="34 Turismo">34 Turismo</option>
+                                <option value="35 UPTC x 10">35 UPTC x 10</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
                     <div className="col-md-4">
                         <button className="btn btn-warning mt-4" onClick={searchHand}>Buscar</button>
                         <button className="btn btn-danger ms-4 mt-4" onClick={()=>{setEstado(); setKam(); setProbabilidadCierre(); setInputHand();}}>Reiniciar Campos</button>
                     </div>
                 </div>
+               
             </div>
             <div className="col-lg-4 col-sm-12 float-end fondo">
                 <Link to="/clientes/crear"><button className="btn btn-success my-4">Crear Nuevo Cliente</button></Link>
@@ -320,6 +412,9 @@ const VerClientes = () => {
                                             <option value="Abonado">Abonado</option>
                                             <option value="Pagado">Pagado</option>
                                             <option value="Devuelto">Devuelto</option>
+                                            <option value="Variaciones">Variaciones</option>
+                                            <option value="Emitir Tiquetes">Emitir Tiquetes</option>
+                                            <option value="En Logistica">En Logistica</option>
                                         </select>
                                     </td>
                                     <td>{i.probabilidadCierre}</td>
