@@ -300,10 +300,10 @@ const VerClientes = () => {
                         </div>
                     </div>
                     <div className="row">
-                    <div className="col-md-3">
+                    <div className="col-md-5">
                         <div className="form-group mt-3 text-center">
                             <label htmlFor="Grupo">Grupo</label>
-                            <select name="Grupo" id="Grupo" className="form-control m-0 p-0 text-center" onChange={e=>setGrupo(e.target.value)}>
+                            <select name="Grupo" id="Grupo" className="form-control m-0 p-0" onChange={e=>setGrupo(e.target.value)}>
                                 <option>- Seleccione Filtro -</option>
                                 <option value="1 GobernacionesX11 NOV">1 GobernacionesX11 NOV</option>
                                 <option value="2 Gob de Casanare">2 Gob de Casanare</option>
