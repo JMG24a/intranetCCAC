@@ -152,6 +152,7 @@ const VerClientes = () => {
             })
             .then(e=>setClientes(e.data))
             .catch(e=>console.log(e))
+            return;
         }
 
         if(probabilidadCierre){
@@ -164,6 +165,7 @@ const VerClientes = () => {
             })
             .then(e=>setClientes(e.data))
             .catch(e=>console.log(e))
+            return;
         }
 
         if(kam){
@@ -176,6 +178,7 @@ const VerClientes = () => {
             })
             .then(e=>setClientes(e.data))
             .catch(e=>console.log(e))
+            return;
             
         }
 
@@ -189,6 +192,7 @@ const VerClientes = () => {
             })
             .then(e=>setClientes(e.data))
             .catch(e=>console.log(e))
+            return;
         }
         if(categoria){
             axios.get(`${process.env.REACT_APP_SERVIDOR}/api/clientes?limit=1000&offset=${page}&categoria=${categoria}`,{
@@ -200,6 +204,7 @@ const VerClientes = () => {
             })
             .then(e=>setClientes(e.data))
             .catch(e=>console.log(e))
+            return;
         }
         if(grupo){
             console.log(grupo)
@@ -212,12 +217,13 @@ const VerClientes = () => {
             })
             .then(e=>setClientes(e.data))
             .catch(e=>console.log(e))
+            return;
         }
     }
 
     useEffect(() => {
         getClientesFiltro();
-    }, [page, inputHand, estado, kam, probabilidadCierre, categoria, grupo])
+    }, [page])
     
     return (
         <div className='px-4 py-5 verClientes'>
