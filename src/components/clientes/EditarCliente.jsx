@@ -341,7 +341,7 @@ const EditarCliente = () => {
                                 <option value="Leidy">Leidy</option>
                                 <option value="Alejandra">Alejandra</option>
                                 <option value="Alison">Alison</option>
-                                <option value="Natalia">Natalia</option>
+                                <option value="Juliana">Juliana</option>
                                 <option value="Jesus">Jesus</option>
                                 <option value="Cecilia">Cecilia</option>
                                 <option value="Nicolas">Nicolas</option>
