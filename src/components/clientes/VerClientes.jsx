@@ -391,6 +391,7 @@ const VerClientes = () => {
                 <table className="table table-light table-striped table-hover ">
                 <thead>
                     <tr>
+                        <th>Grupo</th>
                         <th>Categoria</th>
                         <th>Origen</th>
                         <th>KAM</th>
@@ -411,6 +412,7 @@ const VerClientes = () => {
                             clientes.length < 1  ? <tr><td colSpan="10">No hay Registros para mostrar...</td></tr> :
                             clientes.map(i=>
                                 <tr key={i.id}>
+                                    <td>{i.grupo}</td>
                                     <td>{i.categoria}</td>
                                     <td>{i.origen}</td>
                                     <td>{i.kam}</td>
