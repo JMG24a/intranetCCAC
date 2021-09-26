@@ -31,6 +31,8 @@ const VerClientes = () => {
     const [cotizacionDevuelto, setCotizacionDevuelto] = useState(0)
     const [cotizacionPagado, setCotizacionPagado] = useState(0)
     const [cotiDev, setCotiDev] = useState(0)
+    const [emitirTiquetes, setEmitirTiquetes] = useState([])
+
 
     const getClientesFiltro = ()=>{
        
@@ -63,6 +65,16 @@ const VerClientes = () => {
                         }
             })
             .then(e=>setCotizacionDevuelto(e.data.length))
+            .catch(e=>console.log(e))
+          
+            axios.get(`${process.env.REACT_APP_SERVIDOR}/api/clientes?limit=1000&offset=${page}&estado=Emitir Tiquetes`,{
+                headers:{
+                    token:'JaRvIs92!',
+                    correo:'alecapo@gmail.com',
+                    password:'123456'
+                        }
+            })
+            .then(e=>setEmitirTiquetes(e.data.length))
             .catch(e=>console.log(e))
 
 
@@ -242,7 +254,7 @@ const VerClientes = () => {
                      <h3 className="text-white text-center">Variaciones</h3>
                 </div>
                 <div className="col-md-2">
-                     <h1 className="text-white text-center">{cotizacionDevuelto}</h1>
+                     <h1 className="text-white text-center">{emitirTiquetes}</h1>
                      <h3 className="text-white text-center">Emitir Tiquetes</h3>
                 </div>
                 <div className="col-md-2">
@@ -255,7 +267,7 @@ const VerClientes = () => {
                 </div>
             </div>
             <div className="row">
-            <div className="col-lg-7 col-sm-12">
+            <div className="col-lg-10 col-sm-12">
                 <div className="row fondo">
                     <div className="form-group mt-2">
                         <label htmlFor="buscar">Ingrese Nombre para buscar</label>
@@ -382,7 +394,7 @@ const VerClientes = () => {
                 </div>
                
             </div>
-            <div className="col-lg-4 col-sm-12 float-end fondo">
+            <div className="col-lg-2 col-sm-12 float-end fondo">
                 <Link to="/clientes/crear"><button className="btn btn-success my-4">Crear Nuevo Cliente</button></Link>
                 <Link to="/participantes"><button className="btn btn-warning my-4 ms-4">Pasajeros con Documentos</button></Link>
             </div>

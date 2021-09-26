@@ -37,6 +37,7 @@ const EditarCliente = () => {
 
         const data = {
             empresa:e.target['empresa'].value,
+            tipoPersona:e.target['tipoPersona'].value,
             contacto:e.target['contacto'].value,
             cargo:e.target['cargo'].value,
             origen:e.target['origen'].value,
@@ -98,9 +99,23 @@ const EditarCliente = () => {
                     <div className="row">
                         <h4>Datos del cliente</h4>
                         <div className="col-md-6">
-                            <div className="form-group">
-                                <label htmlFor="empresa">Nombre de la Empresa</label>
-                                <input type="text" name="empresa" id="empresa" className="form-control" defaultValue={cliente.empresa}/>
+                            <div className="row">
+                                <div className="col-md-8">
+                                    <div className="form-group">
+                                        <label htmlFor="empresa">Nombre de la Empresa</label>
+                                        <input type="text" name="empresa" id="empresa" className="form-control" defaultValue={cliente.empresa}/>
+                                    </div>
+                                </div>
+                                <div className="col-md-4">
+                                    <div className="form-group">
+                                        <label htmlFor="empresa">Tipo Persona</label>
+                                        <select name="tipoPersona" id="tipoPersona" className="form-control">
+                                            <option value={cliente.tipoPersona}>{cliente.tipoPersona}</option>
+                                            <option value="Juridica">Juridica</option>
+                                            <option value="Natural">Natural</option>
+                                        </select>
+                                    </div>
+                                </div>
                             </div>
                             <div className="form-group">
                                 <label htmlFor="nit">Nit</label>
@@ -226,10 +241,22 @@ const EditarCliente = () => {
                                     <div className="form-group">
                                         <a href={`https://www.ccac.com.co/storage/${cliente.cotizacionFile}`} target="_blank">Descargar Cotizacion</a>
                                     </div>
+                                    <div className="form-group">
+                                        <a href={`https://www.ccac.com.co/storage/${cliente.rutFile}`} target="_blank">Descargar Rut</a>
+                                    </div>
+
+
                                     <form action={`https://www.ccac.com.co/api/arch/${cliente.id}`} method="POST" enctype="multipart/form-data" name="cotizaciones">
                                         <div className="form-group">
                                             <label htmlFor="">Subir Cotizacion</label>
                                             <input type="file" name="cotizaciones" id="cotizaciones" class="form-control"/>
+                                        </div>
+                                        <button type="submit" className="btn btn-secondary btn-sm">Guardar</button>
+                                    </form>
+                                    <form action={`https://www.ccac.com.co/api/arch/rut/${cliente.id}`} method="POST" enctype="multipart/form-data" name="rut">
+                                        <div className="form-group">
+                                            <label htmlFor="rut">Subir Rut</label>
+                                            <input type="file" name="rut" id="rut" class="form-control"/>
                                         </div>
                                         <button type="submit" className="btn btn-secondary btn-sm">Guardar</button>
                                     </form>
