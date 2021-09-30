@@ -55,16 +55,22 @@ const CrearCliente = () => {
                                 <input type="text" name="empresa" id="empresa" className="form-control" onChange={formHandler} />
                             </div>
                             <div className="row">
-                                <div className="col-md-6">
+                                <div className="col-md-4">
                                     <div className="form-group">
                                         <label htmlFor="nit">Nit</label>
                                         <input type="text" name="nit" id="nit" className="form-control" onChange={formHandler} />
                                     </div>
                                 </div>
-                                <div className="col-md-6">
+                                <div className="col-md-4">
                                     <div className="form-group">
-                                        <label htmlFor="cc">CC</label>
+                                        <label htmlFor="cc">No de CC</label>
                                         <input type="text" name="cc" id="cc" className="form-control" onChange={formHandler} />
+                                    </div>
+                                </div>
+                                <div className="col-md-4">
+                                    <div className="form-group">
+                                        <label htmlFor="pasaporte">No de Pasaporte</label>
+                                        <input type="text" name="pasaporte" id="pasaporte" className="form-control" onChange={formHandler} />
                                     </div>
                                 </div>
                             </div>

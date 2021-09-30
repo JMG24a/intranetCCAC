@@ -10,6 +10,7 @@ import EditarCliente from "../components/clientes/EditarCliente";
 import VerClientes from "../components/clientes/VerClientes";
 import Costos from "../components/costos/Costos";
 import Export from "../components/export/Export";
+import Grupos from "../components/grupos/Grupos";
 import Navbar from "../components/includes/Navbar";
 import Login from "../components/login/Login";
 import Logistica from "../components/logistica/Logistica";
@@ -50,6 +51,9 @@ export const  AppRouter = () => {
                     </Route>
                     <Route exact path="/logistica/:id">
                         <Logistica/>
+                    </Route>
+                    <Route exact path="/grupos">
+                        <Grupos/>
                     </Route>
                    
                     <Route path="/">

@@ -15,6 +15,22 @@ const EditarCliente = () => {
    
     const {id} = useParams();
     const [cliente, setCliente] = useState([])
+    const [grupos, setGrupos] = useState([])
+
+    const getGrupos = ()=>{
+        axios.get(`${process.env.REACT_APP_SERVIDOR}/api/grupos`,{
+            headers:{
+                token:'JaRvIs92!',
+                correo:'alecapo@gmail.com',
+                password:'123456'
+                    }
+        })
+        .then(e=>setGrupos(e.data.Grupos))
+        .catch(e=>console.log(e))
+    }
+
+
+
     const getCliente =  () =>{
        
         axios.get(`${process.env.REACT_APP_SERVIDOR}/api/clientes/${id}`,{
@@ -68,7 +84,8 @@ const EditarCliente = () => {
             FechaFinV:e.target['FechaFinV'].value,
             noCotizacion:e.target['noCotizacion'].value,
             noFactura:e.target['noFactura'].value,
-            estado:e.target['estado'].value
+            estado:e.target['estado'].value,
+            pasaporte:e.target['pasaporte'].value
         }
 
         axios.put(`${process.env.REACT_APP_SERVIDOR}/api/clientes/update/${id}`,data,{
@@ -88,6 +105,7 @@ const EditarCliente = () => {
     
     useEffect(() => {
         getCliente();
+        getGrupos();
     },[])
 
     return (
@@ -121,9 +139,19 @@ const EditarCliente = () => {
                                 <label htmlFor="nit">Nit</label>
                                 <input type="text" name="nit" id="nit" className="form-control"  defaultValue={cliente.nit}/>
                             </div>
-                            <div className="form-group">
-                                <label htmlFor="cc">Cedula</label>
-                                <input type="text" name="cc" id="cc" className="form-control" defaultValue={cliente.cc}/>
+                            <div className="row">
+                                <div className="col-md-6">
+                                    <div className="form-group">
+                                        <label htmlFor="cc">Cedula</label>
+                                        <input type="text" name="cc" id="cc" className="form-control" defaultValue={cliente.cc}/>
+                                    </div>
+                                </div>
+                                <div className="col-md-6">
+                                    <div className="form-group">
+                                        <label htmlFor="pasaporte"> No de Pasaporte</label>
+                                        <input type="text" name="pasaporte" id="pasaporte" className="form-control" defaultValue={cliente.pasaporte}/>
+                                    </div>
+                                </div>
                             </div>
                             <div className="row">
                                 <div className="col-md-6">          
@@ -230,8 +258,8 @@ const EditarCliente = () => {
                                     </div>
                                 </div>
                             </div>
-                            <div className="row my-4">
-                                <div className="col-md-4">
+
+                            <section className="mt-4">
                                     <div className="form-group">
                                         <a href={`https://www.ccac.com.co/storage/${cliente.pasaporteFile}`} target="_blank">Descargar Pasaporte</a>
                                     </div>
@@ -247,8 +275,9 @@ const EditarCliente = () => {
                                     <div className="form-group">
                                         <a href={`https://www.ccac.com.co/storage/${cliente.recibosFile}`} target="_blank">Descargar Recibo</a>
                                     </div>
-
-
+                            </section>
+                            <div className="row my-4">
+                                <div className="col-md-4">
                                     <form action={`https://www.ccac.com.co/api/arch/${cliente.id}`} method="POST" enctype="multipart/form-data" name="cotizaciones">
                                         <div className="form-group">
                                             <label htmlFor="">Subir Cotizacion</label>
@@ -263,10 +292,26 @@ const EditarCliente = () => {
                                         </div>
                                         <button type="submit" className="btn btn-secondary btn-sm">Guardar</button>
                                     </form>
-                                    <form action={`https://www.ccac.com.co/api/arch/recibos/${cliente.id}`} method="POST" enctype="multipart/form-data" name="rut">
+                                    <form action={`https://www.ccac.com.co/api/arch/recibos/${cliente.id}`} method="POST" enctype="multipart/form-data" name="recibos">
                                         <div className="form-group">
-                                            <label htmlFor="rut">Subir Recibos</label>
+                                            <label htmlFor="recibos">Subir Recibos</label>
                                             <input type="file" name="recibos" id="recibos" class="form-control"/>
+                                        </div>
+                                        <button type="submit" className="btn btn-secondary btn-sm">Guardar</button>
+                                    </form>
+                                </div>
+                                <div className="col-md-4">
+                                    <form action={`https://www.ccac.com.co/api/arch/pasaporteFile/${cliente.id}`} method="POST" enctype="multipart/form-data" name="pasaporteFile">
+                                        <div className="form-group">
+                                            <label htmlFor="pasaporteFile">Subir Pasaporte</label>
+                                            <input type="file" name="pasaporteFile" id="pasaporteFile" class="form-control"/>
+                                        </div>
+                                        <button type="submit" className="btn btn-secondary btn-sm">Guardar</button>
+                                    </form>
+                                    <form action={`https://www.ccac.com.co/api/arch/vacunaFile/${cliente.id}`} method="POST" enctype="multipart/form-data" name="vacunaFile">
+                                        <div className="form-group">
+                                            <label htmlFor="vacunaFile">Subir Vacuna</label>
+                                            <input type="file" name="vacunaFile" id="vacunaFile" class="form-control"/>
                                         </div>
                                         <button type="submit" className="btn btn-secondary btn-sm">Guardar</button>
                                     </form>
@@ -312,58 +357,15 @@ const EditarCliente = () => {
                             <div className="col-md-3">
                                 <label htmlFor="grupo">Grupo</label>
                                     <select name="grupo" id="grupo" className="form-control">
-                                        <option value={cliente.grupo}>{cliente.grupo}</option>
-                                        <option value="13 Academia IST X8">13 Academia IST X8</option>
-                                        <option value="14 Academia MAD X9">14 Academia MAD X9</option>
-                                        <option value="15 Academia SUE X 11">15 Academia SUE X 11</option>
-                                        <option value="16 Academica SUEX11 Acompañante">16 Academica SUEX11 Acompañante</option>
-                                        <option value="17 Academia + Madrid X11 sin TKS">17 Academia + Madrid X11 sin TKS</option>
-                                        <option value="18 Academia + Cairo X13">18 Academia + Cairo X13</option>
-                                        <option value="19 Academia+MAD+CAI X 13">19 Academia+MAD+CAI X 13</option>
-                                        <option value="18B Academia + Cairo X13 (acompañantes)">18B Academia + Cairo X13 (acompañantes)</option>
-                                        <option value="19B Academia+MAD+CAI X 13 (Acomp)">19B Academia+MAD+CAI X 13 (Acomp)</option>
-                                        <option value="10 ANM VIP ExternoX10 Sin TKTS">10 ANM VIP ExternoX10 Sin TKTS</option>
-                                        <option value="11 ANM ExternoX8">11 ANM ExternoX8</option>
-                                        <option value="12 ANM ExternoX11">12 ANM ExternoX11</option>
-                                        <option value="7 ANM ContratistasX9">7 ANM ContratistasX9</option>
-                                        <option value="8 ANM VIP InternoX10">8 ANM VIP InternoX10</option>
-                                        <option value="9 ANM VIP ExternoX10">9 ANM VIP ExternoX10</option>
-                                        <option value="20 Comercial S. Arquitectos X 11">20 Comercial S. Arquitectos X 11</option>
-                                        <option value="22 CCPasto X 11 + DOH">22 CCPasto X 11 + DOH</option>
-                                        <option value="23 Comercial ICN X 15">23 Comercial ICN X 15</option>
-                                        <option value="24 Fenalco X 8">24 Fenalco X 8</option>
-                                        <option value="5 Comer PereiraX11 NOV">5 Comer PereiraX11 NOV</option>
-                                        <option value="6 Frisby PereiraX11 NOV">6 Frisby PereiraX11 NOV</option>
-                                        <option value="1 GobernacionesX11 NOV">1 GobernacionesX11 NOV</option>
-                                        <option value="2 Gob de Casanare">2 Gob de Casanare</option>
-                                        <option value="3 Gob de BoyacaX11 NOV">3 Gob de BoyacaX11 NOV</option>
-                                        <option value="4 GobernacionesX8">4 GobernacionesX8</option>
-                                        <option value="3B Gob de BoyacaX11 Acompañante">3B Gob de BoyacaX11 Acompañante</option>
-                                        <option value="25 Multisectorial X 11">25 Multisectorial X 11</option>
-                                        <option value="26 CarboMax X 10">26 CarboMax X 10</option>
-                                        <option value="21 Turismo IST X 11">21 Turismo IST X 11</option>
-                                        <option value="27 CarboMax VIP X9">27 CarboMax VIP X9</option>
-                                        <option value="28 VIP PROPUESTA">28 VIP PROPUESTA</option>
-                                        <option value="29 Gober Socha Propuesta X13">29 Gober Socha Propuesta X13</option>
-                                        <option value="30 Unibolivar DBX X11">30 Unibolivar DBX X11</option>
-                                        <option value="31 Recetor">31 Recetor</option>
-                                        <option value="32 Univ. Eje IST+DBX+CAI x16">32 Univ. Eje IST+DBX+CAI x16</option>
-                                        <option value="33 Univ. Eje IST+DBX+CAI x15">33 Univ. Eje IST+DBX+CAI x15</option>
-                                        <option value="34 Turismo">34 Turismo</option>
-                                        <option value="35 UPTC x 11">35 UPTC x 11</option>
-                                        <option value="35B UPTC x 11 SIN TKTS">35B UPTC x 11 SIN TKTS</option>
-                                        <option value="36 CamarasComercioX11 NOV">36 CamarasComercioX11 NOV</option>
-                                        <option value="37 FUCS X 11 Ene">37 FUCS X 11 Ene</option>
-                                        <option value="38 Academia SUE X11">38 Academia SUE X11</option>
-                                        <option value="39 Gob de Caldas X11 NOV">39 Gob de Caldas X11 NOV</option>
-                                        <option value="40 San Mateo X 9">40 San Mateo X 9</option>
-                                        <option value="41 CCYK X 11">41 CCYK X 11</option>
-                                        <option value="42 CCYK X 11 Acompañantes">42 CCYK X 11 Acompañantes</option>
-                                        <option value="43 UTP X 12">43 UTP X 12</option>
-                                        <option value="44 UTP X 12 Acompañante">44 UTP X 12 Acompañante</option>
-                                        <option value="45 ProColombia X 11">45 ProColombia X 11</option>
-                                        <option value="46 UniLibre X 11">46 UniLibre X 11</option>
-                                        <option value="47 UniLibre X 11 Sin TKTS">47 UniLibre X 11 Sin TKTS</option>
+                                        {
+                                            cliente.grupo ?<option value={cliente.grupo}>{cliente.grupo}</option> : <option value="NO HAY GRUPO">NO HAY GRUPO</option>
+                                        }
+                                        {/* <option value={cliente.grupo}>{cliente.grupo}</option> */}
+                                        {
+                                            grupos.map(i=>
+                                                <option value={i.nombre}>{i.nombre}</option>
+                                            )
+                                        }
                                     </select>
                             </div>
                     </div>
