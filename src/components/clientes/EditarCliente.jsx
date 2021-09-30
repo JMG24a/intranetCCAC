@@ -261,19 +261,19 @@ const EditarCliente = () => {
 
                             <section className="mt-4">
                                     <div className="form-group">
-                                        <a href={`https://www.ccac.com.co/storage/${cliente.pasaporteFile}`} target="_blank">Descargar Pasaporte</a>
+                                        <a href={`https://www.ccac.com.co/storage/${cliente.pasaporteFile}`} target="_blank" rel="noreferrer">Descargar Pasaporte</a>
                                     </div>
                                     <div className="form-group">
-                                        <a href={`https://www.ccac.com.co/storage/${cliente.vacunaFile}`} target="_blank">Descargar Vacuna</a>
+                                        <a href={`https://www.ccac.com.co/storage/${cliente.vacunaFile}`} target="_blank" rel="noreferrer">Descargar Vacuna</a>
                                     </div>
                                     <div className="form-group">
-                                        <a href={`https://www.ccac.com.co/storage/${cliente.cotizacionFile}`} target="_blank">Descargar Cotizacion</a>
+                                        <a href={`https://www.ccac.com.co/storage/${cliente.cotizacionFile}`} target="_blank" rel="noreferrer">Descargar Cotizacion</a>
                                     </div>
                                     <div className="form-group">
-                                        <a href={`https://www.ccac.com.co/storage/${cliente.rutFile}`} target="_blank">Descargar Rut</a>
+                                        <a href={`https://www.ccac.com.co/storage/${cliente.rutFile}`} target="_blank" rel="noreferrer">Descargar Rut</a>
                                     </div>
                                     <div className="form-group">
-                                        <a href={`https://www.ccac.com.co/storage/${cliente.recibosFile}`} target="_blank">Descargar Recibo</a>
+                                        <a href={`https://www.ccac.com.co/storage/${cliente.recibosFile}`} target="_blank" rel="noreferrer">Descargar Recibo</a>
                                     </div>
                             </section>
                             <div className="row my-4">
