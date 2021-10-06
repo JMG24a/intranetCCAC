@@ -297,6 +297,7 @@ const VerClientes = () => {
                                     <option value="Revision Informacion">Revision Informacion</option>
                                     <option value="Pendiente Enviar Cotizacion">Pendiente Enviar Cotizacion</option>
                                     <option value="Cotizacion Enviada">Cotizacion Enviada</option>
+                                    <option value="Cotizacion Cargada">Cotizacion Cargada</option>
                                     <option value="Facturado">Facturado</option>
                                     <option value="Cerrado Perdido">Cerrado Perdido</option>
                                     <option value="Abonado">Abonado</option>
@@ -329,7 +330,7 @@ const VerClientes = () => {
                                 <option>- Seleccione Filtro -</option>
                                 <option value="Leidy">Leidy</option>
                                 <option value="Alejandra">Alejandra</option>
-                                <option value="Alison">Alison</option>
+                                <option value="Sara">Sara</option>
                                 <option value="Juliana">Juliana</option>
                                 <option value="Jesus">Jesus</option>
                                 <option value="Cecilia">Cecilia</option>
@@ -405,7 +406,7 @@ const VerClientes = () => {
                                     <td>{i.categoria}</td>
                                     <td>{i.origen}</td>
                                     <td>{i.kam}</td>
-                                    <td>{i.createdAt}</td>
+                                    <td>{i.created_at}</td>
                                     <td>{i.fechaLlamada}</td>
                                     <td>{i.empresa}</td>
                                     <td>{i.contacto}</td>
@@ -422,6 +423,7 @@ const VerClientes = () => {
                                             <option value="Revision Informacion">Revision Informacion</option>
                                             <option value="Pendiente Enviar Cotizacion">Pendiente Enviar Cotizacion</option>
                                             <option value="Cotizacion Enviada">Cotizacion Enviada</option>
+                                            <option value="Cotizacion Cargada">Cotizacion Cargada</option>
                                             <option value="Facturado">Facturado</option>
                                             <option value="Cerrado Perdido">Cerrado Perdido</option>
                                             <option value="Abonado">Abonado</option>

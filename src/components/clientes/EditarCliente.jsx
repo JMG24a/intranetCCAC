@@ -415,6 +415,7 @@ const EditarCliente = () => {
                                 <option value="Revision Informacion">Revision Informacion</option>
                                 <option value="Pendiente Enviar Cotizacion">Pendiente Enviar Cotizacion</option>
                                 <option value="Cotizacion Enviada">Cotizacion Enviada</option>
+                                <option value="Cotizacion Cargada">Cotizacion Cargada</option>
                                 <option value="Facturado">Facturado</option>
                                 <option value="Cerrado Perdido">Cerrado Perdido</option>
                                 <option value="Abonado">Abonado</option>
