@@ -12,7 +12,7 @@ const Grupos = () => {
                 password:'123456'
                     }
         })
-        .then(e=>console.log(e.data.Grupos))
+        .then(e=>setGrupos(e.data.Grupos))
         .catch(e=>console.log(e))
     }
 

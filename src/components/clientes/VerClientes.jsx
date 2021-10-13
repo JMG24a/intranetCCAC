@@ -335,6 +335,7 @@ const VerClientes = () => {
                                 <option value="Jesus">Jesus</option>
                                 <option value="Cecilia">Cecilia</option>
                                 <option value="Nicolas">Nicolas</option>
+                                <option value="Jessica">Jessica</option>
                             </select>
                         </div>
                     </div>
