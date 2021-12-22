@@ -14,6 +14,8 @@ import Grupos from "../components/grupos/Grupos";
 import Navbar from "../components/includes/Navbar";
 import Login from "../components/login/Login";
 import Logistica from "../components/logistica/Logistica";
+import Clientes from "../components/pages/clientes/Clientes";
+import Pendientes from "../components/pages/pendientes/Pendientes";
 import Participantes from "../components/participantes/Participantes";
 import '../css/style.css'
 
@@ -30,6 +32,9 @@ export const  AppRouter = () => {
                     </Route>
                     <Route exact path="/clientes/editar/:id">
                         <Navbar/><EditarCliente/> 
+                    </Route>
+                    <Route exact path="/clientes">
+                        <Navbar/><Clientes/> 
                     </Route>
                     <Route exact path="/clientes/ver">
                         <Navbar/><VerClientes/> 
@@ -54,6 +59,9 @@ export const  AppRouter = () => {
                     </Route>
                     <Route exact path="/grupos">
                         <Grupos/>
+                    </Route>
+                    <Route exact path="/pendientes">
+                    <Navbar/><Pendientes/>
                     </Route>
                    
                     <Route path="/">
