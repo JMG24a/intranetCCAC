@@ -86,8 +86,16 @@ const EditarCliente = () => {
       noFactura: e.target["noFactura"].value,
       estado: e.target["estado"].value,
       pasaporte: e.target["pasaporte"].value,
+      alergias: e.target["alergias"].value,
+      rh: e.target["rh"].value,
+      prepagada: e.target["prepagada"].value,
+      eps: e.target["eps"].value,
+      visaAmericana: e.target["visaAmericana"].value,
+      fechaVacuna: e.target["fechaVacuna"].value,
+      contactoEmergencia: e.target["contactoEmergencia"].value,
+      telefonoEmergencia: e.target["telefonoEmergencia"].value,
     };
-
+    console.log(data);
     axios
       .put(
         `${process.env.REACT_APP_SERVIDOR}/api/clientes/update/${id}`,
@@ -421,49 +429,94 @@ const EditarCliente = () => {
 
           <section className="my-4">
             <h3>Informacion Adicional</h3>
-            <ul>
-              <li>
-                ALERGIAS:{" "}
-                {!cliente.alergias ? "NO HAY INFORMACION " : cliente.alergias}
-              </li>
-              <li>RH: {!cliente.rh ? "NO HAY INFORMACION " : cliente.rh}</li>
-              <li>
-                PREPAGADA:{" "}
-                {!cliente.prepagada ? "NO HAY INFORMACION " : cliente.prepagada}
-              </li>
-              <li>EPS: {!cliente.eps ? "NO HAY INFORMACION " : cliente.eps}</li>
-              <li>
-                VISA AMERICANA:{" "}
-                {!cliente.visaAmericana
-                  ? "NO HAY INFORMACION "
-                  : cliente.visaAmericana}
-              </li>
-              <li>
-                FECHA ULTIMA VACUNA:{" "}
-                {!cliente.fechaVacuna
-                  ? "NO HAY INFORMACION "
-                  : cliente.fechaVacuna}
-              </li>
-              <li>
-                Contacto Emergencia
-                <ul>
-                  <li>
-                    {" "}
-                    NOMBRE:{" "}
-                    {!cliente.contactoEmergencia
-                      ? "NO HAY INFORMACION "
-                      : cliente.contactoEmergencia}
-                  </li>
-                  <li>
-                    {" "}
-                    TELEFONO:{" "}
-                    {!cliente.telefonoEmergencia
-                      ? "NO HAY INFORMACION "
-                      : cliente.telefonoEmergencia}
-                  </li>
-                </ul>
-              </li>
-            </ul>
+            <div className="row">
+              <div className="col-md-3">
+                <label htmlFor="alergias">Alergias</label>
+                <input
+                  type="text"
+                  name="alergias"
+                  id="alergias"
+                  className="form-control"
+                  defaultValue={cliente.alergias}
+                />
+              </div>
+              <div className="col-md-3">
+                <label htmlFor="rh">Rh</label>
+                <input
+                  type="text"
+                  name="rh"
+                  id="rh"
+                  className="form-control"
+                  defaultValue={cliente.rh}
+                />
+              </div>
+              <div className="col-md-3">
+                <label htmlFor="prepagada">Prepagada</label>
+                <input
+                  type="text"
+                  name="prepagada"
+                  id="prepagada"
+                  className="form-control"
+                  defaultValue={cliente.prepagada}
+                />
+              </div>
+              <div className="col-md-3">
+                <label htmlFor="eps">Eps</label>
+                <input
+                  type="text"
+                  name="eps"
+                  id="eps"
+                  className="form-control"
+                  defaultValue={cliente.eps}
+                />
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-md-3">
+                <label htmlFor="visaAmericana">Tiene Visa Americana?</label>
+                <input
+                  type="text"
+                  name="visaAmericana"
+                  id="visaAmericana"
+                  className="form-control"
+                  defaultValue={cliente.visaAmericana}
+                />
+              </div>
+              <div className="col-md-3">
+                <label htmlFor="fechaVacuna">fecha ultima de Vacuna</label>
+                <input
+                  type="text"
+                  name="fechaVacuna"
+                  id="fechaVacuna"
+                  className="form-control"
+                  defaultValue={cliente.fechaVacuna}
+                />
+              </div>
+              <div className="col-md-3">
+                <label htmlFor="contactoEmergencia">
+                  Contacto de Emergencia
+                </label>
+                <input
+                  type="text"
+                  name="contactoEmergencia"
+                  id="contactoEmergencia"
+                  className="form-control"
+                  defaultValue={cliente.contactoEmergencia}
+                />
+              </div>
+              <div className="col-md-3">
+                <label htmlFor="telefonoEmergencia">
+                  Telefono de Emergencia
+                </label>
+                <input
+                  type="text"
+                  name="telefonoEmergencia"
+                  id="telefonoEmergencia"
+                  className="form-control"
+                  defaultValue={cliente.telefonoEmergencia}
+                />
+              </div>
+            </div>
           </section>
 
           <section className="mt-5">

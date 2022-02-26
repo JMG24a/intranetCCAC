@@ -499,6 +499,7 @@ const VerClientes = () => {
                     <option value="URL - Inscripciones">
                       URL - Inscripciones
                     </option>
+                    <option value="URL - Informes	">URL - Informes</option>
                   </select>
                 </div>
               </div>
