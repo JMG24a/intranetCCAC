@@ -8,6 +8,7 @@ import Costos from "../components/costos/Costos";
 import Export from "../components/export/Export";
 import Grupos from "../components/grupos/Grupos";
 import Navbar from "../components/includes/Navbar";
+import Lbc from "../components/lbc/Lbc";
 import Login from "../components/login/Login";
 import Logistica from "../components/logistica/Logistica";
 import Clientes from "../components/pages/clientes/Clientes";
@@ -15,6 +16,8 @@ import Inicio from "../components/pages/inicio/Inicio";
 import Misiones from "../components/pages/misiones/Misiones";
 import Pendientes from "../components/pages/pendientes/Pendientes";
 import Tarjetas from "../components/pages/tarjetas/Tarjetas";
+import Deals from "../components/pages2/Deals/Deals";
+import Inicio2 from "../components/pages2/Inicio/Inicio2";
 import Participantes from "../components/participantes/Participantes";
 import "../css/style.css";
 
@@ -23,10 +26,11 @@ export const AppRouter = () => {
     <Router>
       <Fragment>
         <Switch>
-          <Route exact path="/login">
+          {/* <Route exact path="/login">
             <Login />
           </Route>
           <Route exact path="/tarjetas">
+            <Navbar />
             <Tarjetas />
           </Route>
           <Route exact path="/clientes/editar/:id">
@@ -71,14 +75,22 @@ export const AppRouter = () => {
             <Navbar />
             <Misiones />
           </Route>
-          <Route path="/">
-            {/* <Navbar /> */}
-            <VerClientes />
-          </Route>
-          {/* <Route path="/">
+          <Route exact path="/lbc">
             <Navbar />
-            <Inicio />
+            <Lbc />
           </Route> */}
+          <Route exact path="/">
+            <Navbar />
+            <Inicio2 />
+          </Route>
+          <Route exact path="/deals">
+            <Navbar />
+            <Deals />
+          </Route>
+          <Route path="/">
+            <Navbar />
+            <Inicio2 />
+          </Route>
         </Switch>
       </Fragment>
     </Router>

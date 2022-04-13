@@ -22,3 +22,411 @@
 .nav-link {
   font-size: 1.5rem;
 }
+
+.inputContact{
+  background-color: #E2E2E2;
+  border-radius: 20px;
+  margin-left: 20px;
+  height: 30px;
+  border: none;
+  text-align: center;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.171);
+}
+
+.inputDeals{
+  width: 80px;
+  background-color: #E2E2E2;
+  border-radius: 20px;
+  margin-left: 15px;
+  height: 30px;
+border: none;
+text-align: center;
+box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.171);
+}
+
+.inputPriorityAlta{
+  background-color: rgb(255, 131, 88);
+  width: 100%;
+  text-align: center;
+  margin: 0px;
+  padding: 0px;
+  border: none;
+   border-radius: 10px;
+}
+.inputPriorityMedia{
+  background-color: rgb(121, 175, 253);
+  width: 100%;
+  text-align: center;
+  margin: 0px;
+  padding: 0px;
+  border: none;
+   border-radius: 10px;
+}
+.inputPriorityBaja{
+  background-color: rgb(113, 214, 209);
+  width: 100%;
+  text-align: center;
+  margin: 0px;
+  padding: 0px;
+  border: none;
+   border-radius: 10px;
+}
+
+.typeCustomer{
+  background-color: #03E5A7;
+  width: 120px;
+  text-align: center;
+  margin: 0px;
+  padding: 0px;
+  border: none;
+  border-radius: 10px;
+}
+.typePartner{
+  background-color: #FFFF00;
+  width: 100%;
+  text-align: center;
+  margin: 0px;
+  padding: 0px;
+  border: none;
+   border-radius: 10px;
+}
+.typeVendor{
+  background-color: #E50345;
+  width: 100%;
+  text-align: center;
+  margin: 0px;
+  padding: 0px;
+  border: none;
+   border-radius: 10px;
+}
+
+.accountValueInput{
+  border: none;
+  text-align: center;
+}
+
+.emailInput{
+  border: none;
+  min-width: 200px;
+  height: 40px;
+}
+
+.buscarInput{
+  height: 45px;
+  border: 1px solid rgb(189, 189, 189);
+  width: 100%;
+}
+
+/* TABLA  */
+
+.tabla{
+  table-layout: auto;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tabla td,th{
+  border-bottom: 1px solid #ddd;
+  padding: 10px 15px;
+  text-align: center;
+}
+.tabla th{
+  color: white;
+  background-color: #851436;
+  font-weight: 500;
+}
+
+.tabla tr:hover {background-color: rgb(235, 235, 235);}
+
+
+/* MODALS */
+
+/* NEW ACCOUNT  */
+
+.fondoBlack{
+    /* display: none; */
+  background-color: rgba(0, 0, 0, 0.596);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+}
+
+.contenedorNewACC h2{
+  color: white;
+  text-align: center;
+  font-weight: 700;
+  font-size: 2.1em;
+}
+
+.contenedorNewACC{
+  display: none;
+  position: absolute; 
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, 0);
+  width: 500px;
+  background-color: #7F1232;
+  padding: 40px;
+  border-radius: 40px;
+}
+
+.contenedorSubNewACC{
+  background-color: #600E26;
+  padding: 30px;
+  border-radius: 30px;
+}
+
+.contenedorSubNewACC input{
+  color: #600E26;
+  height: 45px;
+  border: none;
+}
+.contenedorSubNewACC input::placeholder{
+  color: #600e277e
+}
+
+.contenedorSubNewACC .firstSelect select{
+  color: #600E26;
+  height: 35px;
+  border: none;
+}
+
+.contenedorSubNewACC select{
+  color: #600E26;
+  height: 45px;
+  border: none;
+  padding-left: 35px !important; 
+}
+
+.contenedorSubNewACC button{
+  background-color: #C0AB50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  width: 100%;
+  height: 50px;
+}
+
+.contenedorSubNewACC button:hover{
+  background-color: #887a3b;
+}
+
+.labelNewAccount{
+  text-align: center;
+  width: 100%; 
+  color: white;
+}
+
+.input-container {
+	padding-bottom: 1em;
+}
+.left-inner-addon {
+    position: relative;
+}
+.left-inner-addon input {
+    padding-left: 35px !important; 
+}
+.left-inner-addon i {
+    position: absolute;
+    padding-top: 20px;
+    padding-left: 10px;
+    pointer-events: none;
+    color: #600E26
+}
+
+input {
+  width: 100%;
+  padding: 1em !important;
+  margin: 0em !important;
+  box-sizing: border-box;
+}
+
+.active {
+  display: block !important;
+  transition: cubic-bezier(0.075, 0.82, 0.165, 1);
+  transition-duration: 2s;
+}
+
+.inactive{
+  display: none !important ;
+}
+
+.fondoNegro {
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top:0;
+  z-index:0;
+  margin-left: -25px;
+}
+
+
+/* Modal Enlazar contacto */
+
+.contenedorAddCtc{
+  display: none;
+  position: absolute; 
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, 0);
+  width: 500px;
+  background-color: #7F1232;
+  padding: 40px;
+  border-radius: 40px;
+}
+
+.subContenedorAddCtc{
+  background-color: #600E26;
+  padding: 30px;
+  border-radius: 30px;
+}
+
+.crearNuevoButton{
+  display: none;
+    background-color: #7F1232;
+    color:white;
+    transform: translateY(-45px);
+    float: right;
+    height: 45px;
+    width: 25%;
+    border:none;
+    border-radius: 0;
+}
+
+.crearNuevo button:hover{
+  background-color: #6e102c;
+  color:white
+}
+
+.crearNuevo input{
+  height: 45px;
+}
+
+/* MODAL ACCOUNT  */
+
+.fondoContacts{
+  /* display: none; */
+  position: absolute;
+  top:0;
+  background-color: #600E26;
+  width: 50%;
+  padding: 20px;
+  right:0;
+  z-index: 1;
+}
+
+.fondoContacts .fila{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.fondoContacts .fila label{
+  margin-right: 10px;
+}
+
+.fondoContacts input{
+  height: 45px;
+}
+
+.accordion-button{
+  /* background-color: #600E26; */
+  /* color: white; */
+  margin-top: 10px;
+}
+
+/* MODAL NEW CONTACT  */
+
+.fondoNewDeal {
+  position:  fixed;
+   width: 600px;
+   top: 20px;
+   left: calc(50% - 300px);
+   /* bottom: 40px; */
+   z-index: 100;
+  background-color: #600E26;
+  padding: 20px;
+  border-radius: 20px;
+}
+
+.fondoNewDeal input {
+  height: 45px;
+}
+
+
+/* STAGE  */
+
+.stageLead{
+  background-color: #03E5A7;
+}
+.stageProposal{
+  background-color: #e5d603;
+}
+.stageNegotiation{
+  background-color: #e58b03;
+}
+.stageWon{
+  background-color: #03e516;
+}
+.stageSent{
+  background-color: #cee503;
+}
+.stageLost{
+  background-color: #e50321;
+}
+.stageContract{
+  background-color: #03c3e5;
+}
+
+#stage select{
+    border-radius: 20px;
+    border:none;
+    text-align: center;
+    padding: 2px;
+}
+
+#priority{
+  min-width: 100px;
+}
+
+#closeProbability{
+  text-align: center;
+  min-width: 50px;
+}
+
+#forecastValue{
+  text-align: center;
+}
+
+#forecastValue{
+  min-width: 100px;
+  text-align: center;
+}
+
+#actualDealValue{
+  text-align: center;
+}
+
+.tablaDeal input{
+  height: 25px;
+}
+
+/* OWNER MODAL  */
+
+.fondoOwnerModal {
+  position:  fixed;
+   width: 600px;
+   top: 20px;
+   left: calc(50% - 300px);
+   /* bottom: 40px; */
+   z-index: 100;
+  background-color: #600E26;
+  padding: 20px;
+  border-radius: 20px;
+}

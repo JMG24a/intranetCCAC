@@ -6,10 +6,7 @@ import Cookies from "universal-cookie";
 const VerClientes = () => {
   const history = useHistory();
   const cookies = new Cookies();
-  if (
-    cookies.get("token") !==
-    "3d33c77f6aba01680fce7ec86557886856f6e75392fc3d7e79566fd0980b6c03"
-  ) {
+  if (cookies.get("token") !== "3d33c77f6aba01680fce7ec86557886856f6e75392fc3d7e79566fd0980b6c03") {
     console.log("error de autenticacion");
     history.replace("/login");
   }
@@ -51,100 +48,79 @@ const VerClientes = () => {
 
   const getClientesFiltro = () => {
     axios
-      .get(
-        `${process.env.REACT_APP_SERVIDOR}/api/clientes?limit=1000&offset=${page}&estado=Pendiente Enviar Cotizacion`,
-        {
-          headers: {
-            token: "JaRvIs92!",
-            correo: "alecapo@gmail.com",
-            password: "123456",
-          },
-        }
-      )
+      .get(`${process.env.REACT_APP_SERVIDOR}/api/clientes?limit=1000&offset=${page}&estado=Pendiente Enviar Cotizacion`, {
+        headers: {
+          token: "JaRvIs92!",
+          correo: "alecapo@gmail.com",
+          password: "123456",
+        },
+      })
       .then((e) => setEstadoCount(e.data.length))
       .catch((e) => console.log(e));
 
     axios
-      .get(
-        `${process.env.REACT_APP_SERVIDOR}/api/clientes?limit=1000&offset=${page}&estado=Cotizacion Enviada`,
-        {
-          headers: {
-            token: "JaRvIs92!",
-            correo: "alecapo@gmail.com",
-            password: "123456",
-          },
-        }
-      )
+      .get(`${process.env.REACT_APP_SERVIDOR}/api/clientes?limit=1000&offset=${page}&estado=Cotizacion Enviada`, {
+        headers: {
+          token: "JaRvIs92!",
+          correo: "alecapo@gmail.com",
+          password: "123456",
+        },
+      })
       .then((e) => setCotizacionEnviadaCount(e.data.length))
       .catch((e) => console.log(e));
 
     axios
-      .get(
-        `${process.env.REACT_APP_SERVIDOR}/api/clientes?limit=1000&offset=${page}&estado=Variaciones`,
-        {
-          headers: {
-            token: "JaRvIs92!",
-            correo: "alecapo@gmail.com",
-            password: "123456",
-          },
-        }
-      )
+      .get(`${process.env.REACT_APP_SERVIDOR}/api/clientes?limit=1000&offset=${page}&estado=Variaciones`, {
+        headers: {
+          token: "JaRvIs92!",
+          correo: "alecapo@gmail.com",
+          password: "123456",
+        },
+      })
       .then((e) => setCotizacionDevuelto(e.data.length))
       .catch((e) => console.log(e));
 
     axios
-      .get(
-        `${process.env.REACT_APP_SERVIDOR}/api/clientes?limit=1000&offset=${page}&estado=Emitir Tiquetes`,
-        {
-          headers: {
-            token: "JaRvIs92!",
-            correo: "alecapo@gmail.com",
-            password: "123456",
-          },
-        }
-      )
+      .get(`${process.env.REACT_APP_SERVIDOR}/api/clientes?limit=1000&offset=${page}&estado=Emitir Tiquetes`, {
+        headers: {
+          token: "JaRvIs92!",
+          correo: "alecapo@gmail.com",
+          password: "123456",
+        },
+      })
       .then((e) => setEmitirTiquetes(e.data.length))
       .catch((e) => console.log(e));
 
     axios
-      .get(
-        `${process.env.REACT_APP_SERVIDOR}/api/clientes?limit=1000&offset=${page}&estado=Pagado`,
-        {
-          headers: {
-            token: "JaRvIs92!",
-            correo: "alecapo@gmail.com",
-            password: "123456",
-          },
-        }
-      )
+      .get(`${process.env.REACT_APP_SERVIDOR}/api/clientes?limit=1000&offset=${page}&estado=Pagado`, {
+        headers: {
+          token: "JaRvIs92!",
+          correo: "alecapo@gmail.com",
+          password: "123456",
+        },
+      })
       .then((e) => setCotizacionPagado(e.data.length))
       .catch((e) => console.log(e));
 
     axios
-      .get(
-        `${process.env.REACT_APP_SERVIDOR}/api/clientes?limit=1000&offset=${page}&estado=Devuelto`,
-        {
-          headers: {
-            token: "JaRvIs92!",
-            correo: "alecapo@gmail.com",
-            password: "123456",
-          },
-        }
-      )
+      .get(`${process.env.REACT_APP_SERVIDOR}/api/clientes?limit=1000&offset=${page}&estado=Devuelto`, {
+        headers: {
+          token: "JaRvIs92!",
+          correo: "alecapo@gmail.com",
+          password: "123456",
+        },
+      })
       .then((e) => setCotiDev(e.data.length))
       .catch((e) => console.log(e));
 
     axios
-      .get(
-        `${process.env.REACT_APP_SERVIDOR}/api/clientes?limit=10&offset=${page}`,
-        {
-          headers: {
-            token: "JaRvIs92!",
-            correo: "alecapo@gmail.com",
-            password: "123456",
-          },
-        }
-      )
+      .get(`${process.env.REACT_APP_SERVIDOR}/api/clientes?limit=10&offset=${page}`, {
+        headers: {
+          token: "JaRvIs92!",
+          correo: "alecapo@gmail.com",
+          password: "123456",
+        },
+      })
       .then((e) => setClientes(e.data))
       .catch((e) => console.log(e));
   };
@@ -185,16 +161,13 @@ const VerClientes = () => {
     console.log(origen);
     if (origen) {
       axios
-        .get(
-          `${process.env.REACT_APP_SERVIDOR}/api/clientes?limit=1000&offset=${page}&origen=${origen}`,
-          {
-            headers: {
-              token: "JaRvIs92!",
-              correo: "alecapo@gmail.com",
-              password: "123456",
-            },
-          }
-        )
+        .get(`${process.env.REACT_APP_SERVIDOR}/api/clientes?limit=1000&offset=${page}&origen=${origen}`, {
+          headers: {
+            token: "JaRvIs92!",
+            correo: "alecapo@gmail.com",
+            password: "123456",
+          },
+        })
         .then((e) => setClientes(e.data))
         .catch((e) => console.log(e));
       return;
@@ -202,16 +175,13 @@ const VerClientes = () => {
 
     if (estado && kam) {
       axios
-        .get(
-          `${process.env.REACT_APP_SERVIDOR}/api/clientes?limit=1000&offset=${page}&estado=${estado}&kam=${kam}`,
-          {
-            headers: {
-              token: "JaRvIs92!",
-              correo: "alecapo@gmail.com",
-              password: "123456",
-            },
-          }
-        )
+        .get(`${process.env.REACT_APP_SERVIDOR}/api/clientes?limit=1000&offset=${page}&estado=${estado}&kam=${kam}`, {
+          headers: {
+            token: "JaRvIs92!",
+            correo: "alecapo@gmail.com",
+            password: "123456",
+          },
+        })
         .then((e) => setClientes(e.data))
         .catch((e) => console.log(e));
       return;
@@ -219,16 +189,13 @@ const VerClientes = () => {
 
     if (estado) {
       axios
-        .get(
-          `${process.env.REACT_APP_SERVIDOR}/api/clientes?limit=1000&offset=${page}&estado=${estado}`,
-          {
-            headers: {
-              token: "JaRvIs92!",
-              correo: "alecapo@gmail.com",
-              password: "123456",
-            },
-          }
-        )
+        .get(`${process.env.REACT_APP_SERVIDOR}/api/clientes?limit=1000&offset=${page}&estado=${estado}`, {
+          headers: {
+            token: "JaRvIs92!",
+            correo: "alecapo@gmail.com",
+            password: "123456",
+          },
+        })
         .then((e) => setClientes(e.data))
         .catch((e) => console.log(e));
       return;
@@ -236,16 +203,13 @@ const VerClientes = () => {
 
     if (probabilidadCierre) {
       axios
-        .get(
-          `${process.env.REACT_APP_SERVIDOR}/api/clientes?limit=1000&offset=${page}&probabilidadCierre=${probabilidadCierre}`,
-          {
-            headers: {
-              token: "JaRvIs92!",
-              correo: "alecapo@gmail.com",
-              password: "123456",
-            },
-          }
-        )
+        .get(`${process.env.REACT_APP_SERVIDOR}/api/clientes?limit=1000&offset=${page}&probabilidadCierre=${probabilidadCierre}`, {
+          headers: {
+            token: "JaRvIs92!",
+            correo: "alecapo@gmail.com",
+            password: "123456",
+          },
+        })
         .then((e) => setClientes(e.data))
         .catch((e) => console.log(e));
       return;
@@ -253,16 +217,13 @@ const VerClientes = () => {
 
     if (kam) {
       axios
-        .get(
-          `${process.env.REACT_APP_SERVIDOR}/api/clientes?limit=1000&offset=${page}&kam=${kam}`,
-          {
-            headers: {
-              token: "JaRvIs92!",
-              correo: "alecapo@gmail.com",
-              password: "123456",
-            },
-          }
-        )
+        .get(`${process.env.REACT_APP_SERVIDOR}/api/clientes?limit=1000&offset=${page}&kam=${kam}`, {
+          headers: {
+            token: "JaRvIs92!",
+            correo: "alecapo@gmail.com",
+            password: "123456",
+          },
+        })
         .then((e) => setClientes(e.data))
         .catch((e) => console.log(e));
       return;
@@ -270,32 +231,26 @@ const VerClientes = () => {
 
     if (inputHand) {
       axios
-        .get(
-          `${process.env.REACT_APP_SERVIDOR}/api/clientes?limit=1000&offset=${page}&searchValue=${inputHand}`,
-          {
-            headers: {
-              token: "JaRvIs92!",
-              correo: "alecapo@gmail.com",
-              password: "123456",
-            },
-          }
-        )
+        .get(`${process.env.REACT_APP_SERVIDOR}/api/clientes?limit=1000&offset=${page}&searchValue=${inputHand}`, {
+          headers: {
+            token: "JaRvIs92!",
+            correo: "alecapo@gmail.com",
+            password: "123456",
+          },
+        })
         .then((e) => setClientes(e.data))
         .catch((e) => console.log(e));
       return;
     }
     if (categoria) {
       axios
-        .get(
-          `${process.env.REACT_APP_SERVIDOR}/api/clientes?limit=1000&offset=${page}&categoria=${categoria}`,
-          {
-            headers: {
-              token: "JaRvIs92!",
-              correo: "alecapo@gmail.com",
-              password: "123456",
-            },
-          }
-        )
+        .get(`${process.env.REACT_APP_SERVIDOR}/api/clientes?limit=1000&offset=${page}&categoria=${categoria}`, {
+          headers: {
+            token: "JaRvIs92!",
+            correo: "alecapo@gmail.com",
+            password: "123456",
+          },
+        })
         .then((e) => setClientes(e.data))
         .catch((e) => console.log(e));
       return;
@@ -303,16 +258,13 @@ const VerClientes = () => {
     if (grupo) {
       console.log(grupo);
       axios
-        .get(
-          `${process.env.REACT_APP_SERVIDOR}/api/clientes?limit=1000&offset=${page}&grupo=${grupo}`,
-          {
-            headers: {
-              token: "JaRvIs92!",
-              correo: "alecapo@gmail.com",
-              password: "123456",
-            },
-          }
-        )
+        .get(`${process.env.REACT_APP_SERVIDOR}/api/clientes?limit=1000&offset=${page}&grupo=${grupo}`, {
+          headers: {
+            token: "JaRvIs92!",
+            correo: "alecapo@gmail.com",
+            password: "123456",
+          },
+        })
         .then((e) => setClientes(e.data))
         .catch((e) => console.log(e));
       return;
@@ -377,18 +329,10 @@ const VerClientes = () => {
                   onChange={(e) => setEstado(e.target.value)}
                 >
                   <option>- Seleccione Filtro -</option>
-                  <option value="Imposible de Contactar">
-                    Imposible de Contactar
-                  </option>
-                  <option value="Pendiente Enviar Informacion">
-                    Pendiente Enviar Informacion
-                  </option>
-                  <option value="Revision Informacion">
-                    Revision Informacion
-                  </option>
-                  <option value="Pendiente Enviar Cotizacion">
-                    Pendiente Enviar Cotizacion
-                  </option>
+                  <option value="Imposible de Contactar">Imposible de Contactar</option>
+                  <option value="Pendiente Enviar Informacion">Pendiente Enviar Informacion</option>
+                  <option value="Revision Informacion">Revision Informacion</option>
+                  <option value="Pendiente Enviar Cotizacion">Pendiente Enviar Cotizacion</option>
                   <option value="Cotizacion Enviada">Cotizacion Enviada</option>
                   <option value="Cotizacion Cargada">Cotizacion Cargada</option>
                   <option value="Facturado">Facturado</option>
@@ -424,12 +368,7 @@ const VerClientes = () => {
             <div className="col-md-3">
               <div className="form-group mt-3 text-center">
                 <label htmlFor="categoria">KAM</label>
-                <select
-                  name="categoria"
-                  id="categoria"
-                  className="form-control m-0 p-0 text-center"
-                  onChange={(e) => setKam(e.target.value)}
-                >
+                <select name="categoria" id="categoria" className="form-control m-0 p-0 text-center" onChange={(e) => setKam(e.target.value)}>
                   <option>- Seleccione Filtro -</option>
                   <option value="Leidy">Leidy</option>
                   <option value="Alejandra">Alejandra</option>
@@ -445,12 +384,7 @@ const VerClientes = () => {
             <div className="col-md-3">
               <div className="form-group mt-3 text-center">
                 <label htmlFor="categoria">Categoria</label>
-                <select
-                  name="categoria"
-                  id="categoria"
-                  className="form-control m-0 p-0 text-center"
-                  onChange={(e) => setCategoria(e.target.value)}
-                >
+                <select name="categoria" id="categoria" className="form-control m-0 p-0 text-center" onChange={(e) => setCategoria(e.target.value)}>
                   <option>- Seleccione Filtro -</option>
                   <option value="Comercio">Comercio</option>
                   <option value="Cultura y Turismo">Cultura y Turismo</option>
@@ -463,12 +397,7 @@ const VerClientes = () => {
               <div className="col-md-5">
                 <div className="form-group mt-3 text-center">
                   <label htmlFor="Grupo">Grupo</label>
-                  <select
-                    name="Grupo"
-                    id="Grupo"
-                    className="form-control m-0 p-0"
-                    onChange={(e) => setGrupo(e.target.value)}
-                  >
+                  <select name="Grupo" id="Grupo" className="form-control m-0 p-0" onChange={(e) => setGrupo(e.target.value)}>
                     <option>- Seleccione Filtro -</option>
                     {grupos.map((i) => (
                       <option value={i.nombre}>{i.nombre}</option>
@@ -479,26 +408,16 @@ const VerClientes = () => {
               <div className="col-md-5">
                 <div className="form-group mt-3 text-center">
                   <label htmlFor="categoria">Origen</label>
-                  <select
-                    name="categoria"
-                    id="categoria"
-                    className="form-control m-0 p-0 text-center"
-                    onChange={(e) => setOrigen(e.target.value)}
-                  >
+                  <select name="categoria" id="categoria" className="form-control m-0 p-0 text-center" onChange={(e) => setOrigen(e.target.value)}>
                     <option>- Seleccione - </option>
+                    <option value="Manual - Tarjetas">Manual - Tarjetas</option>
                     <option value="Manual - Otro">Manual - Otro</option>
                     <option value="Redes Sociales">Redes Sociales</option>
-                    <option value="URL - Participantes">
-                      URL - Participantes
-                    </option>
-                    <option value="URL - Landing Expo2020">
-                      URL - Landing Expo2020
-                    </option>
+                    <option value="URL - Participantes">URL - Participantes</option>
+                    <option value="URL - Landing Expo2020">URL - Landing Expo2020</option>
                     <option value="URL - Contactenos">URL - Contactenos</option>
                     <option value="URL - Mailing">URL - Mailing</option>
-                    <option value="URL - Inscripciones">
-                      URL - Inscripciones
-                    </option>
+                    <option value="URL - Inscripciones">URL - Inscripciones</option>
                     <option value="URL - Informes	">URL - Informes</option>
                   </select>
                 </div>
@@ -524,14 +443,10 @@ const VerClientes = () => {
         </div>
         <div className="col-lg-2 col-sm-12 float-end fondo">
           <Link to="/clientes/crear">
-            <button className="btn btn-success my-4">
-              Crear Nuevo Cliente
-            </button>
+            <button className="btn btn-success my-4">Crear Nuevo Cliente</button>
           </Link>
           <Link to="/participantes">
-            <button className="btn btn-warning my-4 ms-4">
-              Pasajeros con Documentos
-            </button>
+            <button className="btn btn-warning my-4 ms-4">Pasajeros con Documentos</button>
           </Link>
         </div>
       </div>
@@ -584,24 +499,12 @@ const VerClientes = () => {
                     >
                       <option value={i.estado}>{i.estado}</option>
                       <option> ------------------------- </option>
-                      <option value="Imposible de Contactar">
-                        Imposible de Contactar
-                      </option>
-                      <option value="Pendiente Enviar Informacion">
-                        Pendiente Enviar Informacion
-                      </option>
-                      <option value="Revision Informacion">
-                        Revision Informacion
-                      </option>
-                      <option value="Pendiente Enviar Cotizacion">
-                        Pendiente Enviar Cotizacion
-                      </option>
-                      <option value="Cotizacion Enviada">
-                        Cotizacion Enviada
-                      </option>
-                      <option value="Cotizacion Cargada">
-                        Cotizacion Cargada
-                      </option>
+                      <option value="Imposible de Contactar">Imposible de Contactar</option>
+                      <option value="Pendiente Enviar Informacion">Pendiente Enviar Informacion</option>
+                      <option value="Revision Informacion">Revision Informacion</option>
+                      <option value="Pendiente Enviar Cotizacion">Pendiente Enviar Cotizacion</option>
+                      <option value="Cotizacion Enviada">Cotizacion Enviada</option>
+                      <option value="Cotizacion Cargada">Cotizacion Cargada</option>
                       <option value="Facturado">Facturado</option>
                       <option value="Cerrado Perdido">Cerrado Perdido</option>
                       <option value="Abonado">Abonado</option>
@@ -616,23 +519,13 @@ const VerClientes = () => {
                   <td>
                     <Link to={"/clientes/editar/" + i.id}>
                       <button className="btn btn-warning">
-                        <i
-                          className="fas fa-pen"
-                          style={{ color: "white" }}
-                        ></i>
+                        <i className="fas fa-pen" style={{ color: "white" }}></i>
                       </button>
                     </Link>
                   </td>
                   <td>
-                    <button
-                      onClick={() => deleteHandler(i.id)}
-                      className="btn btn-danger"
-                      style={{ background: "red" }}
-                    >
-                      <i
-                        className="fas fa-trash"
-                        style={{ color: "white" }}
-                      ></i>
+                    <button onClick={() => deleteHandler(i.id)} className="btn btn-danger" style={{ background: "red" }}>
+                      <i className="fas fa-trash" style={{ color: "white" }}></i>
                     </button>
                   </td>
                 </tr>
@@ -646,10 +539,7 @@ const VerClientes = () => {
       </div>
       <div className="row row-cols-lg-auto ms-5 float-end">
         {page > 0 ? (
-          <button
-            className="btn btn-primary"
-            onClick={() => setPage(page - 10)}
-          >
+          <button className="btn btn-primary" onClick={() => setPage(page - 10)}>
             Anterior
           </button>
         ) : (
@@ -663,10 +553,7 @@ const VerClientes = () => {
         ) : (
           <h4 className="text-white">0</h4>
         )}
-        <button
-          className="btn btn-primary ms-4"
-          onClick={() => setPage(page + 10)}
-        >
+        <button className="btn btn-primary ms-4" onClick={() => setPage(page + 10)}>
           Siguiente
         </button>
       </div>

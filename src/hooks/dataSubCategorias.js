@@ -8,6 +8,7 @@ const subCategorias = [
   "Comercio - Aeroespacial",
   "Comercio - Tecnología",
   "Comercio - Cámara de Comercio",
+  "Comercio - Alimentos y Bebidas",
   "Academia - Ingenieria",
   "Academia - Publicidad",
   "Academia - Administracion",

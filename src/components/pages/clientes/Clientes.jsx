@@ -42,22 +42,10 @@ const Clientes = () => {
       minWidth: 150,
       renderCell: (params) => (
         <strong>
-          <Button
-            variant="contained"
-            color="primary"
-            size="small"
-            style={{ marginLeft: 16 }}
-            onClick={() => redirectHandler(params)}
-          >
+          <Button variant="contained" color="primary" size="small" style={{ marginLeft: 16 }} onClick={() => redirectHandler(params)}>
             Abrir
           </Button>
-          <Button
-            variant="contained"
-            color="error"
-            size="small"
-            style={{ marginLeft: 16 }}
-            onClick={() => deleteHandler(params)}
-          >
+          <Button variant="contained" color="error" size="small" style={{ marginLeft: 16 }} onClick={() => deleteHandler(params)}>
             Eliminar
           </Button>
         </strong>
@@ -92,16 +80,13 @@ const Clientes = () => {
 
   const getClientes = async () => {
     await axios
-      .get(
-        `${process.env.REACT_APP_SERVIDOR}/api/clientes?limit=5000&offset=0`,
-        {
-          headers: {
-            token: "JaRvIs92!",
-            correo: "alecapo@gmail.com",
-            password: "123456",
-          },
-        }
-      )
+      .get(`${process.env.REACT_APP_SERVIDOR}/api/clientes?limit=5000&offset=0`, {
+        headers: {
+          token: "JaRvIs92!",
+          correo: "alecapo@gmail.com",
+          password: "123456",
+        },
+      })
       .then((e) => {
         setClientes(e.data);
         setLoading(false);
@@ -111,16 +96,13 @@ const Clientes = () => {
 
   const searchHandler = async (inputHand) => {
     await axios
-      .get(
-        `${process.env.REACT_APP_SERVIDOR}/api/clientes?limit=1000&offset=0&searchValue=${searchValue}`,
-        {
-          headers: {
-            token: "JaRvIs92!",
-            correo: "alecapo@gmail.com",
-            password: "123456",
-          },
-        }
-      )
+      .get(`${process.env.REACT_APP_SERVIDOR}/api/clientes?limit=1000&offset=0&searchValue=${searchValue}`, {
+        headers: {
+          token: "JaRvIs92!",
+          correo: "alecapo@gmail.com",
+          password: "123456",
+        },
+      })
       .then((e) => setClientes(e.data))
       .catch((e) => console.log(e));
   };
@@ -133,13 +115,7 @@ const Clientes = () => {
       <h1>Lista de Clientes</h1>
       <div className="form-group col-4 my-4">
         <label htmlFor="searchValue">Ingrese valor a buscar</label>
-        <input
-          type="text"
-          name="searchValue"
-          id="searchValue"
-          className="form-control"
-          onChange={(e) => setSearchValue(e.target.value)}
-        />
+        <input type="text" name="searchValue" id="searchValue" className="form-control" onChange={(e) => setSearchValue(e.target.value)} />
         <div className="my-3">
           <button className="btn btn-primary me-3" onClick={searchHandler}>
             Buscar

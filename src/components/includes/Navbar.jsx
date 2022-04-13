@@ -30,11 +30,7 @@ const Navbar = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <div className="container-fluid">
-        <img
-          src="/images/LogoCCACacostado.svg"
-          alt="LogoCCAC"
-          style={{ width: "15%", padding: "15px" }}
-        />
+        <img src="/images/LogoCCACacostado.svg" alt="LogoCCAC" style={{ width: "15%", padding: "15px" }} />
 
         <button
           className="navbar-toggler"
@@ -63,6 +59,16 @@ const Navbar = () => {
             <li className="nav-item">
               <Link to="/misiones" className="nav-link">
                 Misiones
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link to="/lbc" className="nav-link">
+                LBC
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link to="/tarjetas" className="nav-link">
+                Tarjetas
               </Link>
             </li>
           </ul>
