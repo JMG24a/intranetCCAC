@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Cookies from "universal-cookie";
+
 const Navbar = () => {
   const [user, setUser] = useState({ nombre: "", imagen: "" });
   const cookies = new Cookies();
@@ -30,7 +31,11 @@ const Navbar = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <div className="container-fluid">
-        <img src="/images/LogoCCACacostado.svg" alt="LogoCCAC" style={{ width: "15%", padding: "15px" }} />
+        <img
+          src="/images/LogoCCACacostado.svg"
+          alt="LogoCCAC"
+          style={{ width: "15%", padding: "15px" }}
+        />
 
         <button
           className="navbar-toggler"
@@ -52,23 +57,23 @@ const Navbar = () => {
               </Link>
             </li>
             <li className="nav-item">
-              <Link to="/clientes" className="nav-link">
-                Clientes
+              <Link to="/accounts" className="nav-link">
+                Accounts
               </Link>
             </li>
             <li className="nav-item">
-              <Link to="/misiones" className="nav-link">
-                Misiones
+              <Link to="/deals" className="nav-link">
+                Deals
               </Link>
             </li>
             <li className="nav-item">
-              <Link to="/lbc" className="nav-link">
-                LBC
+              <Link to="/employees" className="nav-link">
+                Employees
               </Link>
             </li>
             <li className="nav-item">
-              <Link to="/tarjetas" className="nav-link">
-                Tarjetas
+              <Link to="/leads" className="nav-link">
+                Leads
               </Link>
             </li>
           </ul>

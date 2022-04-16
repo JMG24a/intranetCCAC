@@ -14,10 +14,10 @@ const OwnerModal = ({ idDeal, deals }) => {
   useEffect(() => {
     getEmployees();
 
-    const newDeal = deals.filter((item) => {
-      return item.id === idDeal;
-    });
-    setChecked(newDeal[0].owner);
+    // const newDeal = deals.filter((item) => {
+    //   return item.id === idDeal;
+    // });
+    // setChecked(newDeal[0].owner);
   }, []);
 
   return (
@@ -51,7 +51,13 @@ const OwnerModal = ({ idDeal, deals }) => {
                     <tr>
                       <td> {item.nameEmployee}</td>
                       <td>
-                        <input type="checkbox" name="test" id="test" checked style={{ width: "20px" }} />
+                        <input
+                          type="checkbox"
+                          name="test"
+                          id="test"
+                          checked
+                          style={{ width: "20px" }}
+                        />
                       </td>
                     </tr>
                   ) : (
