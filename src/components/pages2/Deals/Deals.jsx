@@ -8,6 +8,8 @@ import OwnerModal from "../modals/OwnerModal";
 import EditDeal from "../modals/EditDeal";
 import { DataEmployees } from "../../../hooks/DataEmployees";
 import CreateContact from "../modals/CreateContact";
+import AccountModal from "../modals/AccountModal";
+import AccountSelect from "../modals/AccountSelect";
 
 const Deals = () => {
   const [deals, setDeals] = useState([]);
@@ -19,7 +21,9 @@ const Deals = () => {
   const [showEditDeal, setShowEditDeal] = useState(false);
   const [showOwner, setShowOwner] = useState(false);
   const { employees } = DataEmployees();
-  const [showModalContact, setShowModalContact] = useState(true);
+  const [showModalContact, setShowModalContact] = useState(false);
+  const [dealEdit, setDealEdit] = useState(true);
+  const [showModalAccount, setShowModalAccount] = useState(false);
 
   const getDeals = async () => {
     await axios
@@ -82,17 +86,13 @@ const Deals = () => {
 
   const stageFilter = (e) => {
     if (deals !== filteredDeals) {
-      const filtrado = filteredDeals.filter(
-        (item) => item[`${e.target.name}`] === e.target.value
-      );
+      const filtrado = filteredDeals.filter((item) => item[`${e.target.name}`] === e.target.value);
 
       setDeals(filtrado);
       return;
     }
 
-    const filtrado = deals.filter(
-      (item) => item[`${e.target.name}`] === e.target.value
-    );
+    const filtrado = deals.filter((item) => item[`${e.target.name}`] === e.target.value);
 
     setDeals(filtrado);
   };
@@ -142,12 +142,7 @@ const Deals = () => {
                   <th>Contacto</th>
                   <th>Cuenta</th>
                   <th>
-                    <select
-                      name="stage"
-                      id="stage"
-                      onChange={(e) => stageFilter(e)}
-                      className="form-control"
-                    >
+                    <select name="stage" id="stage" onChange={(e) => stageFilter(e)} className="form-control">
                       <option value="Stage">Stage</option>
                       {stage.map((item, index) => (
                         <option value={item} key={index}>
@@ -157,12 +152,7 @@ const Deals = () => {
                     </select>
                   </th>
                   <th>
-                    <select
-                      name="priority"
-                      id="priority"
-                      onChange={(e) => stageFilter(e)}
-                      className="form-control"
-                    >
+                    <select name="priority" id="priority" onChange={(e) => stageFilter(e)} className="form-control">
                       <option>Priority</option>
                       {priority.map((item, index) => (
                         <option value={item} key={index}>
@@ -196,66 +186,65 @@ const Deals = () => {
                       />
                     </td>
                     <td id="owner">
-                      {/* {item.owner.map((i, index) => (
-                        <input
-                          name="owner"
-                          className="form-control"
-                          id="owner"
-                          onClick={() => {
-                            setShowOwner(true);
-                            console.log("seteado iddeal", item.id);
-                          }}
-                          type="text"
-                          defaultValue={i.nameEmployee}
-                          style={{ minWidth: "150px" }}
-                        />
-                      ))} */}
-                      <select name="" id="" className="form-control">
+                      <select name="owner" id="owner" className="form-control" onChange={(e) => formHandler("owner", e, item.id)}>
                         {item.owner.length > 0 ? (
-                          item.owner.map((item, index) => (
-                            <option value={item.nameEmployee}>
-                              {item.nameEmployee}
-                            </option>
-                          ))
+                          item.owner.map((item, index) => <option value={item.nameEmployee}>{item.nameEmployee}</option>)
                         ) : (
                           <option>- Seleccione -</option>
                         )}
 
                         {employees.map((item, index) => (
-                          <option value={item.nameEmployee}>
-                            {item.nameEmployee}
-                          </option>
+                          <option value={item.id}>{item.nameEmployee}</option>
                         ))}
                       </select>
                     </td>
                     <td id="contact">
-                      {item.contact.map((item, index) => (
-                        <input
-                          type="text"
-                          name=""
-                          id=""
-                          key={index}
-                          defaultValue={item.contactName}
-                          className="form-control"
-                          style={{ minWidth: "150px" }}
-                          onClick={() => setShowModalContact(true)}
-                          readOnly
-                        />
-                      ))}
+                      {item.contact.length > 0 ? (
+                        item.contact.map((i, index) => (
+                          <input
+                            type="text"
+                            name=""
+                            id=""
+                            key={index}
+                            defaultValue={i.contactName}
+                            className="form-control"
+                            style={{ minWidth: "150px" }}
+                            onClick={() => setShowModalContact(true)}
+                            readOnly
+                          />
+                        ))
+                      ) : (
+                        <button
+                          className="btn btn-primary"
+                          onClick={() => {
+                            setShowModalContact(true);
+                            setIdDeal(item.id);
+                          }}
+                        >
+                          Enlazar Contacto
+                        </button>
+                      )}
                     </td>
                     <td id="account">
-                      {item.account.map((item, index) => (
-                        <input
-                          type="text"
-                          name=""
-                          id=""
-                          key={index}
-                          defaultValue={item.account}
-                          className="form-control"
-                        />
-                      ))}
+                      {item.account.length > 0 ? (
+                        item.account.map((i, index) => (
+                          // console.log(i)
+                          <input type="text" name="" id="" key={index} defaultValue={i.accountName} className="form-control" readOnly />
+                        ))
+                      ) : (
+                        <button
+                          className="btn btn-secondary"
+                          onClick={() => {
+                            setShowModalAccount(true);
+                            setFondoNegro(true);
+                            setIdDeal(item.id);
+                          }}
+                        >
+                          Añadir Cuenta
+                        </button>
+                      )}
                     </td>
-                    <td id="stage">
+                    <td id="stage" className="text-center">
                       {
                         <select
                           name="stage"
@@ -294,11 +283,7 @@ const Deals = () => {
                         id="priority"
                         onChange={(e) => formHandler("priority", e, item.id)}
                         className={
-                          item.priority === "Alto"
-                            ? "inputPriorityAlta"
-                            : item.priority === "Medio"
-                            ? "inputPriorityMedia"
-                            : "inputPriorityBaja"
+                          item.priority === "Alto" ? "inputPriorityAlta" : item.priority === "Medio" ? "inputPriorityMedia" : "inputPriorityBaja"
                         }
                       >
                         <option value={item.priority}>{item.priority}</option>
@@ -310,9 +295,7 @@ const Deals = () => {
                       </select>
                     </td>
                     <td id="dealLength">
-                      <p className="text-center">
-                        {moment().diff(item.dealCreationDate, "days") + " days"}
-                      </p>
+                      <p className="text-center">{moment().diff(item.dealCreationDate, "days") + " days"}</p>
                     </td>
                     <td id="dealValue">
                       <input
@@ -331,9 +314,7 @@ const Deals = () => {
                         name="closeProbability"
                         id="closeProbability"
                         defaultValue={item.closeProbability}
-                        onBlur={(e) =>
-                          formHandler("closeProbability", e, item.id)
-                        }
+                        onBlur={(e) => formHandler("closeProbability", e, item.id)}
                       />
                     </td>
                     <td id="forecastValue">
@@ -341,9 +322,7 @@ const Deals = () => {
                         type="text"
                         name="forecastValue"
                         id="forecastValue"
-                        defaultValue={parseInt(
-                          (item.closeProbability / 100) * item.dealValue
-                        ).toLocaleString()}
+                        defaultValue={parseInt((item.closeProbability / 100) * item.dealValue).toLocaleString()}
                         onBlur={(e) => formHandler("forecastValue", e, item.id)}
                         readOnly
                       />
@@ -354,16 +333,8 @@ const Deals = () => {
                         className="form-control"
                         name="expectedCloseDate"
                         id="expectedCloseDate"
-                        defaultValue={moment(item.expectedCloseDate).format(
-                          "YYYY-MM-DD"
-                        )}
-                        onChange={(e) =>
-                          dateHandler(
-                            moment(e.target.value).format("YYYY-MM-DD"),
-                            "expectedCloseDate",
-                            item.id
-                          )
-                        }
+                        defaultValue={moment(item.expectedCloseDate).format("YYYY-MM-DD")}
+                        onChange={(e) => dateHandler(moment(e.target.value).format("YYYY-MM-DD"), "expectedCloseDate", item.id)}
                       />
                     </td>
                     <td id="actualDealValue">
@@ -382,19 +353,10 @@ const Deals = () => {
                         type="date"
                         name="dealCreationDate"
                         id="dealCreationDate"
-                        defaultValue={moment(item.dealCreationDate).format(
-                          "YYYY-MM-DD"
-                        )}
-                        onChange={(e) =>
-                          dateHandler(
-                            moment(e.target.value).format("YYYY-MM-DD"),
-                            "dealCreationDate",
-                            item.id
-                          )
-                        }
+                        defaultValue={moment(item.dealCreationDate).format("YYYY-MM-DD")}
+                        onChange={(e) => dateHandler(moment(e.target.value).format("YYYY-MM-DD"), "dealCreationDate", item.id)}
                       />
                     </td>
-
                     <td className="text-center">
                       <button
                         className="btn btn-warning"
@@ -449,26 +411,25 @@ const Deals = () => {
       </div>
 
       {createNewDealM === true ? (
-        <NewDeal
-          fondoNegro={fondoNegro}
-          setFondoNegro={setFondoNegro}
-          setCreateNewDealM={setCreateNewDealM}
-          getDeals={getDeals}
-        />
+        <NewDeal fondoNegro={fondoNegro} setFondoNegro={setFondoNegro} setCreateNewDealM={setCreateNewDealM} getDeals={getDeals} />
       ) : null}
 
       {showOwner ? <OwnerModal idDeal={idDeal} deals={deals} /> : null}
       {showEditDeal ? (
-        <EditDeal
+        <EditDeal fondoNegro={fondoNegro} setFondoNegro={setFondoNegro} setShowEditDeal={setShowEditDeal} getDeals={getDeals} idDeal={idDeal} />
+      ) : null}
+      {showModalContact ? (
+        <CreateContact setShowModalContact={setShowModalContact} id={idDeal} setDealEdit={setDealEdit} dealEdit={dealEdit} getDeals={getDeals} />
+      ) : null}
+      {showModalAccount ? (
+        <AccountSelect
           fondoNegro={fondoNegro}
           setFondoNegro={setFondoNegro}
-          setShowEditDeal={setShowEditDeal}
-          getDeals={getDeals}
+          setShowModalAccount={setShowModalAccount}
           idDeal={idDeal}
+          getDeals={getDeals}
         />
       ) : null}
-      {showModalContact ? <CreateContact /> : null}
-      <CreateContact />
     </div>
   );
 };

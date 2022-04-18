@@ -15,7 +15,7 @@
   align-items: center;
   justify-content: center;
   @media (max-width: 768px) {
-    display: none;
+
   }
 }
 
@@ -146,7 +146,7 @@ th {
 /* NEW ACCOUNT  */
 
 .fondoBlack {
-  /* display: none; */
+  
   background-color: rgba(0, 0, 0, 0.596);
   width: 100%;
   height: 100%;
@@ -164,8 +164,8 @@ th {
 }
 
 .contenedorNewACC {
-  display: none;
-  position: absolute;
+  
+  position: fixed;
   top: 20%;
   left: 50%;
   transform: translate(-50%, 0);
@@ -269,8 +269,8 @@ input {
 /* Modal Enlazar contacto */
 
 .contenedorAddCtc {
-  /* display: none; */
-  position: absolute;
+  
+  position: fixed;
   top: 20%;
   left: 50%;
   transform: translate(-50%, 0);
@@ -287,7 +287,7 @@ input {
 }
 
 .crearNuevoButton {
-  display: none;
+
   background-color: #7f1232;
   color: white;
   transform: translateY(-45px);
@@ -310,7 +310,7 @@ input {
 /* MODAL ACCOUNT  */
 
 .fondoContacts {
-  /* display: none; */
+  
   position: fixed;
   top: 0;
   background-color: #600e26;
@@ -456,4 +456,16 @@ input {
   bottom: 0;
   padding: 20px;
   z-index: 1;
+}
+
+
+/* ACCOUNT SELECT  */
+
+.accountSelect{
+  position: fixed;
+  top: 20%;
+  left: calc(50% - 300px);
+  min-width: 500px;
+  background-color: #600e26;
+  padding: 20px;
 }

@@ -7,15 +7,7 @@ import priority from "../../../hooks/dataPriority";
 import subCategorias from "../../../hooks/dataSubCategorias";
 import typeF from "../../../hooks/dataTipo";
 
-const AccountModal = ({
-  id,
-  account,
-  setAccount,
-  fondoNegro,
-  setFondoNegro,
-  setshowAccountModal,
-  getAccounts,
-}) => {
+const AccountModal = ({ id, account, setAccount, fondoNegro, setFondoNegro, setshowAccountModal, getAccounts }) => {
   const [form, setForm] = useState([]);
 
   const formHandler = (e) => {
@@ -53,15 +45,8 @@ const AccountModal = ({
             <div className="col-md-6">
               <div className="fila">
                 <label htmlFor="priority">Prioridad</label>
-                <select
-                  name="priority"
-                  id="priority"
-                  className="form-control"
-                  onChange={(e) => formHandler(e)}
-                >
-                  <option defaultValue={account.priority}>
-                    {account.priority}
-                  </option>
+                <select name="priority" id="priority" className="form-control" onChange={(e) => formHandler(e)}>
+                  <option defaultValue={account.priority}>{account.priority}</option>
                   {priority.map((item, index) => (
                     <option value={item} key={index}>
                       {item}
@@ -73,12 +58,7 @@ const AccountModal = ({
             <div className="col-md-6">
               <div className="fila">
                 <label htmlFor="type">Tipo</label>
-                <select
-                  name="type"
-                  id="type"
-                  className="form-control"
-                  onChange={(e) => formHandler(e)}
-                >
+                <select name="type" id="type" className="form-control" onChange={(e) => formHandler(e)}>
                   <option value={account.type}>{account.type}</option>
                   {typeF.map((item, index) => (
                     <option value={item} key={index}>
@@ -123,14 +103,7 @@ const AccountModal = ({
             <div className="col-md-6">
               <div className="fila">
                 <label htmlFor="email">Email</label>
-                <input
-                  type="text"
-                  name="email"
-                  id="email"
-                  className="form-control"
-                  defaultValue={account.email}
-                  onChange={(e) => formHandler(e)}
-                />
+                <input type="text" name="email" id="email" className="form-control" defaultValue={account.email} onChange={(e) => formHandler(e)} />
               </div>
             </div>
           </div>
@@ -138,14 +111,7 @@ const AccountModal = ({
             <div className="col-md-6">
               <div className="fila">
                 <label htmlFor="nit">Nit</label>
-                <input
-                  type="text"
-                  name="nit"
-                  id="nit"
-                  className="form-control"
-                  defaultValue={account.nit}
-                  onChange={(e) => formHandler(e)}
-                />
+                <input type="text" name="nit" id="nit" className="form-control" defaultValue={account.nit} onChange={(e) => formHandler(e)} />
               </div>
             </div>
             <div className="col-md-6">
@@ -166,15 +132,8 @@ const AccountModal = ({
             <div className="col-md-6">
               <div className="fila">
                 <label htmlFor="categoria">Categoria</label>
-                <select
-                  name="categoria"
-                  id="categoria"
-                  className="form-control"
-                  onChange={(e) => formHandler(e)}
-                >
-                  <option value={account.categoria}>
-                    {account.categoria}{" "}
-                  </option>
+                <select name="categoria" id="categoria" className="form-control" onChange={(e) => formHandler(e)}>
+                  <option value={account.categoria}>{account.categoria} </option>
                   {categorias.map((item, index) => (
                     <option value={item} key={index}>
                       {item}
@@ -186,15 +145,8 @@ const AccountModal = ({
             <div className="col-md-6">
               <div className="fila">
                 <label htmlFor="subCategoria">SubCategoria</label>
-                <select
-                  name="subCategoria"
-                  id="subCategoria"
-                  className="form-control"
-                  onChange={(e) => formHandler(e)}
-                >
-                  <option value={account.categoria}>
-                    {account.subCategoria}
-                  </option>
+                <select name="subCategoria" id="subCategoria" className="form-control" onChange={(e) => formHandler(e)}>
+                  <option value={account.categoria}>{account.subCategoria}</option>
                   {subCategorias.map((item, index) => (
                     <option value={item} key={index}>
                       {item}
@@ -206,14 +158,7 @@ const AccountModal = ({
           </div>
           <div className="row my-4">
             <label htmlFor="comentarios">Comentarios</label>
-            <textarea
-              name=""
-              id=""
-              cols="30"
-              rows="5"
-              className="form-control"
-              defaultValue={JSON.stringify(account.comments)}
-            ></textarea>
+            <textarea name="" id="" cols="30" rows="5" className="form-control" defaultValue={JSON.stringify(account.comments)}></textarea>
           </div>
         </div>
 
@@ -231,26 +176,14 @@ const AccountModal = ({
                 Ubicacion
               </button>
             </h2>
-            <div
-              id="collapseOne"
-              className="accordion-collapse collapse"
-              aria-labelledby="headingOne"
-              data-bs-parent="#accordionExample"
-            >
+            <div id="collapseOne" className="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
               <div className="accordion-body">
                 <div className="row">
                   <div className="col-md-6">
                     <div className="fila">
                       <label htmlFor="country">Pais</label>
-                      <select
-                        name="country"
-                        id="country"
-                        className="form-control"
-                        onChange={(e) => formHandler(e)}
-                      >
-                        <option value={account.country}>
-                          {account.country}
-                        </option>
+                      <select name="country" id="country" className="form-control" onChange={(e) => formHandler(e)}>
+                        <option value={account.country}>{account.country}</option>
 
                         {paises.map((item, index) => (
                           <option value={item.name} key={index}>
@@ -263,12 +196,7 @@ const AccountModal = ({
                   <div className="col-md-6">
                     <div className="fila">
                       <label htmlFor="city">Ciudad</label>
-                      <select
-                        name="city"
-                        id="city"
-                        className="form-control"
-                        onChange={(e) => formHandler(e)}
-                      >
+                      <select name="city" id="city" className="form-control" onChange={(e) => formHandler(e)}>
                         <option value={account.city}>{account.city}</option>
                         {ciudades.map((item, index) => (
                           <option value={item} key={index}>
@@ -310,12 +238,7 @@ const AccountModal = ({
                 Deals
               </button>
             </h2>
-            <div
-              id="collapseTwo"
-              className="accordion-collapse collapse"
-              aria-labelledby="headingTwo"
-              data-bs-parent="#accordionExample"
-            >
+            <div id="collapseTwo" className="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
               <div className="accordion-body">
                 <strong>En Construccion.</strong>
               </div>
@@ -334,22 +257,14 @@ const AccountModal = ({
                 Contacts
               </button>
             </h2>
-            <div
-              id="collapseThree"
-              className="accordion-collapse collapse"
-              aria-labelledby="headingThree"
-              data-bs-parent="#accordionExample"
-            >
+            <div id="collapseThree" className="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
               <div className="accordion-body">
                 <strong>En Construccion.</strong>
               </div>
             </div>
           </div>
         </div>
-        <button
-          className="btn btn-primary float-end my-4"
-          onClick={() => submitHandler(id)}
-        >
+        <button className="btn btn-primary float-end my-4" onClick={() => submitHandler(id)}>
           Guardar
         </button>
       </div>

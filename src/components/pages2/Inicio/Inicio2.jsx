@@ -14,7 +14,8 @@ const Inicio2 = () => {
   const [showContactModal, setShowContactModal] = useState(false);
   const [fondoNegro, setFondoNegro] = useState(true);
   const [client, setClient] = useState([]);
-
+  const [showEnlazarContacto, setShowEnlazarContacto] = useState(false);
+  const [showNewAccountModal, setShowNewAccountModal] = useState(false);
   const getAccounts = async () => {
     await axios
       .get(`http://localhost:3001/api/v1/accounts`)
@@ -27,8 +28,9 @@ const Inicio2 = () => {
   };
 
   const showNewAccount = () => {
-    document.getElementById("newAccountModal").classList.add("active");
-    document.getElementById("fondoBlack").classList.add("fondoBlack");
+    setShowEnlazarContacto(true);
+    // document.getElementById("newAccountModal").classList.add("active");
+    // document.getElementById("fondoBlack").classList.add("fondoBlack");
   };
 
   const searchHandler = (e) => {
@@ -70,10 +72,7 @@ const Inicio2 = () => {
       <section className="m-3 my-5">
         <div className="row row-cols-sm-auto">
           <div className="col me-5">
-            <button
-              className="btn btn-primary"
-              onClick={() => showNewAccount()}
-            >
+            <button className="btn btn-primary" onClick={() => setShowNewAccountModal(true)}>
               Crear Nuevo
             </button>
           </div>
@@ -118,10 +117,7 @@ const Inicio2 = () => {
             <tbody>
               {accounts.map((item, index) => (
                 <tr key={index}>
-                  <td
-                    id="accountName"
-                    style={{ minWidth: "250px", textAlign: "left" }}
-                  >
+                  <td id="accountName" style={{ minWidth: "250px", textAlign: "left" }}>
                     {item.accountName}
                   </td>
                   <td id="tipo">
@@ -155,14 +151,8 @@ const Inicio2 = () => {
                         type="text"
                         name="accountValue"
                         id="accountValue"
-                        defaultValue={
-                          item.accountValue
-                            ? parseInt(item.accountValue).toLocaleString()
-                            : 0
-                        }
-                        onBlur={(e) =>
-                          selectHandler("accountValue", e, item.id)
-                        }
+                        defaultValue={item.accountValue ? parseInt(item.accountValue).toLocaleString() : 0}
+                        onBlur={(e) => selectHandler("accountValue", e, item.id)}
                       />
                     }
                   </td>
@@ -175,14 +165,12 @@ const Inicio2 = () => {
                           type="text"
                           name=""
                           id=""
-                          value={i.contactName}
+                          defaultValue={i.contactName}
                           onClick={() => {
                             setId(i._id);
                             // console.log(i._id);
                             axios
-                              .get(
-                                `http://localhost:3001/api/v1/contacts/id/${i._id}`
-                              )
+                              .get(`http://localhost:3001/api/v1/contacts/id/${i._id}`)
                               .then((res) => setClient(res.data.contact))
                               .catch((err) => console.log(err));
 
@@ -198,9 +186,7 @@ const Inicio2 = () => {
                         className="btn btn-primary"
                         onClick={() => {
                           setId(item.id);
-                          document
-                            .getElementById("contenedorAddCtc")
-                            .classList.add("active");
+                          setShowEnlazarContacto(true);
                         }}
                       >
                         Agregar Contacto
@@ -210,15 +196,7 @@ const Inicio2 = () => {
                   <td id="inputDeals">
                     {item.deals
                       ? JSON.parse(item.deals).map((i, index) => (
-                          <input
-                            key={index}
-                            className="inputDeals"
-                            type="text"
-                            name=""
-                            id=""
-                            value={i}
-                            readOnly
-                          />
+                          <input key={index} className="inputDeals" type="text" name="" id="" value={i} readOnly />
                         ))
                       : ""}
                   </td>
@@ -226,11 +204,7 @@ const Inicio2 = () => {
                     {
                       <select
                         className={
-                          item.priority === "Alta"
-                            ? "inputPriorityAlta"
-                            : item.priority === "Media"
-                            ? "inputPriorityMedia"
-                            : "inputPriorityBaja"
+                          item.priority === "Alta" ? "inputPriorityAlta" : item.priority === "Media" ? "inputPriorityMedia" : "inputPriorityBaja"
                         }
                         name="priority"
                         id="priority"
@@ -244,10 +218,7 @@ const Inicio2 = () => {
                       </select>
                     }
                   </td>
-                  <td
-                    id="subCategoria"
-                    style={{ minWidth: "200px", textAlign: "left" }}
-                  >
+                  <td id="subCategoria" style={{ minWidth: "200px", textAlign: "left" }}>
                     {
                       <select
                         name="subCategoria"
@@ -258,9 +229,7 @@ const Inicio2 = () => {
                           selectHandler("subCategoria", e, item.id);
                         }}
                       >
-                        <option value={item.subCategoria}>
-                          {item.subCategoria}
-                        </option>
+                        <option value={item.subCategoria}>{item.subCategoria}</option>
                         {subCategorias.map((i, index) => (
                           <option value={i} key={index}>
                             {i}
@@ -275,7 +244,7 @@ const Inicio2 = () => {
                         type="text"
                         name="email"
                         id="email"
-                        defaultValue={item.email}
+                        value={item.email}
                         className="emailInput"
                         onBlur={(e) => {
                           selectHandler("email", e, item.id);
@@ -290,9 +259,7 @@ const Inicio2 = () => {
                       onClick={() => {
                         setId(item.id);
                         axios
-                          .get(
-                            `http://localhost:3001/api/v1/accounts/id/${item.id}`
-                          )
+                          .get(`http://localhost:3001/api/v1/accounts/id/${item.id}`)
                           .then((res) => setAccount(res.data.Acc))
                           .catch((err) => console.log(err));
 
@@ -310,8 +277,12 @@ const Inicio2 = () => {
         </div>
         {/* <DataGrid rows={accounts} columns={columns} pageSize={15} rowsPerPageOptions={[10]} disableSelectionOnClick /> */}
       </div>
-      <NewAccount getAccounts={getAccounts} />
-      <CreateContact id={id} getAccounts={getAccounts} />
+
+      {showNewAccountModal ? <NewAccount getAccounts={getAccounts} setShowNewAccountModal={setShowNewAccountModal} /> : null}
+
+      {showEnlazarContacto ? (
+        <CreateContact id={id} getAccounts={getAccounts} setShowEnlazarContacto={setShowEnlazarContacto} showEnlazarContacto={showEnlazarContacto} />
+      ) : null}
       {showAccountModal === true ? (
         <AccountModal
           id={id}

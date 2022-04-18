@@ -7,15 +7,7 @@ import priority from "../../../hooks/dataPriority";
 import subCategorias from "../../../hooks/dataSubCategorias";
 import typeF from "../../../hooks/dataTipo";
 
-const ContactsModal = ({
-  id,
-  client,
-  setAccount,
-  fondoNegro,
-  setFondoNegro,
-  setShowContactModal,
-  getAccounts,
-}) => {
+const ContactsModal = ({ id, client, setAccount, fondoNegro, setFondoNegro, setShowContactModal, getAccounts }) => {
   const [form, setForm] = useState([]);
 
   const formHandler = (e) => {
@@ -55,15 +47,8 @@ const ContactsModal = ({
             <div className="col-md-6">
               <div className="fila">
                 <label htmlFor="priority">Prioridad</label>
-                <select
-                  name="priority"
-                  id="priority"
-                  className="form-control"
-                  onChange={(e) => formHandler(e)}
-                >
-                  <option defaultValue={client.priority}>
-                    {client.priority}
-                  </option>
+                <select name="priority" id="priority" className="form-control" onChange={(e) => formHandler(e)}>
+                  <option defaultValue={client.priority}>{client.priority}</option>
                   {priority.map((item, index) => (
                     <option value={item} key={index}>
                       {item}
@@ -75,12 +60,7 @@ const ContactsModal = ({
             <div className="col-md-6">
               <div className="fila">
                 <label htmlFor="type">Tipo</label>
-                <select
-                  name="type"
-                  id="type"
-                  className="form-control"
-                  onChange={(e) => formHandler(e)}
-                >
+                <select name="type" id="type" className="form-control" onChange={(e) => formHandler(e)}>
                   <option value={client.type}>{client.type}</option>
                   {typeF.map((item, index) => (
                     <option value={item} key={index}>
@@ -125,14 +105,7 @@ const ContactsModal = ({
             <div className="col-md-6">
               <div className="fila">
                 <label htmlFor="nit">CC</label>
-                <input
-                  type="text"
-                  name="cc"
-                  id="cc"
-                  className="form-control"
-                  defaultValue={client.cc}
-                  onChange={(e) => formHandler(e)}
-                />
+                <input type="text" name="cc" id="cc" className="form-control" defaultValue={client.cc} onChange={(e) => formHandler(e)} />
               </div>
             </div>
             <div className="col-md-6">
@@ -153,14 +126,7 @@ const ContactsModal = ({
             <div className="col-md-6">
               <div className="fila">
                 <label htmlFor="email">Email</label>
-                <input
-                  type="text"
-                  name="email"
-                  id="email"
-                  className="form-control"
-                  defaultValue={client.email}
-                  onChange={(e) => formHandler(e)}
-                />
+                <input type="text" name="email" id="email" className="form-control" defaultValue={client.email} onChange={(e) => formHandler(e)} />
               </div>
             </div>
             <div className="col-md-6">
@@ -181,14 +147,7 @@ const ContactsModal = ({
             <div className="col-md-6">
               <div className="fila">
                 <label htmlFor="title">Title</label>
-                <input
-                  type="text"
-                  name="title"
-                  id="title"
-                  className="form-control"
-                  defaultValue={client.title}
-                  onChange={(e) => formHandler(e)}
-                />
+                <input type="text" name="title" id="title" className="form-control" defaultValue={client.title} onChange={(e) => formHandler(e)} />
               </div>
             </div>
             <div className="col-md-6">
@@ -217,26 +176,16 @@ const ContactsModal = ({
                 aria-expanded="true"
                 aria-controls="collapseOne"
               >
-                Misiones
+                Direccion
               </button>
             </h2>
-            <div
-              id="collapseOne"
-              className="accordion-collapse collapse"
-              aria-labelledby="headingOne"
-              data-bs-parent="#accordionExample"
-            >
+            <div id="collapseOne" className="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
               <div className="accordion-body">
                 <div className="row">
                   <div className="col-md-6">
                     <div className="fila">
                       <label htmlFor="country">Pais</label>
-                      <select
-                        name="country"
-                        id="country"
-                        className="form-control"
-                        onChange={(e) => formHandler(e)}
-                      >
+                      <select name="country" id="country" className="form-control" onChange={(e) => formHandler(e)}>
                         <option value={client.country}>{client.country}</option>
 
                         {paises.map((item, index) => (
@@ -250,12 +199,7 @@ const ContactsModal = ({
                   <div className="col-md-6">
                     <div className="fila">
                       <label htmlFor="city">Ciudad</label>
-                      <select
-                        name="city"
-                        id="city"
-                        className="form-control"
-                        onChange={(e) => formHandler(e)}
-                      >
+                      <select name="city" id="city" className="form-control" onChange={(e) => formHandler(e)}>
                         <option value={client.city}>{client.city}</option>
                         {ciudades.map((item, index) => (
                           <option value={item} key={index}>
@@ -297,22 +241,14 @@ const ContactsModal = ({
                 Deals
               </button>
             </h2>
-            <div
-              id="collapseTwo"
-              className="accordion-collapse collapse"
-              aria-labelledby="headingTwo"
-              data-bs-parent="#accordionExample"
-            >
+            <div id="collapseTwo" className="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
               <div className="accordion-body">
                 <strong>En Construccion.</strong>
               </div>
             </div>
           </div>
         </div>
-        <button
-          className="btn btn-primary float-end my-4"
-          onClick={() => submitHandler(id)}
-        >
+        <button className="btn btn-primary float-end my-4" onClick={() => submitHandler(id)}>
           Guardar
         </button>
       </div>

@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 
-const CreateContact = ({ id, getAccounts }) => {
+const CreateContact = ({ id, getAccounts, setShowModalContact, dealEdit, getDeals, setShowEnlazarContacto, showEnlazarContacto }) => {
   const [form, setForm] = useState({ contactName: "" });
   const [contacts, setContacts] = useState([]);
   //
@@ -20,6 +20,7 @@ const CreateContact = ({ id, getAccounts }) => {
           .put(`http://localhost:3001/api/v1/accounts/update?accountID=${id}&contactID=${event.data.contact.id}`)
           .then((res) => {
             getAccounts();
+            closeModal();
           })
           .catch((err) => console.log(err));
       })
@@ -31,14 +32,19 @@ const CreateContact = ({ id, getAccounts }) => {
     document.getElementById("contenedorAddCtc").classList.remove("active");
   };
 
-  //
-
   const closeModal = () => {
-    document.getElementById("contenedorAddCtc").classList.remove("active");
-    document.getElementById("fondoBlack").classList.remove("fondoBlack");
-  };
+    console.log(showEnlazarContacto);
+    // setShowModalContact(false);
+    setShowEnlazarContacto(false);
+    if (dealEdit) {
+      getDeals();
+      return;
+    }
 
-  //
+    getAccounts();
+    // document.getElementById("contenedorAddCtc").classList.remove("active");
+    // document.getElementById("fondoBlack").classList.remove("fondoBlack");
+  };
 
   const getContacts = () => {
     axios
@@ -50,15 +56,25 @@ const CreateContact = ({ id, getAccounts }) => {
   };
 
   const selectContactHandler = async (idAccount, idContact) => {
-    console.log(idAccount, idContact);
+    if (dealEdit) {
+      await axios
+        .put(`http://localhost:3001/api/v1/deals`, [{ contact: idContact }, idAccount])
+        .then((res) => {
+          // getAccounts();
+
+          closeModal();
+          console.log(res);
+        })
+        .catch((err) => console.log(err));
+      return;
+    }
     await axios
       .put(`http://localhost:3001/api/v1/accounts/update?accountID=${idAccount}&contactID=${idContact}`)
       .then((res) => {
         getAccounts();
       })
       .catch((err) => console.log(err));
-
-    document.getElementById("contenedorAddCtc").classList.remove("active");
+    setShowEnlazarContacto(false);
   };
 
   const searchContactHandler = (e) => {

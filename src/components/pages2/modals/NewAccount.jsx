@@ -4,7 +4,7 @@ import subCategorias from "../../../hooks/dataSubCategorias";
 import Swal from "sweetalert2";
 import axios from "axios";
 
-const NewAccount = ({ getAccounts }) => {
+const NewAccount = ({ getAccounts, setShowNewAccountModal }) => {
   const [cate, setCate] = useState(categorias);
   const [subCate, setSubCate] = useState(subCategorias);
   const [form, setForm] = useState({
@@ -82,15 +82,13 @@ const NewAccount = ({ getAccounts }) => {
       categoria: "",
       subCategoria: "",
     });
+    setShowNewAccountModal(false);
 
-    document.getElementById("newAccountModal").classList.remove("active");
-    document.getElementById("fondoBlack").classList.remove("fondoBlack");
     getAccounts();
   };
 
   const closeModal = () => {
-    document.getElementById("newAccountModal").classList.remove("active");
-    document.getElementById("fondoBlack").classList.remove("fondoBlack");
+    setShowNewAccountModal(false);
   };
 
   return (
