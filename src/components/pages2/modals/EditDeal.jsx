@@ -16,7 +16,7 @@ const EditDeal = ({
   const { employees } = DataEmployees();
   const getDeal = () => {
     axios
-      .get(`http://localhost:3001/api/v1/deals/get/${idDeal}`)
+      .get(`${process.env.REACT_APP_SERVIDOR}/api/v1/deals/get/${idDeal}`)
 
       .then((res) => {
         setDeal(res.data.deal);

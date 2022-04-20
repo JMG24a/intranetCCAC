@@ -2,14 +2,22 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import GetAccounts from "../../../hooks/GetAccounts";
 
-const AccountSelect = ({ fondoNegro, setFondoNegro, setShowModalAccount, idDeal, getDeals }) => {
+const AccountSelect = ({
+  fondoNegro,
+  setFondoNegro,
+  setShowModalAccount,
+  idDeal,
+  getDeals,
+}) => {
   const accounts = GetAccounts();
   const [acc, setAcc] = useState([]);
   console.log(idDeal);
   const searchHandler = (e) => {
     if (e.target.value.split("").length > 2) {
       axios
-        .get(`http://localhost:3001/api/v1/accounts/${e.target.value}`)
+        .get(
+          `${process.env.REACT_APP_SERVIDOR}/api/v1/accounts/${e.target.value}`
+        )
         .then((res) => setAcc(res.data.Acc))
         .catch((err) => console.error(err));
       console.log(acc);
@@ -25,7 +33,7 @@ const AccountSelect = ({ fondoNegro, setFondoNegro, setShowModalAccount, idDeal,
     const form = [{ account: [idAccount] }, idDeal];
 
     axios
-      .put("http://localhost:3001/api/v1/deals", form)
+      .put(`${process.env.REACT_APP_SERVIDOR}/api/v1/deals`, form)
       .then((res) => {
         setShowModalAccount(false);
         setFondoNegro(false);
@@ -55,7 +63,14 @@ const AccountSelect = ({ fondoNegro, setFondoNegro, setShowModalAccount, idDeal,
         <h1 className="text-white my-3 text-center">Seleccione Cuenta</h1>
         <div className="bg-white p-4 rounded">
           <div className="form-group mb-4">
-            <input className="form-control" type="text" name="search" id="search" placeholder="Ingrese Busqueda" onChange={(e) => searchHandler(e)} />
+            <input
+              className="form-control"
+              type="text"
+              name="search"
+              id="search"
+              placeholder="Ingrese Busqueda"
+              onChange={(e) => searchHandler(e)}
+            />
           </div>
           <table className="table ">
             <tbody>
@@ -64,7 +79,10 @@ const AccountSelect = ({ fondoNegro, setFondoNegro, setShowModalAccount, idDeal,
                     <tr key={index}>
                       <td>{item.accountName}</td>
                       <td>
-                        <button className="btn btn-primary" onClick={(e) => selectHandler(item.id, idDeal)}>
+                        <button
+                          className="btn btn-primary"
+                          onClick={(e) => selectHandler(item.id, idDeal)}
+                        >
                           <i className="fa fa-hand-pointer"></i>
                         </button>
                       </td>
@@ -74,7 +92,10 @@ const AccountSelect = ({ fondoNegro, setFondoNegro, setShowModalAccount, idDeal,
                     <tr key={index}>
                       <td>{item.accountName}</td>
                       <td>
-                        <button className="btn btn-primary" onClick={(e) => selectHandler(item.id, idDeal)}>
+                        <button
+                          className="btn btn-primary"
+                          onClick={(e) => selectHandler(item.id, idDeal)}
+                        >
                           <i className="fa fa-hand-pointer"></i>
                         </button>
                       </td>

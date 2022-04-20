@@ -57,7 +57,10 @@ const NewAccount = ({ getAccounts, setShowNewAccountModal }) => {
         text: "Revisa el campo Categoria!",
       });
       return;
-    } else if (form.subCategoria === "" || form.subCategoria === "- Seleccione -") {
+    } else if (
+      form.subCategoria === "" ||
+      form.subCategoria === "- Seleccione -"
+    ) {
       Swal.fire({
         icon: "error",
         title: "Oops...",
@@ -69,7 +72,7 @@ const NewAccount = ({ getAccounts, setShowNewAccountModal }) => {
     // guardo en DB
 
     await axios
-      .post("http://localhost:3001/api/v1/accounts/new", form)
+      .post(`${process.env.REACT_APP_SERVIDOR}/api/v1/accounts/new`, form)
       .then((event) => console.log(event.data))
       .catch((err) => console.error(err));
     // Cerrado del modal y vaciado del doc
@@ -94,7 +97,15 @@ const NewAccount = ({ getAccounts, setShowNewAccountModal }) => {
   return (
     <div id="fondoBlack">
       <div className="contenedorNewACC" id="newAccountModal">
-        <div style={{ color: "white", float: "right", marginTop: "-15px", marginRight: "-15px" }} onClick={() => closeModal()}>
+        <div
+          style={{
+            color: "white",
+            float: "right",
+            marginTop: "-15px",
+            marginRight: "-15px",
+          }}
+          onClick={() => closeModal()}
+        >
           <i className="fa fa-times fa-2x"></i>
         </div>
         <h2 className="mb-4 mt-3">CREAR NUEVA CUENTA</h2>

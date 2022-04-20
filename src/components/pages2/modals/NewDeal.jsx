@@ -1,7 +1,12 @@
 import axios from "axios";
 import React, { useState } from "react";
 
-const NewDeal = ({ fondoNegro, setFondoNegro, setCreateNewDealM, getDeals }) => {
+const NewDeal = ({
+  fondoNegro,
+  setFondoNegro,
+  setCreateNewDealM,
+  getDeals,
+}) => {
   const [form, setForm] = useState({});
 
   const formHandler = (e) => {
@@ -10,7 +15,7 @@ const NewDeal = ({ fondoNegro, setFondoNegro, setCreateNewDealM, getDeals }) => 
 
   const submitHandler = () => {
     axios
-      .post("http://localhost:3001/api/v1/deals/new", form)
+      .post(`${process.env.REACT_APP_SERVIDOR}/api/v1/deals/new`, form)
       .then((res) => getDeals())
       .catch((err) => console.log(err));
 
@@ -33,14 +38,21 @@ const NewDeal = ({ fondoNegro, setFondoNegro, setCreateNewDealM, getDeals }) => 
       <h1>New Deal</h1>
       <div className="fondoNewDeal p-4" id="contactModal">
         <div
-          style={{ color: "white", float: "right", marginTop: "-15px", marginRight: "-15px" }}
+          style={{
+            color: "white",
+            float: "right",
+            marginTop: "-15px",
+            marginRight: "-15px",
+          }}
           onClick={() => {
             setCreateNewDealM(false);
           }}
         >
           <i className="fa fa-times fa-2x"></i>
         </div>
-        <h2 className="text-white mt-3 mb-4 text-center">Crear un nuevo negocio</h2>
+        <h2 className="text-white mt-3 mb-4 text-center">
+          Crear un nuevo negocio
+        </h2>
 
         <div className="bg-white p-3 rounded">
           <div className="row">
@@ -144,7 +156,10 @@ const NewDeal = ({ fondoNegro, setFondoNegro, setCreateNewDealM, getDeals }) => 
             ></textarea>
           </div>
         </div>
-        <button className="btn btn-primary float-end my-4" onClick={() => submitHandler()}>
+        <button
+          className="btn btn-primary float-end my-4"
+          onClick={() => submitHandler()}
+        >
           Crear Nuevo
         </button>
       </div>

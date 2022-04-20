@@ -1,7 +1,15 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 
-const CreateContact = ({ id, getAccounts, setShowModalContact, dealEdit, getDeals, setShowEnlazarContacto, showEnlazarContacto }) => {
+const CreateContact = ({
+  id,
+  getAccounts,
+  setShowModalContact,
+  dealEdit,
+  getDeals,
+  setShowEnlazarContacto,
+  showEnlazarContacto,
+}) => {
   const [form, setForm] = useState({ contactName: "" });
   const [contacts, setContacts] = useState([]);
   //
@@ -13,11 +21,13 @@ const CreateContact = ({ id, getAccounts, setShowModalContact, dealEdit, getDeal
     }
     // Ingreso a la DB
     await axios
-      .post("http://localhost:3001/api/v1/contacts/new", form)
+      .post(`${process.env.REACT_APP_SERVIDOR}/api/v1/contacts/new`, form)
       .then((event) => {
         console.log(event.data);
         axios
-          .put(`http://localhost:3001/api/v1/accounts/update?accountID=${id}&contactID=${event.data.contact.id}`)
+          .put(
+            `${process.env.REACT_APP_SERVIDOR}/api/v1/accounts/update?accountID=${id}&contactID=${event.data.contact.id}`
+          )
           .then((res) => {
             getAccounts();
             closeModal();
@@ -48,7 +58,7 @@ const CreateContact = ({ id, getAccounts, setShowModalContact, dealEdit, getDeal
 
   const getContacts = () => {
     axios
-      .get("http://localhost:3001/api/v1/contacts")
+      .get(`${process.env.REACT_APP_SERVIDOR}/api/v1/contacts`)
       .then((res) => {
         setContacts(res.data.contacts);
       })
@@ -58,7 +68,10 @@ const CreateContact = ({ id, getAccounts, setShowModalContact, dealEdit, getDeal
   const selectContactHandler = async (idAccount, idContact) => {
     if (dealEdit) {
       await axios
-        .put(`http://localhost:3001/api/v1/deals`, [{ contact: idContact }, idAccount])
+        .put(`${process.env.REACT_APP_SERVIDOR}/api/v1/deals`, [
+          { contact: idContact },
+          idAccount,
+        ])
         .then((res) => {
           // getAccounts();
 
@@ -69,7 +82,9 @@ const CreateContact = ({ id, getAccounts, setShowModalContact, dealEdit, getDeal
       return;
     }
     await axios
-      .put(`http://localhost:3001/api/v1/accounts/update?accountID=${idAccount}&contactID=${idContact}`)
+      .put(
+        `${process.env.REACT_APP_SERVIDOR}/api/v1/accounts/update?accountID=${idAccount}&contactID=${idContact}`
+      )
       .then((res) => {
         getAccounts();
       })
@@ -82,7 +97,7 @@ const CreateContact = ({ id, getAccounts, setShowModalContact, dealEdit, getDeal
 
     if (searchValue.split("").length > 3) {
       axios
-        .get(`http://localhost:3001/api/v1/contacts/${searchValue}`)
+        .get(`${process.env.REACT_APP_SERVIDOR}/api/v1/contacts/${searchValue}`)
         .then((res) => setContacts(res.data.contact))
         .catch((err) => console.error(err));
       return;
@@ -99,7 +114,15 @@ const CreateContact = ({ id, getAccounts, setShowModalContact, dealEdit, getDeal
   return (
     <div>
       <div className="contenedorAddCtc" id="contenedorAddCtc">
-        <div style={{ color: "white", float: "right", marginTop: "-15px", marginRight: "-15px" }} onClick={() => closeModal()}>
+        <div
+          style={{
+            color: "white",
+            float: "right",
+            marginTop: "-15px",
+            marginRight: "-15px",
+          }}
+          onClick={() => closeModal()}
+        >
           <i className="fa fa-times fa-2x"></i>
         </div>
         <h2 className="text-white text-center">ENLAZAR CONTACTO</h2>
@@ -122,7 +145,10 @@ const CreateContact = ({ id, getAccounts, setShowModalContact, dealEdit, getDeal
                   <tr key={index}>
                     <td>{item.contactName}</td>
                     <td>
-                      <button className="btn btn-primary" onClick={() => selectContactHandler(id, item.id)}>
+                      <button
+                        className="btn btn-primary"
+                        onClick={() => selectContactHandler(id, item.id)}
+                      >
                         <i className="fa fa-hand-pointer"></i>
                       </button>
                     </td>
@@ -138,12 +164,19 @@ const CreateContact = ({ id, getAccounts, setShowModalContact, dealEdit, getDeal
                 name="crearNuevo"
                 id="crearNuevo"
                 placeholder="+ Crear Nuevo"
-                onClick={() => (document.getElementById("crearNuevoButton").style.display = "block")}
+                onClick={() =>
+                  (document.getElementById("crearNuevoButton").style.display =
+                    "block")
+                }
                 onChange={(e) => {
                   setForm({ contactName: e.target.value });
                 }}
               />
-              <button className="crearNuevoButton" id="crearNuevoButton" onClick={() => crearNuevoHandler()}>
+              <button
+                className="crearNuevoButton"
+                id="crearNuevoButton"
+                onClick={() => crearNuevoHandler()}
+              >
                 Añadir
               </button>
             </div>

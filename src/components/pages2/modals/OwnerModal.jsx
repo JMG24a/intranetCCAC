@@ -6,7 +6,7 @@ const OwnerModal = ({ idDeal, deals }) => {
   const [checked, setChecked] = useState([]);
   const getEmployees = () => {
     axios
-      .get("http://localhost:3001/api/v1/employees")
+      .get(`${process.env.REACT_APP_SERVIDOR}/api/v1/employees`)
       .then((res) => setEmployees(res.data.employees))
       .catch((err) => console.log(err));
   };

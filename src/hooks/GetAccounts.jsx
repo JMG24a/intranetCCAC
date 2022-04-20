@@ -6,7 +6,7 @@ const GetAccounts = () => {
 
   const getAcc = async () => {
     await axios
-      .get("http://localhost:3001/api/v1/accounts")
+      .get(`${process.env.REACT_APP_SERVIDOR}/api/v1/accounts`)
       .then((res) => setAccounts(res.data.accounts))
       .catch((err) => console.log(err));
   };

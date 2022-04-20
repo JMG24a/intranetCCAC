@@ -18,7 +18,7 @@ const Inicio2 = () => {
   const [showNewAccountModal, setShowNewAccountModal] = useState(false);
   const getAccounts = async () => {
     await axios
-      .get(`http://localhost:3001/api/v1/accounts`)
+      .get(`${process.env.REACT_APP_SERVIDOR}/api/v1/accounts`)
       .then((e) => {
         setAccounts(e.data.accounts);
       })
@@ -36,7 +36,9 @@ const Inicio2 = () => {
   const searchHandler = (e) => {
     if (e.target.value.split("").length > 3) {
       axios
-        .get(`http://localhost:3001/api/v1/accounts/${e.target.value}`)
+        .get(
+          `${process.env.REACT_APP_SERVIDOR}/api/v1/accounts/${e.target.value}`
+        )
         .then((res) => setAccounts(res.data.Acc))
         .catch((err) => console.error(err));
       return;
@@ -50,7 +52,7 @@ const Inicio2 = () => {
     const form = [{ [e.target.name]: e.target.value }, idAcc];
 
     axios
-      .put("http://localhost:3001/api/v1/accounts", form)
+      .put(`${process.env.REACT_APP_SERVIDOR}/api/v1/accounts`, form)
       .then((res) => {
         alert("actualizado correctamente");
         console.log(res.data);
@@ -72,7 +74,10 @@ const Inicio2 = () => {
       <section className="m-3 my-5">
         <div className="row row-cols-sm-auto">
           <div className="col me-5">
-            <button className="btn btn-primary" onClick={() => setShowNewAccountModal(true)}>
+            <button
+              className="btn btn-primary"
+              onClick={() => setShowNewAccountModal(true)}
+            >
               Crear Nuevo
             </button>
           </div>
@@ -117,7 +122,10 @@ const Inicio2 = () => {
             <tbody>
               {accounts.map((item, index) => (
                 <tr key={index}>
-                  <td id="accountName" style={{ minWidth: "250px", textAlign: "left" }}>
+                  <td
+                    id="accountName"
+                    style={{ minWidth: "250px", textAlign: "left" }}
+                  >
                     {item.accountName}
                   </td>
                   <td id="tipo">
@@ -151,8 +159,14 @@ const Inicio2 = () => {
                         type="text"
                         name="accountValue"
                         id="accountValue"
-                        defaultValue={item.accountValue ? parseInt(item.accountValue).toLocaleString() : 0}
-                        onBlur={(e) => selectHandler("accountValue", e, item.id)}
+                        defaultValue={
+                          item.accountValue
+                            ? parseInt(item.accountValue).toLocaleString()
+                            : 0
+                        }
+                        onBlur={(e) =>
+                          selectHandler("accountValue", e, item.id)
+                        }
                       />
                     }
                   </td>
@@ -170,7 +184,9 @@ const Inicio2 = () => {
                             setId(i._id);
                             // console.log(i._id);
                             axios
-                              .get(`http://localhost:3001/api/v1/contacts/id/${i._id}`)
+                              .get(
+                                `${process.env.REACT_APP_SERVIDOR}/api/v1/contacts/id/${i._id}`
+                              )
                               .then((res) => setClient(res.data.contact))
                               .catch((err) => console.log(err));
 
@@ -196,7 +212,15 @@ const Inicio2 = () => {
                   <td id="inputDeals">
                     {item.deals
                       ? JSON.parse(item.deals).map((i, index) => (
-                          <input key={index} className="inputDeals" type="text" name="" id="" value={i} readOnly />
+                          <input
+                            key={index}
+                            className="inputDeals"
+                            type="text"
+                            name=""
+                            id=""
+                            value={i}
+                            readOnly
+                          />
                         ))
                       : ""}
                   </td>
@@ -204,7 +228,11 @@ const Inicio2 = () => {
                     {
                       <select
                         className={
-                          item.priority === "Alta" ? "inputPriorityAlta" : item.priority === "Media" ? "inputPriorityMedia" : "inputPriorityBaja"
+                          item.priority === "Alta"
+                            ? "inputPriorityAlta"
+                            : item.priority === "Media"
+                            ? "inputPriorityMedia"
+                            : "inputPriorityBaja"
                         }
                         name="priority"
                         id="priority"
@@ -218,7 +246,10 @@ const Inicio2 = () => {
                       </select>
                     }
                   </td>
-                  <td id="subCategoria" style={{ minWidth: "200px", textAlign: "left" }}>
+                  <td
+                    id="subCategoria"
+                    style={{ minWidth: "200px", textAlign: "left" }}
+                  >
                     {
                       <select
                         name="subCategoria"
@@ -229,7 +260,9 @@ const Inicio2 = () => {
                           selectHandler("subCategoria", e, item.id);
                         }}
                       >
-                        <option value={item.subCategoria}>{item.subCategoria}</option>
+                        <option value={item.subCategoria}>
+                          {item.subCategoria}
+                        </option>
                         {subCategorias.map((i, index) => (
                           <option value={i} key={index}>
                             {i}
@@ -259,7 +292,9 @@ const Inicio2 = () => {
                       onClick={() => {
                         setId(item.id);
                         axios
-                          .get(`http://localhost:3001/api/v1/accounts/id/${item.id}`)
+                          .get(
+                            `${process.env.REACT_APP_SERVIDOR}/api/v1/accounts/id/${item.id}`
+                          )
                           .then((res) => setAccount(res.data.Acc))
                           .catch((err) => console.log(err));
 
@@ -278,10 +313,20 @@ const Inicio2 = () => {
         {/* <DataGrid rows={accounts} columns={columns} pageSize={15} rowsPerPageOptions={[10]} disableSelectionOnClick /> */}
       </div>
 
-      {showNewAccountModal ? <NewAccount getAccounts={getAccounts} setShowNewAccountModal={setShowNewAccountModal} /> : null}
+      {showNewAccountModal ? (
+        <NewAccount
+          getAccounts={getAccounts}
+          setShowNewAccountModal={setShowNewAccountModal}
+        />
+      ) : null}
 
       {showEnlazarContacto ? (
-        <CreateContact id={id} getAccounts={getAccounts} setShowEnlazarContacto={setShowEnlazarContacto} showEnlazarContacto={showEnlazarContacto} />
+        <CreateContact
+          id={id}
+          getAccounts={getAccounts}
+          setShowEnlazarContacto={setShowEnlazarContacto}
+          showEnlazarContacto={showEnlazarContacto}
+        />
       ) : null}
       {showAccountModal === true ? (
         <AccountModal
