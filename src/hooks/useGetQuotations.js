@@ -6,7 +6,7 @@ export default function useGetQuotations() {
 
   const getEmpleados = async () => {
     await axios
-      .get(`http://localhost:3001/api/v1/quotations`)
+      .get(`${process.env.REACT_APP_SERVIDOR}/api/v1/quotations`)
       .then((res) => setEmpleado(res.data.quotations))
       .catch((err) => console.log(err));
   };

@@ -67,11 +67,11 @@ const Navbar = () => {
                 Employees
               </Link>
             </li>
-            <li className="nav-item">
+            {/* <li className="nav-item">
               <Link to="/leads" className="nav-link">
                 Leads
               </Link>
-            </li>
+            </li> */}
             <li className="nav-item">
               <Link to="/cotizaciones" className="nav-link">
                 Quotations

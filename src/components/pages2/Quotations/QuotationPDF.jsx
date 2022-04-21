@@ -14,7 +14,7 @@ const QuotationPDF = () => {
 
   const getQuotation = () => {
     axios
-      .get(`http://localhost:3001/api/v1/quotations/${noCoti}`)
+      .get(`${process.env.REACT_APP_SERVIDOR}/api/v1/quotations/${noCoti}`)
       .then((res) => setAccount(res.data.busqueda))
       .catch((err) => console.log(err));
   };

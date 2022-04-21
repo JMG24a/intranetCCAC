@@ -1,9 +1,10 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { employees } from "../../../hooks/GetEmployees";
+import GetEmployees from "../../../hooks/GetEmployees";
 
 const Employees = () => {
-  const employees = [];
+  const employees = GetEmployees();
+  // const employees = [];
 
   const [form, setForm] = useState({});
   const formHandler = (e) => {

@@ -63,7 +63,7 @@ const Quotation = () => {
     const formF = { ...form, productos: listadoProductosAgregados, subTotal: subTotal, tax: tax, total, total };
 
     axios
-      .post("http://localhost:3001/api/v1/quotations/new", formF)
+      .post(`${process.env.REACT_APP_SERVIDOR}/api/v1/quotations/new`, formF)
       .then((res) => console.log(res.data))
       .catch((err) => console.log(err));
   };

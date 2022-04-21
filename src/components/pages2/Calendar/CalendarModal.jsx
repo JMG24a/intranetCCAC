@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import Modal from "react-modal";
-import "./modalStyle.css";
+// import Modal from "react-modal";
+// import "./modalStyle.css";
 
 const customStyles = {
   content: {
@@ -13,7 +13,7 @@ const customStyles = {
   },
 };
 
-Modal.setAppElement("#root");
+// Modal.setAppElement("#root");
 
 export const CalendarModal = () => {
   const [isOpen, setIsOpen] = useState(true);
@@ -23,7 +23,7 @@ export const CalendarModal = () => {
   };
   return (
     <div>
-      <Modal
+      {/* <Modal
         isOpen={isOpen}
         // onAfterOpen={afterOpenModal}
         onRequestClose={closeModal}
@@ -35,7 +35,7 @@ export const CalendarModal = () => {
         <h1>Hola</h1>
         <hr />
         <p>Lorem ipsum dolor sit.</p>
-      </Modal>
+      </Modal> */}
     </div>
   );
 };
