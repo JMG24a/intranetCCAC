@@ -241,7 +241,7 @@ th {
 
 input {
   width: 100%;
-  padding: 1em !important;
+  /* padding: 1em !important; */
   margin: 0em !important;
   box-sizing: border-box;
 }
@@ -469,3 +469,13 @@ input {
   background-color: #600e26;
   padding: 20px;
 }
+
+
+/* QUOTATIONS */
+
+.totalsTable{
+  width: 20%;
+  float: right;
+  margin-top: 25px;
+}
+

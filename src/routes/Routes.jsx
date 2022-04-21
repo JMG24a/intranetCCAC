@@ -16,11 +16,15 @@ import Inicio from "../components/pages/inicio/Inicio";
 import Misiones from "../components/pages/misiones/Misiones";
 import Pendientes from "../components/pages/pendientes/Pendientes";
 import Tarjetas from "../components/pages/tarjetas/Tarjetas";
-import Calendar from "../components/pages2/Calendar/Calendar";
+
+import Calendario from "../components/pages2/Calendar/Calendario";
 import Deals from "../components/pages2/Deals/Deals";
 import Employees from "../components/pages2/Employees/Employees";
 import Inicio2 from "../components/pages2/Inicio/Inicio2";
 import Leads from "../components/pages2/Leads/Leads";
+import Quotation from "../components/pages2/Quotations/Quotation";
+import QuotationPDF from "../components/pages2/Quotations/QuotationPDF";
+import QuotationShow from "../components/pages2/Quotations/QuotationShow";
 import Participantes from "../components/participantes/Participantes";
 import "../css/style.css";
 
@@ -31,7 +35,7 @@ export const AppRouter = () => {
         <Switch>
           <Route exact path="/">
             <Navbar />
-            <Calendar />
+            <Calendario />
           </Route>
           <Route exact path="/deals">
             <Navbar />
@@ -48,6 +52,18 @@ export const AppRouter = () => {
           <Route exact path="/leads">
             <Navbar />
             <Leads />
+          </Route>
+          <Route exact path="/cotizaciones">
+            <Navbar />
+            <Quotation />
+          </Route>
+          <Route exact path="/cotizaciones/ver">
+            <Navbar />
+            <QuotationShow />
+          </Route>
+          <Route exact path="/cotizaciones/imprimir/:noCoti">
+            <Navbar />
+            <QuotationPDF />
           </Route>
           <Route path="/">
             <Navbar />

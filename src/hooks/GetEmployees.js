@@ -1,20 +1,19 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-const GetEmployees = () => {
-  const [accounts, setAccounts] = useState([]);
+export default function GetEmployees() {
+  const [empleado, setEmpleado] = useState([]);
 
-  const getAcc = async () => {
+  const getEmpleados = async () => {
     await axios
       .get(`${process.env.REACT_APP_SERVIDOR}/api/v1/employees`)
-      .then((res) => setAccounts(res.data.employees))
+      .then((res) => setEmpleado(res.data.employees))
       .catch((err) => console.log(err));
   };
 
   useEffect(() => {
-    getAcc();
+    getEmpleados();
   }, []);
-  return accounts;
-};
 
-export default GetEmployees;
+  return empleado;
+}
