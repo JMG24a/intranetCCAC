@@ -26,6 +26,8 @@ import Quotation from "../components/pages2/Quotations/Quotation";
 import QuotationPDF from "../components/pages2/Quotations/QuotationPDF";
 import QuotationShow from "../components/pages2/Quotations/QuotationShow";
 import Participantes from "../components/participantes/Participantes";
+//jmg24a dependencies
+import { CalendarContext } from '../context/CalendarContext';
 import "../css/style.css";
 
 export const AppRouter = () => {
@@ -35,7 +37,9 @@ export const AppRouter = () => {
         <Switch>
           <Route exact path="/">
             <Navbar />
-            <Calendario />
+            <CalendarContext>
+              <Calendario />
+            </CalendarContext>
           </Route>
           <Route exact path="/deals">
             <Navbar />
