@@ -1,6 +1,9 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 
+//jmg24a dependencies
+import { CalendarModal as Modal } from '../Calendar/CalendarModal';
+
 const CreateContact = ({
   id,
   getAccounts,
@@ -45,7 +48,7 @@ const CreateContact = ({
   const closeModal = () => {
     console.log(showEnlazarContacto);
     // setShowModalContact(false);
-    setShowEnlazarContacto(false);
+    setShowModalContact(false);
     if (dealEdit) {
       getDeals();
       return;
@@ -113,77 +116,79 @@ const CreateContact = ({
 
   return (
     <div>
-      <div className="contenedorAddCtc" id="contenedorAddCtc">
-        <div
-          style={{
-            color: "white",
-            float: "right",
-            marginTop: "-15px",
-            marginRight: "-15px",
-          }}
-          onClick={() => closeModal()}
-        >
-          <i className="fa fa-times fa-2x"></i>
-        </div>
-        <h2 className="text-white text-center">ENLAZAR CONTACTO</h2>
-        <div className="subContenedorAddCtc">
-          <div className="left-inner-addon input-container">
-            <i className="fa fa-search"></i>
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Buscar Cliente"
-              name="accountName"
-              id="accountName"
-              onChange={(e) => searchContactHandler(e)}
-            />
+      <Modal>
+        <div className="contenedorAddCtc" id="contenedorAddCtc">
+          <div
+            style={{
+              color: "white",
+              float: "right",
+              marginTop: "-15px",
+              marginRight: "-15px",
+            }}
+            onClick={() => closeModal()}
+          >
+          <i className="fa fa-times fa-2x" style={{cursor: 'pointer'}}></i>
           </div>
-          <div style={{ backgroundColor: "white", padding: "20px" }}>
-            <table className="table table-sm table-hover">
-              <tbody>
-                {contacts.slice(0, 4).map((item, index) => (
-                  <tr key={index}>
-                    <td>{item.contactName}</td>
-                    <td>
-                      <button
-                        className="btn btn-primary"
-                        onClick={() => selectContactHandler(id, item.id)}
-                      >
-                        <i className="fa fa-hand-pointer"></i>
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-            <div className="crearNuevo my-5">
+          <h2 className="text-white text-center">ENLAZAR CONTACTO</h2>
+          <div className="subContenedorAddCtc">
+            <div className="left-inner-addon input-container">
+              <i className="fa fa-search"></i>
               <input
-                value={form.contactName}
-                className="form-control"
                 type="text"
-                name="crearNuevo"
-                id="crearNuevo"
-                placeholder="+ Crear Nuevo"
-                onClick={() =>
-                  (document.getElementById("crearNuevoButton").style.display =
-                    "block")
-                }
-                onChange={(e) => {
-                  setForm({ contactName: e.target.value });
-                }}
+                className="form-control"
+                placeholder="Buscar Cliente"
+                name="accountName"
+                id="accountName"
+                onChange={(e) => searchContactHandler(e)}
               />
-              <button
-                className="crearNuevoButton"
-                id="crearNuevoButton"
-                onClick={() => crearNuevoHandler()}
-              >
-                Añadir
-              </button>
             </div>
+            <div style={{ backgroundColor: "white", padding: "20px" }}>
+              <table className="table table-sm table-hover">
+                <tbody>
+                  {contacts.slice(0, 4).map((item, index) => (
+                    <tr key={index}>
+                      <td>{item.contactName}</td>
+                      <td>
+                        <button
+                          className="btn btn-primary"
+                          onClick={() => selectContactHandler(id, item.id)}
+                        >
+                          <i className="fa fa-hand-pointer"></i>
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+              <div className="crearNuevo my-5">
+                <input
+                  value={form.contactName}
+                  className="form-control"
+                  type="text"
+                  name="crearNuevo"
+                  id="crearNuevo"
+                  placeholder="+ Crear Nuevo"
+                  onClick={() =>
+                    (document.getElementById("crearNuevoButton").style.display =
+                      "block")
+                  }
+                  onChange={(e) => {
+                    setForm({ contactName: e.target.value });
+                  }}
+                />
+                <button
+                  className="crearNuevoButton"
+                  id="crearNuevoButton"
+                  onClick={() => crearNuevoHandler()}
+                >
+                  Añadir
+                </button>
+              </div>
+            </div>
+            <div></div>
           </div>
-          <div></div>
         </div>
-      </div>
+      </Modal>
     </div>
   );
 };
