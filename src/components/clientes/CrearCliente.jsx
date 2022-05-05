@@ -3,9 +3,6 @@ import React, { useState } from 'react'
 import {Link, useHistory} from 'react-router-dom'
 import Cookies from 'universal-cookie';
 
-
-
-
 const CrearCliente = () => {
         const history = useHistory();
         const cookies = new Cookies();
@@ -14,8 +11,6 @@ const CrearCliente = () => {
         history.replace('/login')
         }
 
-
-           
         const [form, setForm] = useState([])
         
         const formHandler = (e) => {

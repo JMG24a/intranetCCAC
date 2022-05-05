@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 
 //jmg24a dependencies
-import { CalendarModal as Modal } from '../Calendar/CalendarModal';
+import { ModalCalendar as Modal } from '../Calendar/ModalCalendar';
 
 const CreateContact = ({
   id,

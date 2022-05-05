@@ -24,6 +24,8 @@ const Deals = () => {
   const [showModalContact, setShowModalContact] = useState(false);
   const [dealEdit, setDealEdit] = useState(true);
   const [showModalAccount, setShowModalAccount] = useState(false);
+  //jmg24a repairing filters
+  const [ search, setSearch ] = useState([])
 
   const getDeals = async () => {
     await axios
@@ -32,11 +34,50 @@ const Deals = () => {
         const sinWon = res.data.deals.filter((item) => item.stage != "Won");
         setDeals(sinWon);
         setFilteredDeals(sinWon);
-
+        setSearch(sinWon)
         const won = res.data.deals.filter((item) => item.stage === "Won");
         setWon(won);
       })
       .catch((err) => console.log(err));
+  };
+
+  const onSearching = (e) => {
+    if(e.target.value === ''){
+      setSearch(deals)
+      return 0
+    }
+
+    setSearch(deals.filter((item) => {
+      if(item.owner.length === 0){
+        return false
+      }else{
+        const name = item.owner.map(i => i.nameEmployee)
+        const isTrue = name[0].toLowerCase().includes(e.target.value)
+        return isTrue
+      }
+    }))
+  }
+
+  const stageFilter = (e) => {
+    if(e.target.value === 'priority' || e.target.value === 'stage'){
+      setSearch(deals)
+      return 0
+    }
+
+    if (deals !== filteredDeals) {
+      const filtrado = filteredDeals.filter(
+        (item) => item[`${e.target.name}`] === e.target.value
+      );
+
+      setSearch(filtrado);
+      return;
+    }
+
+    const filtrado = deals.filter(
+      (item) => item[`${e.target.name}`] === e.target.value
+    );
+
+    setSearch(filtrado);
   };
 
   const searchHandler = (e) => {
@@ -46,6 +87,7 @@ const Deals = () => {
         .then((res) => {
           console.log(res.data.deals);
           setDeals(res.data.deals);
+          setSearch(res.data.deals)
         })
         .catch((err) => console.error(err));
       return;
@@ -82,23 +124,6 @@ const Deals = () => {
       .catch((err) => {
         console.log(err);
       });
-  };
-
-  const stageFilter = (e) => {
-    if (deals !== filteredDeals) {
-      const filtrado = filteredDeals.filter(
-        (item) => item[`${e.target.name}`] === e.target.value
-      );
-
-      setDeals(filtrado);
-      return;
-    }
-
-    const filtrado = deals.filter(
-      (item) => item[`${e.target.name}`] === e.target.value
-    );
-
-    setDeals(filtrado);
   };
 
   useEffect(() => {
@@ -142,7 +167,15 @@ const Deals = () => {
               <thead>
                 <tr>
                   <th>Nombre del Negocio</th>
-                  <th>Owner</th>
+                  <th>
+                    <input
+                      type="text"
+                      name="owner"
+                      id=""
+                      placeholder="owner"
+                      onChange={(e)=>onSearching(e)}
+                    />
+                  </th>
                   <th>Contacto</th>
                   <th>Cuenta</th>
                   <th>
@@ -152,7 +185,7 @@ const Deals = () => {
                       onChange={(e) => stageFilter(e)}
                       className="form-control"
                     >
-                      <option value="Stage">Stage</option>
+                      <option value="stage">Stage</option>
                       {stage.map((item, index) => (
                         <option value={item} key={index}>
                           {item}
@@ -167,7 +200,7 @@ const Deals = () => {
                       onChange={(e) => stageFilter(e)}
                       className="form-control"
                     >
-                      <option>Priority</option>
+                      <option value='priority'>Priority</option>
                       {priority.map((item, index) => (
                         <option value={item} key={index}>
                           {item}
@@ -186,7 +219,7 @@ const Deals = () => {
                 </tr>
               </thead>
               <tbody>
-                {deals.map((item, index) => (
+                {search.map((item, index) => (
                   <tr key={index}>
                     <td id="dealName">
                       <input
