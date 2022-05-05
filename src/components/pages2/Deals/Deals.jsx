@@ -24,7 +24,7 @@ const Deals = () => {
   const [showModalContact, setShowModalContact] = useState(false);
   const [dealEdit, setDealEdit] = useState(true);
   const [showModalAccount, setShowModalAccount] = useState(false);
-  //jmg24a repairing filters
+  //jmg24a repairing filters --
   const [ search, setSearch ] = useState([])
 
   const getDeals = async () => {
