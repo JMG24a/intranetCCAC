@@ -1,0 +1,481 @@
+.user {
+  margin-top: 3px;
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}
+
+.userContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  @media (max-width: 768px) {
+
+  }
+}
+
+.nav-link {
+  font-size: 1.5rem;
+}
+
+.inputContact {
+  background-color: #e2e2e2;
+  border-radius: 20px;
+  margin-left: 20px;
+  height: 30px;
+  border: none;
+  text-align: center;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.171);
+}
+
+.inputDeals {
+  width: 80px;
+  background-color: #e2e2e2;
+  border-radius: 20px;
+  margin-left: 15px;
+  height: 30px;
+  border: none;
+  text-align: center;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.171);
+}
+
+.inputPriorityAlta {
+  background-color: rgb(255, 131, 88);
+  width: 100%;
+  text-align: center;
+  margin: 0px;
+  padding: 0px;
+  border: none;
+  border-radius: 10px;
+}
+.inputPriorityMedia {
+  background-color: rgb(121, 175, 253);
+  width: 100%;
+  text-align: center;
+  margin: 0px;
+  padding: 0px;
+  border: none;
+  border-radius: 10px;
+}
+.inputPriorityBaja {
+  background-color: rgb(113, 214, 209);
+  width: 100%;
+  text-align: center;
+  margin: 0px;
+  padding: 0px;
+  border: none;
+  border-radius: 10px;
+}
+
+.typeCustomer {
+  background-color: #03e5a7;
+  width: 120px;
+  text-align: center;
+  margin: 0px;
+  padding: 0px;
+  border: none;
+  border-radius: 10px;
+}
+.typePartner {
+  background-color: #ffff00;
+  width: 100%;
+  text-align: center;
+  margin: 0px;
+  padding: 0px;
+  border: none;
+  border-radius: 10px;
+}
+.typeVendor {
+  background-color: #e50345;
+  width: 100%;
+  text-align: center;
+  margin: 0px;
+  padding: 0px;
+  border: none;
+  border-radius: 10px;
+}
+
+.accountValueInput {
+  border: none;
+  text-align: center;
+}
+
+.emailInput {
+  border: none;
+  min-width: 200px;
+  height: 40px;
+}
+
+.buscarInput {
+  height: 45px;
+  border: 1px solid rgb(189, 189, 189);
+  width: 100%;
+}
+
+/* TABLA  */
+
+.tabla {
+  table-layout: auto;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tabla td,
+th {
+  border-bottom: 1px solid #ddd;
+  padding: 10px 15px;
+  text-align: center;
+}
+.tabla th {
+  color: white;
+  background-color: #851436;
+  font-weight: 500;
+}
+
+.tabla tr:hover {
+  background-color: rgb(235, 235, 235);
+}
+
+/* MODALS */
+
+/* NEW ACCOUNT  */
+
+.fondoBlack {
+  
+  background-color: rgba(0, 0, 0, 0.596);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+}
+
+.contenedorNewACC h2 {
+  color: white;
+  text-align: center;
+  font-weight: 700;
+  font-size: 2.1em;
+}
+
+.contenedorNewACC {
+  
+  position: fixed;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, 0);
+  width: 500px;
+  background-color: #7f1232;
+  padding: 40px;
+  border-radius: 40px;
+}
+
+.contenedorSubNewACC {
+  background-color: #600e26;
+  padding: 30px;
+  border-radius: 30px;
+}
+
+.contenedorSubNewACC input {
+  color: #600e26;
+  height: 45px;
+  border: none;
+}
+.contenedorSubNewACC input::placeholder {
+  color: #600e277e;
+}
+
+.contenedorSubNewACC .firstSelect select {
+  color: #600e26;
+  height: 35px;
+  border: none;
+}
+
+.contenedorSubNewACC select {
+  color: #600e26;
+  height: 45px;
+  border: none;
+  padding-left: 35px !important;
+}
+
+.contenedorSubNewACC button {
+  background-color: #c0ab50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  width: 100%;
+  height: 50px;
+}
+
+.contenedorSubNewACC button:hover {
+  background-color: #887a3b;
+}
+
+.labelNewAccount {
+  text-align: center;
+  width: 100%;
+  color: white;
+}
+
+.input-container {
+  padding-bottom: 1em;
+}
+.left-inner-addon {
+  position: relative;
+}
+.left-inner-addon input {
+  padding-left: 35px !important;
+}
+.left-inner-addon i {
+  position: absolute;
+  padding-top: 20px;
+  padding-left: 10px;
+  pointer-events: none;
+  color: #600e26;
+}
+
+input {
+  width: 100%;
+  /* padding: 1em !important; */
+  margin: 0em !important;
+  box-sizing: border-box;
+}
+
+.active {
+  display: block !important;
+  transition: cubic-bezier(0.075, 0.82, 0.165, 1);
+  transition-duration: 2s;
+}
+
+.inactive {
+  display: none !important ;
+}
+
+.fondoNegro {
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  height: 100vw;
+  position: fixed;
+  top: 0;
+  z-index: 0;
+  margin-left: -25px;
+}
+
+/* Modal Enlazar contacto */
+
+.contenedorAddCtc {
+  
+  position: fixed;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, 0);
+  width: 500px;
+  background-color: #7f1232;
+  padding: 40px;
+  border-radius: 40px;
+}
+
+.subContenedorAddCtc {
+  background-color: #600e26;
+  padding: 30px;
+  border-radius: 30px;
+}
+
+.crearNuevoButton {
+
+  background-color: #7f1232;
+  color: white;
+  transform: translateY(-45px);
+  float: right;
+  height: 45px;
+  width: 25%;
+  border: none;
+  border-radius: 0;
+}
+
+.crearNuevo button:hover {
+  background-color: #6e102c;
+  color: white;
+}
+
+.crearNuevo input {
+  height: 45px;
+}
+
+/* MODAL ACCOUNT  */
+
+.fondoContacts {
+  
+  position: fixed;
+  top: 0;
+  background-color: #600e26;
+  width: 50%;
+  height: 100%;
+  padding: 20px;
+  right: 0;
+  z-index: 1;
+  overflow: scroll;
+}
+
+.fondoContacts .fila {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.fondoContacts .fila label {
+  margin-right: 10px;
+}
+
+.fondoContacts input {
+  height: 45px;
+}
+
+.accordion-button {
+  /* background-color: #600E26; */
+  /* color: white; */
+  margin-top: 10px;
+}
+
+/* MODAL NEW CONTACT  */
+
+.fondoNewDeal {
+  position: fixed;
+  width: 600px;
+  top: 20px;
+  left: calc(50% - 300px);
+  /* bottom: 40px; */
+  z-index: 100;
+  background-color: #600e26;
+  padding: 20px;
+  border-radius: 20px;
+}
+
+.fondoNewDeal input {
+  height: 45px;
+}
+
+/* STAGE  */
+
+.stageLead {
+  background-color: #03e5a7;
+}
+.stageProposal {
+  background-color: #e5d603;
+}
+.stageNegotiation {
+  background-color: #e58b03;
+}
+.stageWon {
+  background-color: #03e516;
+}
+.stageSent {
+  background-color: #cee503;
+}
+.stageLost {
+  background-color: #e50321;
+}
+.stageContract {
+  background-color: #03c3e5;
+}
+
+#stage select {
+  border-radius: 20px;
+  border: none;
+  text-align: center;
+  padding: 2px;
+}
+
+#priority {
+  min-width: 100px;
+}
+
+#closeProbability {
+  text-align: center;
+  min-width: 50px;
+}
+
+#forecastValue {
+  text-align: center;
+}
+
+#forecastValue {
+  min-width: 100px;
+  text-align: center;
+}
+
+#actualDealValue {
+  text-align: center;
+}
+
+.tablaDeal {
+  overflow-x: auto;
+}
+
+.tablaDeal input {
+  height: 25px;
+}
+
+.tablaDeal th {
+  background-color: #600e26;
+  color: white;
+  min-width: 200px;
+}
+
+/* OWNER MODAL  */
+
+.fondoOwnerModal {
+  position: fixed;
+  width: 600px;
+  top: 20px;
+  left: calc(50% - 300px);
+  /* bottom: 40px; */
+  z-index: 100;
+  background-color: #600e26;
+  padding: 20px;
+  border-radius: 20px;
+}
+
+/* edit deal modal  */
+
+.fondoDeal {
+  background-color: rgb(109, 0, 0);
+  width: 50%;
+  height: 100vh;
+  position: fixed;
+  z-index: 10;
+  /* top: 0; */
+  right: 0;
+  bottom: 0;
+  padding: 20px;
+  z-index: 1;
+}
+
+
+/* ACCOUNT SELECT  */
+
+.accountSelect{
+  position: fixed;
+  top: 20%;
+  left: calc(50% - 300px);
+  min-width: 500px;
+  background-color: #600e26;
+  padding: 20px;
+}
+
+
+/* QUOTATIONS */
+
+.totalsTable{
+  width: 20%;
+  float: right;
+  margin-top: 25px;
+}
+

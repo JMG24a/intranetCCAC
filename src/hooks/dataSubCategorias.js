@@ -1,0 +1,28 @@
+const subCategorias = [
+  "- Seleccione -",
+  "Comercio - HORECA",
+  "Comercio - Agricultura",
+  "Comercio - Energia y Mineria",
+  "Comercio - Textiles",
+  "Comercio - Ganadería",
+  "Comercio - Negocios y Finanzas",
+  "Comercio - Aeroespacial",
+  "Comercio - Tecnología",
+  "Comercio - Cámara de Comercio",
+  "Comercio - Alimentos y Bebidas",
+  "Academia - Ingenieria",
+  "Academia - Publicidad",
+  "Academia - Administracion",
+  "Academia - Humanidades",
+  "Academia - Arquitectura",
+  "Academia - Leyes",
+  "Academia - Medicina",
+  "Academia - General",
+  "Gobierno - Gobernacion",
+  "Gobierno - Alcaldía",
+  "Gobierno - Otro",
+  "Gobierno - Agencia Nacional Mineria",
+  "Turismo",
+];
+
+export default subCategorias;
