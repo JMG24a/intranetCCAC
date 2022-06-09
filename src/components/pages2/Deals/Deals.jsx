@@ -109,7 +109,7 @@ const Deals = () => {
 
   const formHandler = (tipo, e, idDeal) => {
     const form = [{ [e.target.name]: e.target.value }, idDeal];
-
+    console.log(form);
     axios
       .put(`${process.env.REACT_APP_SERVIDOR}/api/v1/deals`, form)
       .then((res) => {
@@ -123,7 +123,6 @@ const Deals = () => {
 
   const dateHandler = (date, test, idDeal) => {
     const form = [{ [test]: date }, idDeal];
-    console.log(form);
     axios
       .put(`${process.env.REACT_APP_SERVIDOR}/api/v1/deals`, form)
       .then((res) => {

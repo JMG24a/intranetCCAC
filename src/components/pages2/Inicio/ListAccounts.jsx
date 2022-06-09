@@ -15,7 +15,7 @@ function ListAccounts(props) {
     setAccount,
     setshowAccountModal,
   } = props;
-
+  console.log('A: ',accounts)
   return (
     <>
       <tbody>
@@ -92,9 +92,10 @@ function ListAccounts(props) {
               )}
             </td>
             <td id="inputDeals">
-              {item.deals
-                ? JSON.parse(item.deals).map((i, index) => <input key={index} className="inputDeals" type="text" name="" id="" value={i} readOnly />)
-                : ""}
+              {item.deals // jmg24a deals array does not exist
+                ? JSON.parse(item.deals)
+                  .map((i, index) => <input key={index} className="inputDeals" type="text" name="" id="" value={i} readOnly />)
+                : "inactivo"}
             </td>
             <td id="priority">
               {
