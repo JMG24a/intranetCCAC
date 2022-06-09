@@ -91,6 +91,16 @@ function ListAccounts(props) {
                 </button>
               )}
             </td>
+            <td>
+              <input
+                key={index}
+                className="inputContact"
+                type="text"
+                name=""
+                id=""
+                defaultValue={"Web"}
+              />
+            </td>
             <td id="inputDeals">
               {item.deals // jmg24a deals array does not exist
                 ? JSON.parse(item.deals)

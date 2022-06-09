@@ -64,19 +64,20 @@ const Inicio2 = () => {
     // document.getElementById("fondoBlack").classList.add("fondoBlack");
   };
 
-  const searchHandler = (e) => {
-    if (e.target.value.split("").length > 3) {
-      axios
-        .get(
-          `${process.env.REACT_APP_SERVIDOR}/api/v1/accounts/${e.target.value}`
-        )
-        .then((res) => setAccounts(res.data.Acc))
-        .catch((err) => console.error(err));
-      return;
-    } else if (e.target.value.split("").length === 0) {
-      console.log("buscar esta vacio");
-      getAccounts();
+  const onSearching = (e) => {
+    if (e.target.value === "") {
+      setSearchPriory(accounts);
+      return 0;
     }
+    const filter = accounts.filter((item) => {
+      if (item.accountName.length === 0) {
+        return false;
+      } else {
+        const isTrue = item.accountName.toLowerCase().includes(e.target.value.toLowerCase());
+        return isTrue;
+      }
+    })
+    setSearchPriory(filter);
   };
 
   const selectHandler = (tipo, e, idAcc) => {
@@ -120,7 +121,7 @@ const Inicio2 = () => {
               id="buscar"
               placeholder="Ingresa el valor a buscar"
               onChange={(e) => {
-                searchHandler(e);
+                onSearching(e);
               }}
             />
           </div>
@@ -135,6 +136,7 @@ const Inicio2 = () => {
                 <th>TIPO</th>
                 <th>VALOR DE LA CUENTA</th>
                 <th>CONTACTOS</th>
+                <th>ORIGEN</th>
                 <th>NEGOCIOS ACTIVOS</th>
                 <th>
                   <select name="priority" id="" onChange={(e)=>searchPriorities(e)}>

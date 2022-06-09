@@ -1,27 +1,62 @@
 import axios from "axios";
 import React, { useState } from "react";
 import GetEmployees from "../../../hooks/GetEmployees";
+import { Alert } from "../../response/Alert";
+import { ModalCalendar as Modal} from "../Calendar/ModalCalendar";
+import { EmployeeModal } from "./Modal";
 
 const Employees = () => {
   const employees = GetEmployees();
   // const employees = [];
 
   const [form, setForm] = useState({});
+  //jmg24a
+  const [modal, setModal] = useState(false);
+  const [alert, setAlert] = useState({
+    state: false,
+    message: "",
+    color: "green"
+  });
+
   const formHandler = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
   const submitHandler = () => {
+    if(!form.nameEmployee) {
+      return 0;
+    }
+
     axios
       .post(`${process.env.REACT_APP_SERVIDOR}/api/v1/employees/new`, form)
-      .then((res) => console.log(res.data))
+      .then((res) => {
+        setModal(false);
+        if(!!res.data.ok){
+          setAlert({
+            ...alert,
+            state: true,
+            message: "Empleado creado con exito"
+          })
+        }else{
+          setAlert({
+            state: false,
+            message: "El empleado no pudo ser creado",
+            color: "red",
+          })
+        }
+        setTimeout(()=>{},1000)
+      })
       .catch((err) => console.log(err));
   };
 
   return (
     <div className="bg-white p-4">
       <h1>Listado de Empleados</h1>
-      <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+      <button
+        type="button"
+        className="btn btn-primary"
+        onClick={()=>{setModal(!modal)}}
+        >
         Crear Nuevo
       </button>
       <table className="table">
@@ -36,7 +71,7 @@ const Employees = () => {
         </thead>
         <tbody>
           {employees.map((item, index) => (
-            <tr>
+            <tr key={index}>
               <td>{item.nameEmployee}</td>
               <td>{item.email}</td>
               <td>{item.cc}</td>
@@ -51,53 +86,17 @@ const Employees = () => {
         </tbody>
       </table>
 
-      <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div className="modal-dialog">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h5 className="modal-title" id="exampleModalLabel">
-                Editar Empleado
-              </h5>
-              <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div className="modal-body">
-              <div className="col-md-6">
-                <img src="https://via.placeholder.com/400x400.png" className="img-fluid" alt="" />
-              </div>
-              <input type="file" name="" id="" />
+      {modal &&
+        <Modal>
+          <EmployeeModal
+            formHandler={formHandler}
+            submitHandler={submitHandler}
+            setModal={setModal}
+          />
+        </Modal>
+      }
 
-              <div className="col mt-4">
-                <label htmlFor="Nombre">Nombre</label>
-                <input type="text" name="nameEmployee" id="nameEmployee" className="form-control" onChange={(e) => formHandler(e)} />
-              </div>
-              <div className="col mt-4">
-                <label htmlFor="Nombre">Cargo</label>
-                <input type="text" name="title" id="title" className="form-control" onChange={(e) => formHandler(e)} />
-              </div>
-              <div className="col">
-                <label htmlFor="CC">CC</label>
-                <input name="cc" id="cc" type="text" className="form-control" onChange={(e) => formHandler(e)} />
-              </div>
-              <div className="col">
-                <label htmlFor="Email">Email</label>
-                <input type="text" name="email" id="email" className="form-control" onChange={(e) => formHandler(e)} />
-              </div>
-              <div className="col">
-                <label htmlFor="Contrasena">Contrasena</label>
-                <input type="password" name="password" id="password" className="form-control" onChange={(e) => formHandler(e)} />
-              </div>
-            </div>
-            <div className="modal-footer">
-              <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">
-                Cerrar
-              </button>
-              <button type="button" className="btn btn-primary" onClick={() => submitHandler()}>
-                Guardar Cambios
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
+      {alert && <Alert setAlert={setAlert} alert={alert}/>}
     </div>
   );
 };
