@@ -25,6 +25,7 @@ const Deals = () => {
   const [dealEdit, setDealEdit] = useState(true);
   const [showModalAccount, setShowModalAccount] = useState(false);
   //jmg24a repairing filters --
+
   const [search, setSearch] = useState([]);
 
   const getDeals = async () => {
@@ -46,18 +47,15 @@ const Deals = () => {
       setSearch(deals);
       return 0;
     }
-
-    setSearch(
-      deals.filter((item) => {
-        if (item.owner.length === 0) {
-          return false;
-        } else {
-          const name = item.owner.map((i) => i.nameEmployee);
-          const isTrue = name[0].toLowerCase().includes(e.target.value);
-          return isTrue;
-        }
-      })
-    );
+    const filter = deals.filter((item) => {
+      if (item.dealName.length === 0) {
+        return false;
+      } else {
+        const isTrue = item.dealName.toLowerCase().includes(e.target.value.toLowerCase());
+        return isTrue;
+      }
+    })
+    setSearch(filter);
   };
 
   const stageFilter = (e) => {
@@ -79,7 +77,6 @@ const Deals = () => {
     }
 
     if (deals !== filteredDeals) {
-      console.log("test");
       const filtrado = filteredDeals.filter((item) => item[`${e.target.name}`] === e.target.value);
       setSearch(filtrado);
       return;
@@ -90,22 +87,22 @@ const Deals = () => {
     setSearch(filtrado);
   };
 
-  const searchHandler = (e) => {
-    if (e.target.value.split("").length > 3) {
-      axios
-        .get(`${process.env.REACT_APP_SERVIDOR}/api/v1/deals/${e.target.value}`)
-        .then((res) => {
-          console.log(res.data.deals);
-          setDeals(res.data.deals);
-          setSearch(res.data.deals);
-        })
-        .catch((err) => console.error(err));
-      return;
-    } else if (e.target.value.split("").length === 0) {
-      console.log("buscar esta vacio");
-      getDeals();
-    }
-  };
+  // const searchHandler = (e) => {
+  //   if (e.target.value.split("").length > 3) {
+  //     axios
+  //       .get(`${process.env.REACT_APP_SERVIDOR}/api/v1/deals/${e.target.value}`)
+  //       .then((res) => {
+  //         console.log('??: ', res.data.deals);
+  //         setDeals(res.data.deals);
+  //         setSearch(res.data.deals);
+  //       })
+  //       .catch((err) => console.error(err));
+  //     return;
+  //   } else if (e.target.value.split("").length === 0) {
+  //     console.log("buscar esta vacio");
+  //     getDeals();
+  //   }
+  // };
 
   const formHandler = (tipo, e, idDeal) => {
     const form = [{ [e.target.name]: e.target.value }, idDeal];
@@ -164,7 +161,7 @@ const Deals = () => {
                 id="buscar"
                 placeholder="Ingresa el valor a buscar"
                 onChange={(e) => {
-                  searchHandler(e);
+                  onSearching(e)
                 }}
               />
             </div>
@@ -231,15 +228,9 @@ const Deals = () => {
                 {search.map((item, index) => (
                   <tr key={index}>
                     <td id="dealName">
-                      <input
-                        type="text"
-                        name="dealName"
-                        id="dealName"
-                        className="form-control"
-                        defaultValue={item.dealName}
-                        onChange={(e) => formHandler("dealName", e, item.id)}
-                        style={{ minWidth: "200px" }}
-                      />
+                      <div className="m-2 p-1 border rounded text-center">
+                        <p className="">{item.dealName}</p>
+                      </div>
                     </td>
                     <td id="owner">
                       <select name="owner" id="owner" className="form-control" onChange={(e) => formHandler("owner", e, item.id)}>
