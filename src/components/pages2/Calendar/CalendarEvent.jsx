@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 
-import { Calendar } from '../../../context/CalendarContext';
+import { Context } from '../../../context/Context';
 import { FormCalendar } from './FormCalendar';
 import { ModalCalendar } from './ModalCalendar';
 import { DetailCalendar } from './DetailCalendar';
@@ -8,7 +8,7 @@ import { DetailCalendar } from './DetailCalendar';
 import './calendarStyle.css'
 
 function CalendarEvent(props) {
-  const { removed, edit } = useContext(Calendar)
+  const { calendar: {removed, edit} } = useContext(Context)
   const [isOpen, setIsOpen] = useState(false)
   const [isConfig, setIsConfig] = useState(false)
 
@@ -57,19 +57,3 @@ function CalendarEvent(props) {
 }
 
 export { CalendarEvent }
-
-
-
-// import React from "react";
-
-// const CalendarEvent = ({ event }) => {
-//   const { title, name } = event;
-//   return (
-//     <div>
-//       <strong>{title}</strong> <br />
-//       <span>- {name}</span>
-//     </div>
-//   );
-// };
-
-// export default CalendarEvent;

@@ -17,7 +17,7 @@ import Misiones from "../components/pages/misiones/Misiones";
 import Pendientes from "../components/pages/pendientes/Pendientes";
 import Tarjetas from "../components/pages/tarjetas/Tarjetas";
 
-import Calendario from "../components/pages2/Calendar/Calendario";
+import Calendar from "../components/pages2/Calendar/Calendario";
 import Deals from "../components/pages2/Deals/Deals";
 import Employees from "../components/pages2/Employees/Employees";
 import Inicio2 from "../components/pages2/Inicio/Inicio2";
@@ -27,54 +27,58 @@ import QuotationPDF from "../components/pages2/Quotations/QuotationPDF";
 import QuotationShow from "../components/pages2/Quotations/QuotationShow";
 import Participantes from "../components/participantes/Participantes";
 //jmg24a dependencies
-import { CalendarContext } from '../context/CalendarContext';
+import { AppContext } from '../context/Context';
 import "../css/style.css";
 
 export const AppRouter = () => {
   return (
     <Router>
-      <Fragment>
-        <Switch>
-          <Route exact path="/">
-            <Navbar />
-            <CalendarContext>
-              <Calendario />
-            </CalendarContext>
-          </Route>
-          <Route exact path="/deals">
-            <Navbar />
-            <Deals />
-          </Route>
-          <Route exact path="/accounts">
-            <Navbar />
-            <Inicio2 />
-          </Route>
-          <Route exact path="/employees">
-            <Navbar />
-            <Employees />
-          </Route>
-          <Route exact path="/leads">
-            <Navbar />
-            <Leads />
-          </Route>
-          <Route exact path="/cotizaciones">
-            <Navbar />
-            <Quotation />
-          </Route>
-          <Route exact path="/cotizaciones/ver">
-            <Navbar />
-            <QuotationShow />
-          </Route>
-          <Route exact path="/cotizaciones/imprimir/:noCoti">
-            <Navbar />
-            <QuotationPDF />
-          </Route>
-          <Route path="/">
-            <Navbar />
-            <Inicio2 />
-          </Route>
-        </Switch>
-      </Fragment>
+      <AppContext>
+        <Fragment>
+          <Switch>
+            <Route exact path="/">
+              <Navbar />
+              <Calendar />
+            </Route>
+            <Route exact path="/deals">
+              <Navbar />
+              <Deals />
+            </Route>
+            <Route exact path="/accounts">
+              <Navbar />
+              <Inicio2 />
+            </Route>
+            <Route exact path="/employees">
+              <Navbar />
+              <Employees />
+            </Route>
+            <Route exact path="/leads">
+              <Navbar />
+              <Leads />
+            </Route>
+            <Route exact path="/cotizaciones">
+              <Navbar />
+              <Quotation />
+            </Route>
+            <Route exact path="/cotizaciones/ver">
+              <Navbar />
+              <QuotationShow />
+            </Route>
+            <Route exact path="/cotizaciones/imprimir/:noCoti">
+              <Navbar />
+              <QuotationPDF />
+            </Route>
+            <Route path="/login">
+              <Navbar />
+              <Login />
+            </Route>
+            <Route path="/">
+              <Navbar />
+              <Inicio2 />
+            </Route>
+          </Switch>
+        </Fragment>
+      </AppContext>
     </Router>
   );
 };

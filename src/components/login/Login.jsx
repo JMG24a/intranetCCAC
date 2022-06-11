@@ -1,12 +1,20 @@
+import { Context } from "../../context/Context";
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import Cookies from "universal-cookie";
 
 const Login = () => {
   const cookies = new Cookies();
+  const { auth: { login, user } } = useContext(Context)
   const history = useHistory();
   const [form, setForm] = useState([]);
+
+  useEffect(()=>{
+    if(user.isLogin){
+      history.replace("/");
+    }
+  },[user])
 
   const formHandler = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -14,37 +22,42 @@ const Login = () => {
 
   const loginHandler = (e) => {
     e.preventDefault();
+    login(form)
+  }
 
-    const body = form;
+  // const loginHandler = (e) => {
+  //   e.preventDefault();
 
-    axios
-      .post(`${process.env.REACT_APP_SERVIDOR}/api/usuarios`, body, {
-        headers: {
-          token: "JaRvIs92!",
-          correo: form.correo,
-          password: form.password,
-        },
-      })
-      .then((e) => {
-        const token = e.data.token;
-        const tokenAuth = token.slice(0, 1) * 3;
-        if (tokenAuth === 0) {
-          console.log("autenticado");
-          cookies.set(
-            "token",
-            "3d33c77f6aba01680fce7ec86557886856f6e75392fc3d7e79566fd0980b6c03",
-            { path: "/", maxAge: 2592000 }
-          );
-          cookies.set("usuario", e.data.nombre);
+  //   const body = form;
 
-          cookies.set("userId", e.data.id);
-          history.replace("/");
-        } else {
-          return console.log("Error de autenticacion 2");
-        }
-      })
-      .catch((e) => console.log(e));
-  };
+  //   axios
+  //     .post(`${process.env.REACT_APP_SERVIDOR}/api/usuarios`, body, {
+  //       headers: {
+  //         token: "JaRvIs92!",
+  //         correo: form.correo,
+  //         password: form.password,
+  //       },
+  //     })
+  //     .then((e) => {
+  //       const token = e.data.token;
+  //       const tokenAuth = token.slice(0, 1) * 3;
+  //       if (tokenAuth === 0) {
+  //         console.log("autenticado");
+  //         cookies.set(
+  //           "token",
+  //           "3d33c77f6aba01680fce7ec86557886856f6e75392fc3d7e79566fd0980b6c03",
+  //           { path: "/", maxAge: 2592000 }
+  //         );
+  //         cookies.set("usuario", e.data.nombre);
+
+  //         cookies.set("userId", e.data.id);
+  //         history.replace("/");
+  //       } else {
+  //         return console.log("Error de autenticacion 2");
+  //       }
+  //     })
+  //     .catch((e) => console.log(e));
+  // };
 
   return (
     <div>
@@ -56,12 +69,12 @@ const Login = () => {
           <img src="/images/LogoCCAC.svg" alt="" />
           <form action="" onSubmit={loginHandler}>
             <div className="form-group">
-              <label htmlFor="correo">Correo</label>
+              <label htmlFor="email">Correo</label>
               <input
                 type="text"
                 className="form-control"
-                name="correo"
-                id="correo"
+                name="email"
+                id="email"
                 onChange={formHandler}
               />
             </div>

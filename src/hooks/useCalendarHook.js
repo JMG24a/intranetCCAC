@@ -1,19 +1,10 @@
-import React, { createContext, useState } from "react";
-import { useEffect } from "react";
 import moment from "moment";
 import axios from "axios";
+import { useState } from "react";
 
-const Calendar = createContext({});
-
-function CalendarContext(props) {
+function useCalendarHook() {
   const [events, setEvents] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    if (events.length <= 0) {
-      getEvents();
-    }
-  }, []);
 
   const getEvents = async () => {
     const { data } = await axios.get("https://ccacback.com/api/v1/calendar");
@@ -108,19 +99,14 @@ function CalendarContext(props) {
     }
   };
 
-  return (
-    <Calendar.Provider
-      value={{
-        events,
-        create,
-        edit,
-        removed,
-        isLoading,
-      }}
-    >
-      {props.children}
-    </Calendar.Provider>
-  );
+  return {
+    events,
+    isLoading,
+    getEvents,
+    create,
+    edit,
+    removed,
+  }
 }
 
-export { Calendar, CalendarContext };
+export { useCalendarHook }

@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import {Calendar, momentLocalizer} from 'react-big-calendar';
 import moment from 'moment';
 
-import { Calendar as Context } from '../../../context/CalendarContext';
+import { Context } from '../../../context/Context';
 import { CalendarEvent } from './CalendarEvent'
 import 'react-big-calendar/lib/css/react-big-calendar.css'
 require("moment/locale/es.js");
@@ -25,7 +25,7 @@ const message = {
 const localizer = momentLocalizer(moment)
 
 function BigCalendar() {
-  const { events } = useContext(Context)
+  const { calendar:{events} } = useContext(Context)
 
   return (
     <Calendar

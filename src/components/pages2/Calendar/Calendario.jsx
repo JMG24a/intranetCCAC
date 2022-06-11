@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 
-import { Calendar as Context } from '../../../context/CalendarContext'
+import { Context } from '../../../context/Context'
 import { BigCalendar } from './BigCalendar'
 import { ModalCalendar } from './ModalCalendar';
 import { FormCalendar } from './FormCalendar';
@@ -8,7 +8,7 @@ import './calendarStyle.css'
 
 function CalendarWrapper() {
   const [isOpen, setIsOpen] = useState(false);
-  const { create, isLoading } = useContext(Context)
+  const { calendar: {create, isLoading} } = useContext(Context)
 
   const handleEvent = () => {
       setIsOpen(!isOpen)
