@@ -139,14 +139,6 @@ const Inicio2 = () => {
                 <th>ORIGEN</th>
                 <th>NEGOCIOS ACTIVOS</th>
                 <th>
-                  <select name="priority" id="" onChange={(e)=>searchPriorities(e)}>
-                    <option value="Todo">PRIORIDAD</option>
-                    <option value="Alta">Alta</option>
-                    <option value="Media">Media</option>
-                    <option value="Baja">Baja</option>
-                  </select>
-                </th>
-                <th>
                   <select name="categories" id="" onChange={(e)=>searchPriorities(e)}>
                     <option value='Todo'>Categorias</option>
                     {subCategorias.map((i, index) => (
@@ -157,6 +149,7 @@ const Inicio2 = () => {
                   </select>
                 </th>
                 <th>EMAIL</th>
+                <th>PRODUCTOS</th>
                 <th>COMENTARIOS</th>
                 <th>Acciones</th>
               </tr>

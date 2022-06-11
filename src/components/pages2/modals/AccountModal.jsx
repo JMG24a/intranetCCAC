@@ -47,7 +47,7 @@ const AccountModal = ({
         ></div>
       ) : null}
       <div className="fondoContacts py-5" id="contactModal">
-        <h1 className="text-white my-3">Informacion de la Cuenta </h1>
+        <h1 className="text-white my-3">Informacion de la Cuenta</h1>
         <div className="bg-white p-4 rounded">
           <div className="row">
             <div className="col-md-6">
@@ -207,11 +207,12 @@ const AccountModal = ({
           <div className="row my-4">
             <label htmlFor="comentarios">Comentarios</label>
             <textarea
-              name=""
-              id=""
+              name="comentarios"
+              id="comentarios"
               cols="30"
               rows="5"
               className="form-control"
+              onChange={(e) => formHandler(e)}
               defaultValue={JSON.stringify(account.comments)}
             ></textarea>
           </div>

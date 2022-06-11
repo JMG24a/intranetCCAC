@@ -22,6 +22,29 @@ const Employees = () => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
+  const handleDelete = (employ) => {
+    console.log(employ)
+    //esperando endpoint
+    // axios
+    // .post(`${process.env.REACT_APP_SERVIDOR}/api/v1/employees/delete`, employ.id)
+    // .then((res) => {
+    //   if(!!res.data.ok){
+    //     setAlert({
+    //       ...alert,
+    //       state: true,
+    //       message: "Empleado eliminado con exito"
+    //     })
+    //   }else{
+    //     setAlert({
+    //       state: false,
+    //       message: "El empleado no pudo ser eliminado",
+    //       color: "red",
+    //     })
+    //   }
+    // })
+    // .catch((err) => console.log(err));
+  }
+
   const submitHandler = () => {
     if(!form.nameEmployee) {
       return 0;
@@ -44,7 +67,6 @@ const Employees = () => {
             color: "red",
           })
         }
-        setTimeout(()=>{},1000)
       })
       .catch((err) => console.log(err));
   };
@@ -77,7 +99,7 @@ const Employees = () => {
               <td>{item.cc}</td>
               <td>{item.role}</td>
               <td>
-                <button className="btn btn-danger">
+                <button className="btn btn-danger" onClick={()=>handleDelete(item)}>
                   <i className="fa fa-trash"></i>
                 </button>
               </td>

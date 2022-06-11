@@ -15,7 +15,7 @@ function ListAccounts(props) {
     setAccount,
     setshowAccountModal,
   } = props;
-  console.log('A: ',accounts)
+
   return (
     <>
       <tbody>
@@ -107,22 +107,6 @@ function ListAccounts(props) {
                   .map((i, index) => <input key={index} className="inputDeals" type="text" name="" id="" value={i} readOnly />)
                 : "inactivo"}
             </td>
-            <td id="priority">
-              {
-                <select
-                  className={item.priority === "Alta" ? "inputPriorityAlta" : item.priority === "Media" ? "inputPriorityMedia" : "inputPriorityBaja"}
-                  name="priority"
-                  id="priority"
-                  value={item.priority}
-                  onChange={(e) => selectHandler("priority", e, item.id)}
-                >
-                  <option value={item.priority}>{item.priority}</option>
-                  <option value="Alta">Alta</option>
-                  <option value="Media">Media</option>
-                  <option value="Baja">Baja</option>
-                </select>
-              }
-            </td>
             <td id="subCategoria" style={{ minWidth: "200px", textAlign: "left" }}>
               {
                 <select
@@ -156,6 +140,9 @@ function ListAccounts(props) {
                   }}
                 />
               }
+            </td>
+            <td>
+              <input type="text" name="email" id="products" className="border emailInput"/>
             </td>
             <td>{item.comments}</td>
             <td>

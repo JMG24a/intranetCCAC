@@ -228,9 +228,7 @@ const Deals = () => {
                 {search.map((item, index) => (
                   <tr key={index}>
                     <td id="dealName">
-                      <div className="m-2 p-1 border rounded text-center">
-                        <p className="">{item.dealName}</p>
-                      </div>
+                      <input className="buscarInput" style={{height: "40px"}} value={item.dealName} />
                     </td>
                     <td id="owner">
                       <select name="owner" id="owner" className="form-control" onChange={(e) => formHandler("owner", e, item.id)}>
@@ -253,7 +251,7 @@ const Deals = () => {
                             name=""
                             id=""
                             key={index}
-                            defaultValue={i.contactName}
+                            value={i.contactName}
                             className="form-control"
                             style={{ minWidth: "150px" }}
                             onClick={() => setShowModalContact(true)}
@@ -276,7 +274,7 @@ const Deals = () => {
                       {item.account.length > 0 ? (
                         item.account.map((i, index) => (
                           // console.log(i)
-                          <input type="text" name="" id="" key={index} defaultValue={i.accountName} className="form-control" readOnly />
+                          <input type="text" name="" id="" key={index} value={i.accountName} className="form-control" readOnly />
                         ))
                       ) : (
                         <button
@@ -342,17 +340,21 @@ const Deals = () => {
                       </select>
                     </td>
                     <td id="dealLength">
-                      <p className="text-center">{moment().diff(item.dealCreationDate, "days") + " days"}</p>
+                    <input
+                      className="mx-3"
+                      type="text"
+                      name="dealLength"
+                      id="dealLength"
+                      value={moment().diff(item.dealCreationDate, "days") + " days"}
+                      />
                     </td>
                     <td id="dealValue">
                       <input
+                        className="mx-3"
                         type="text"
                         name="dealValue"
                         id="dealValue"
-                        defaultValue={item.dealValue}
-                        onBlur={(e) => {
-                          formHandler("dealValue", e, item.id);
-                        }}
+                        value={item.dealValue}
                       />
                     </td>
                     <td id="closeProbability">
@@ -360,8 +362,7 @@ const Deals = () => {
                         type="text"
                         name="closeProbability"
                         id="closeProbability"
-                        defaultValue={item.closeProbability}
-                        onBlur={(e) => formHandler("closeProbability", e, item.id)}
+                        value={`${item.closeProbability}%`}
                       />
                     </td>
                     <td id="forecastValue">
@@ -369,8 +370,7 @@ const Deals = () => {
                         type="text"
                         name="forecastValue"
                         id="forecastValue"
-                        defaultValue={parseInt((item.closeProbability / 100) * item.dealValue).toLocaleString()}
-                        onBlur={(e) => formHandler("forecastValue", e, item.id)}
+                        value={parseInt((item.closeProbability / 100) * item.dealValue).toLocaleString()}
                         readOnly
                       />
                     </td>
@@ -380,7 +380,7 @@ const Deals = () => {
                         className="form-control"
                         name="expectedCloseDate"
                         id="expectedCloseDate"
-                        defaultValue={moment(item.expectedCloseDate).format("YYYY-MM-DD")}
+                        value={moment(item.expectedCloseDate).format("YYYY-MM-DD")}
                         onChange={(e) => dateHandler(moment(e.target.value).format("YYYY-MM-DD"), "expectedCloseDate", item.id)}
                       />
                     </td>
@@ -389,7 +389,7 @@ const Deals = () => {
                         type="text"
                         name="actualDealValue"
                         id="actualDealValue"
-                        defaultValue={item.actualDealValue}
+                        value={item.actualDealValue}
                         onBlur={(e) => {
                           formHandler("actualDealValue", e, item.id);
                         }}
@@ -400,7 +400,7 @@ const Deals = () => {
                         type="date"
                         name="dealCreationDate"
                         id="dealCreationDate"
-                        defaultValue={moment(item.dealCreationDate).format("YYYY-MM-DD")}
+                        value={moment(item.dealCreationDate).format("YYYY-MM-DD")}
                         onChange={(e) => dateHandler(moment(e.target.value).format("YYYY-MM-DD"), "dealCreationDate", item.id)}
                       />
                     </td>

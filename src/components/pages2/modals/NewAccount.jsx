@@ -4,10 +4,12 @@ import subCategorias from "../../../hooks/dataSubCategorias";
 import Swal from "sweetalert2";
 import axios from "axios";
 import typeF from "../../../hooks/dataTipo";
+import { useGetPartida } from "../../../hooks/useGetPartida";
 
 const NewAccount = ({ getAccounts, setShowNewAccountModal }) => {
   const [cate, setCate] = useState(categorias);
   const [subCate, setSubCate] = useState(subCategorias);
+  const [getPartida, setPartida] = useGetPartida();
   const [form, setForm] = useState({
     type: "",
     priority: "",
@@ -15,6 +17,8 @@ const NewAccount = ({ getAccounts, setShowNewAccountModal }) => {
     email: "",
     categoria: "",
     subCategoria: "",
+    partida: "",
+    products: "",
   });
 
   const formHandler = (e) => {
@@ -65,14 +69,28 @@ const NewAccount = ({ getAccounts, setShowNewAccountModal }) => {
         text: "Revisa el campo Sub Categoria!",
       });
       return;
+    }else if (form.partida === "" || form.partida === "- Seleccione -"){
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Revisa el campo Partida!",
+      });
+    }
+    else if (form.products === "" ){
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Revisa el campo Productos!",
+      });
     }
 
     // guardo en DB
+    console.log(form)
 
-    await axios
-      .post(`${process.env.REACT_APP_SERVIDOR}/api/v1/accounts/new`, form)
-      .then((event) => console.log(event.data))
-      .catch((err) => console.error(err));
+    // await axios
+    //   .post(`${process.env.REACT_APP_SERVIDOR}/api/v1/accounts/new`, form)
+    //   .then((event) => console.log(event.data))
+    //   .catch((err) => console.error(err));
     // Cerrado del modal y vaciado del doc
 
     setForm({
@@ -82,6 +100,8 @@ const NewAccount = ({ getAccounts, setShowNewAccountModal }) => {
       email: "",
       categoria: "",
       subCategoria: "",
+      partida: "",
+      products: "",
     });
     setShowNewAccountModal(false);
 
@@ -215,6 +235,38 @@ const NewAccount = ({ getAccounts, setShowNewAccountModal }) => {
                   }}
                 >
                   {subCate.map((i, index) => (
+                    <option value={i} key={index}>
+                      {i}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div className="left-inner-addon input-container">
+                <i className=""></i>
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="products"
+                  onChange={(e) => {
+                    formHandler(e);
+                  }}
+                  name="products"
+                  id="products"
+                  value={form.products}
+                />
+              </div>
+              <div className="left-inner-addon input-container">
+                <i className=""></i>
+                <select
+                  value={form.partida}
+                  name="partida"
+                  id="partida"
+                  className="form-control"
+                  onChange={(e) => {
+                    formHandler(e);
+                  }}
+                >
+                  {getPartida.map((i, index) => (
                     <option value={i} key={index}>
                       {i}
                     </option>

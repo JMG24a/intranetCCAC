@@ -50,48 +50,6 @@ const ContactsModal = ({
       ) : null}
       <div className="fondoContacts py-5" id="contactModal">
         <h1 className="text-white my-3">Informacion de la Persona </h1>
-        <div className="bg-white p-4 rounded">
-          <div className="row">
-            <div className="col-md-6">
-              <div className="fila">
-                <label htmlFor="priority">Prioridad</label>
-                <select
-                  name="priority"
-                  id="priority"
-                  className="form-control"
-                  onChange={(e) => formHandler(e)}
-                >
-                  <option defaultValue={client.priority}>
-                    {client.priority}
-                  </option>
-                  {priority.map((item, index) => (
-                    <option value={item} key={index}>
-                      {item}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            </div>
-            <div className="col-md-6">
-              <div className="fila">
-                <label htmlFor="type">Tipo</label>
-                <select
-                  name="type"
-                  id="type"
-                  className="form-control"
-                  onChange={(e) => formHandler(e)}
-                >
-                  <option value={client.type}>{client.type}</option>
-                  {typeF.map((item, index) => (
-                    <option value={item} key={index}>
-                      {item}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            </div>
-          </div>
-        </div>
         <div className="bg-white my-3 p-4">
           <div className="row">
             <div className="col-md-6">
@@ -191,19 +149,6 @@ const ContactsModal = ({
                 />
               </div>
             </div>
-            <div className="col-md-6">
-              <div className="fila">
-                <label htmlFor="company">Company</label>
-                <input
-                  type="text"
-                  name="company"
-                  id="company"
-                  className="form-control"
-                  defaultValue={client.company}
-                  onChange={(e) => formHandler(e)}
-                />
-              </div>
-            </div>
           </div>
         </div>
         <div className="accordion" id="accordionExample">
@@ -250,19 +195,7 @@ const ContactsModal = ({
                   <div className="col-md-6">
                     <div className="fila">
                       <label htmlFor="city">Ciudad</label>
-                      <select
-                        name="city"
-                        id="city"
-                        className="form-control"
-                        onChange={(e) => formHandler(e)}
-                      >
-                        <option value={client.city}>{client.city}</option>
-                        {ciudades.map((item, index) => (
-                          <option value={item} key={index}>
-                            {item}
-                          </option>
-                        ))}
-                      </select>
+                      <input type="text" name="city" id="city" className="form-control"/>
                     </div>
                   </div>
                 </div>
