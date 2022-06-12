@@ -62,12 +62,14 @@
 .container-detail{
   position: absolute;
   max-width: 500px;
+  height: auto;
+  max-height: 500px;
+  min-height: 300px;
   border-radius: 20px;
   margin-top: 60px;
   padding: 20px;
   padding-top: 45px;
-  height: auto;
-  max-height: 500px;
+
   background-color: #7f1232;
 }
 
@@ -78,6 +80,7 @@
 
 .container-detail-group{
   margin-top: 20px;
+  min-height: 300px;
   background-color: #600e26;
 }
 
@@ -91,8 +94,10 @@
 
 .details-descriptions{
   text-align: center;
+  min-height: 300px;
   color: white;
 }
+
 .details-descriptions :last-child{
   text-transform: capitalize;
   margin: 10px;

@@ -1,21 +1,12 @@
 import { Context } from "../../context/Context";
-import axios from "axios";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-import Cookies from "universal-cookie";
 import Swal from "sweetalert2";
 
-const Login = () => {
-  const cookies = new Cookies();
-  const { auth: { login, user } } = useContext(Context)
+const Register = () => {
+  const { auth: { register } } = useContext(Context)
   const history = useHistory();
   const [form, setForm] = useState([]);
-
-  useEffect(()=>{
-    if(user.isLogin){
-      history.replace("/");
-    }
-  },[user])
 
   const formHandler = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -23,17 +14,35 @@ const Login = () => {
 
   const loginHandler = async (e) => {
     e.preventDefault();
-    const response = await login(form)
-    const regex = /\incorrect/g
 
-    if(regex.test(response)){
-      console.log(response)
+    if(form.password !== form.password2){
       Swal.fire({
         icon: "error",
-        title: "Error de inicio",
-        text: "Revisa la informacion con atencion",
+        title: "Las contraceñas nos coinciden",
+        text: "Revisa con atencion la informacion",
+      });
+      return 0
+    }
+    const body = {
+      email: form.email,
+      password: form.password
+    }
+    const response = await register(body)
+    const regex = /\error/g
+
+    if(regex.test(response)){
+      Swal.fire({
+        icon: "error",
+        title: "Servicio no disponible",
+        text: "Porfavor intenta mas tarde",
       });
     }
+
+    Swal.fire({
+      icon: "success",
+      title: "cuenta creada con exito",
+      text: "Ya puedes acceder a la pagina",
+    });
   }
 
   // const loginHandler = (e) => {
@@ -82,7 +91,7 @@ const Login = () => {
             <div className="form-group">
               <label htmlFor="email">Correo</label>
               <input
-                type="text"
+                type="email"
                 className="form-control"
                 name="email"
                 id="email"
@@ -99,6 +108,16 @@ const Login = () => {
                 onChange={formHandler}
               />
             </div>
+            <div className="form-group mt-2">
+              <label htmlFor="password">Password</label>
+              <input
+                type="password"
+                className="form-control"
+                name="password2"
+                id="password2"
+                onChange={formHandler}
+              />
+            </div>
             <button type="submit" className="btn mt-3">
               Iniciar Sesión
             </button>
@@ -106,10 +125,10 @@ const Login = () => {
         </div>
       </div>
       <p className="text-white text-center mt-2">
-        Ya tienes una cuenta? <Link to={'/register'} className="text-danger text-decoration-none"> clik aqui!</Link>
+        Ya tienes una cuenta? <Link to={'/login'} className="text-danger text-decoration-none"> clik aqui!</Link>
       </p>
     </div>
   );
 };
 
-export default Login;
+export default Register;

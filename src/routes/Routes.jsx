@@ -10,6 +10,7 @@ import Grupos from "../components/grupos/Grupos";
 import Navbar from "../components/includes/Navbar";
 import Lbc from "../components/lbc/Lbc";
 import Login from "../components/login/Login";
+import Register from "../components/login/Register";
 import Logistica from "../components/logistica/Logistica";
 import Clientes from "../components/pages/clientes/Clientes";
 import Inicio from "../components/pages/inicio/Inicio";
@@ -71,6 +72,10 @@ export const AppRouter = () => {
             <Route path="/login">
               <Navbar />
               <Login />
+            </Route>
+            <Route path="/register">
+              <Navbar />
+              <Register />
             </Route>
             <Route path="/">
               <Navbar />

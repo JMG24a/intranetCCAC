@@ -8,7 +8,7 @@ const Context = createContext({});
 
 function AppContext(props) {
   const { events, isLoading, getEvents, create, edit, removed } = useCalendarHook();
-  const { login, logout, register, loading, user } = useAuthHook();
+  const { login, logout, register, getUser, loading, user } = useAuthHook();
 
   useEffect(() => {
     if (events.length <= 0) {
@@ -23,6 +23,7 @@ function AppContext(props) {
           login,
           logout,
           register,
+          getUser,
           user,
           loading,
         },

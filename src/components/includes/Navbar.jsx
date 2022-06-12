@@ -6,17 +6,27 @@ import Cookies from "universal-cookie";
 import { MenuAdmin } from "./MenuAdmin";
 
 const Navbar = () => {
-  const { auth: { user, logout } } = useContext(Context)
+  const { auth: { user, getUser, logout } } = useContext(Context)
   const [isMenu, setIsMenu] = useState(false);
   const history = useHistory();
   const locate = useLocation()
 
   useEffect(()=>{
     if(!user.isLogin){
+      validationSession()
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[locate.pathname, user.isLogin])
+
+  const validationSession = async () => {
+    const success = await getUser();
+    const router = locate.pathname.replace('/', '');
+    const isValid = ['login','register'].includes(router);
+
+    if(!success && !isValid){
       history.replace("/login");
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[locate.pathname, user.isLogin])
+  }
 
   // const [user, setUser] = useState({ nombre: "", imagen: "" });
   // const cookies = new Cookies();
