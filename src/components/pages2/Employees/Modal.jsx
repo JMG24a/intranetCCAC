@@ -2,7 +2,7 @@ import React from 'react';
 
 function EmployeeModal({submitHandler, formHandler, setModal}) {
     return (
-      <div className="modal-dialog">
+      <div className="modal-dialog" style={{marginTop: "170px"}}>
         <div className="modal-content">
           <div className="modal-header">
             <h5 className="modal-title" id="exampleModalLabel">

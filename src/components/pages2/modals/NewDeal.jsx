@@ -24,10 +24,11 @@ const NewDeal = ({
   };
 
   return (
-    <div>
+    <div className="bg-primary">
       {fondoNegro ? (
         <div
           className="fondoNegro"
+          style={{left: "25px"}}
           onClick={() => {
             // setFondoNegro(false);
             // setCreateNewDealM(false);
@@ -35,8 +36,7 @@ const NewDeal = ({
           }}
         ></div>
       ) : null}
-      <h1>New Deal</h1>
-      <div className="fondoNewDeal p-4" id="contactModal">
+      <div className="fondoNewDeal p-4" style={{marginTop: "230px"}} id="contactModal">
         <div
           style={{
             color: "white",

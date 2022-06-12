@@ -87,7 +87,7 @@ const Inicio2 = () => {
     axios
       .put(`${process.env.REACT_APP_SERVIDOR}/api/v1/accounts`, form)
       .then((res) => {
-        alert("actualizado correctamente");
+        // alert("actualizado correctamente");
         console.log(res.data);
         getAccounts();
       })

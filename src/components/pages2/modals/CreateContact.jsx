@@ -15,7 +15,8 @@ const CreateContact = ({
 }) => {
   const [form, setForm] = useState({ contactName: "" });
   const [contacts, setContacts] = useState([]);
-  //
+  //jmg24a
+  const [search, setSearch] = useState([]);
 
   const crearNuevoHandler = async () => {
     if (form.contactName === "") {
@@ -64,6 +65,7 @@ const CreateContact = ({
       .get(`${process.env.REACT_APP_SERVIDOR}/api/v1/contacts`)
       .then((res) => {
         setContacts(res.data.contacts);
+        setSearch(res.data.contacts)
       })
       .catch((err) => console.error("fallo", err));
   };
@@ -95,20 +97,36 @@ const CreateContact = ({
     setShowEnlazarContacto(false);
   };
 
-  const searchContactHandler = (e) => {
-    const searchValue = e.target.value;
+  // const searchContactHandler = (e) => {
+  //   const searchValue = e.target.value;
 
-    if (searchValue.split("").length > 3) {
-      axios
-        .get(`${process.env.REACT_APP_SERVIDOR}/api/v1/contacts/${searchValue}`)
-        .then((res) => setContacts(res.data.contact))
-        .catch((err) => console.error(err));
-      return;
-    } else if (searchValue.split("").length === 0) {
-      getContacts();
-      console.log("get");
+  //   if (searchValue.split("").length > 3) {
+  //     axios
+  //       .get(`${process.env.REACT_APP_SERVIDOR}/api/v1/contacts/${searchValue}`)
+  //       .then((res) => setContacts(res.data.contact))
+  //       .catch((err) => console.error(err));
+  //     return;
+  //   } else if (searchValue.split("").length === 0) {
+  //     getContacts();
+  //     console.log("get");
+  //   }
+  // };
+
+  const onSearching = (e) => {
+    if (e.target.value === "") {
+      setSearch(contacts);
+      return 0;
     }
-  };
+    const filter = contacts.filter((item) => {
+      if (item.contactName.length === 0) {
+        return false;
+      } else {
+        const isTrue = item.contactName.toLowerCase().includes(e.target.value.toLowerCase());
+        return isTrue;
+      }
+    })
+    setSearch(filter);
+  }
 
   useEffect(() => {
     getContacts();
@@ -131,23 +149,23 @@ const CreateContact = ({
           </div>
           <h2 className="text-white text-center">ENLAZAR CONTACTO</h2>
           <div className="subContenedorAddCtc">
-            <div className="left-inner-addon input-container">
-              <i className="fa fa-search"></i>
+            <div className="input-container position-relative">
+              <i className="fa fa-search position-absolute" style={{padding: "10px", color: "#600e26"}}></i>
               <input
                 type="text"
                 className="form-control"
                 placeholder="Buscar Cliente"
                 name="accountName"
                 id="accountName"
-                onChange={(e) => searchContactHandler(e)}
+                onChange={(e) => onSearching(e)}
               />
             </div>
             <div style={{ backgroundColor: "white", padding: "20px" }}>
               <table className="table table-sm table-hover">
                 <tbody>
-                  {contacts.slice(0, 4).map((item, index) => (
-                    <tr key={index}>
-                      <td>{item.contactName}</td>
+                  {search.slice(0,4).map((item, index) => (
+                    <tr key={index} className="d-flex justify-content-between border-bottom">
+                      <td className="border-bottom-0">{item.contactName}</td>
                       <td>
                         <button
                           className="btn btn-primary"

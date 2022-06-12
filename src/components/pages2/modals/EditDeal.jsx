@@ -44,6 +44,8 @@ const EditDeal = ({ fondoNegro, setFondoNegro, setShowEditDeal, getDeals, idDeal
       .put(`${process.env.REACT_APP_SERVIDOR}/api/v1/deals`, [changeDealObject,idDeal])
       .then((res) => {
         // console.log(res.data.newDeal);
+        setFondoNegro(false)
+        setShowEditDeal(false)
         getDeals();
       })
       .catch((err) => {
@@ -69,7 +71,7 @@ const EditDeal = ({ fondoNegro, setFondoNegro, setShowEditDeal, getDeals, idDeal
       ) : null}
 
       <form onSubmit={formHandler} ref={formRef}>
-        <div className="fondoDeal">
+        <div className="fondoDeal" style={{background: "#600e26"}}>
           <div className="bg-white p-5">
             <h1>Deals</h1>
             <div className="row">

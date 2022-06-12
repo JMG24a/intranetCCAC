@@ -10,6 +10,7 @@ const NewAccount = ({ getAccounts, setShowNewAccountModal }) => {
   const [cate, setCate] = useState(categorias);
   const [subCate, setSubCate] = useState(subCategorias);
   const [getPartida, setPartida] = useGetPartida();
+  const [isPartida, setIsPartida] = useState(false);
   const [form, setForm] = useState({
     type: "",
     priority: "",
@@ -17,13 +18,21 @@ const NewAccount = ({ getAccounts, setShowNewAccountModal }) => {
     email: "",
     categoria: "",
     subCategoria: "",
-    partida: "",
+    partida: "- Partida -",
     products: "",
   });
 
   const formHandler = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
+
+  const handlePartida = (partida) => {
+    setForm({
+      ...form,
+      partida: partida
+    })
+    setIsPartida(false)
+  }
 
   const submitForm = async () => {
     // Validaciones
@@ -69,7 +78,7 @@ const NewAccount = ({ getAccounts, setShowNewAccountModal }) => {
         text: "Revisa el campo Sub Categoria!",
       });
       return;
-    }else if (form.partida === "" || form.partida === "- Seleccione -"){
+    }else if (form.partida === "" || form.partida === "- Partida -"){
       Swal.fire({
         icon: "error",
         title: "Oops...",
@@ -127,7 +136,7 @@ const NewAccount = ({ getAccounts, setShowNewAccountModal }) => {
           <i className="fa fa-times fa-2x"></i>
         </div>
         <h2 className="mb-4 mt-3">CREAR NUEVA CUENTA</h2>
-        <div className="contenedorSubNewACC">
+        <div className="contenedorSubNewACC position-relative">
           <div className="row mb-4 firstSelect">
             <div className="col-md-6">
               <div className="form-group">
@@ -175,7 +184,7 @@ const NewAccount = ({ getAccounts, setShowNewAccountModal }) => {
               </div>
             </div>
           </div>
-          <div className="row">
+          <div className="row  position-relative">
             <div className="col">
               <div className="left-inner-addon input-container">
                 <i className="fa fa-user"></i>
@@ -257,26 +266,39 @@ const NewAccount = ({ getAccounts, setShowNewAccountModal }) => {
               </div>
               <div className="left-inner-addon input-container">
                 <i className=""></i>
-                <select
-                  style={{ display: "inline-block", verticalAlign: "top", overflow: "hidden", border: "solid grey 1px" }}
+                <input
                   value={form.partida}
-                  name="partida"
-                  id="partida"
                   className="form-control"
-                  onChange={(e) => {
-                    formHandler(e);
-                  }}
-                >
-                  {getPartida.map((i, index) => (
-                    <option value={i} key={index}>
-                      {i}
-                    </option>
-                  ))}
-                </select>
+                  onClick={()=>setIsPartida(!isPartida)}
+                />
               </div>
               <button onClick={() => submitForm()}>CREAR NUEVO</button>
             </div>
           </div>
+          {!!isPartida &&
+            <div style={{
+              position: "absolute",
+              width: "100%",
+              height: "-webkit-fill-available",
+              padding: "20px",
+              overflowY: "scroll",
+              top: "0px",
+              left: "0px",
+              borderRadius: "30px",
+              background: "#600e26"
+            }}>
+              {getPartida.map((i, index) => (
+                <p
+                  key={index}
+                  className="bg-light p-2 rounded"
+                  style={{cursor: "pointer"}}
+                  onClick={()=>handlePartida(i)}
+                >
+                  {i}
+                </p>
+              ))}
+            </div>
+          }
         </div>
       </div>
     </div>

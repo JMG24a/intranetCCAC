@@ -25,3 +25,4 @@ yarn-error.log*
 
 #jmg24 ignore
 .editorconfig
+jmg.md

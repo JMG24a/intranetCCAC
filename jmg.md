@@ -1,4 +1,4 @@
-# ARAB COLOMBIAN 
+# ARAB COLOMBIAN
 tareas a realizar para **arab colombian**
 -	Al editar deal falta funcion (no edita)
 -	En Accounts  no muestra Deals Activos
@@ -76,16 +76,37 @@ El campo productos fue creado de tipo text con estas propiedades, en cuentas
 ```
 ### 14. En Accounts al crear 2 nuevos campos, uno que diga Partida y otro Productos
 Se agregó 2 nuevos campos en el formulario de crear accounts, se creó un componente *selectPartida* para poder renderizar las partidas
-#### 15 Login
+
+### Bugs encontrados:
+A lo largo del desarrollo se encontró diversas fallas de presentación de los estilos y funcionalidades como el cierre de modales, entre otras cosas, esta es una lista de lugares donde se corrigieron estos bugs:
+- search en crear contactos
+- icon lupa en search crear contactos
+- fondo negro en accounts
+- cierre automático del modal información de la cuenta
+- corrección de estilos en employee (columnas mal alineadas)
+- creación de 2 styled components para Accounts y Deals (archivos muy extensos de leer)
+- función de eliminar employee
+- la lista de contactos colapsaba al tener nombres cortos
+- corrección en el posicionamiento de los modales
+- corrigiendo la diferencia de colores en los formularios
+
+### 15 Login
 Para este sistema se modificó el contextCalendar ahora llamado Context, para poder albergar el flujo de auth este context ahora retorna funcionalidades para el auth.
 
-El componente de Login espera recibir dos campos para poder llevar a cabo la autenticación, el email y la contraseña deben coincidir con el registro que se encuentra en el backend, la función **login()** espera recibir del backend un token donde se encuentre la siguiente estructura.
+El componente de Login espera recibir dos campos para poder llevar a cabo la autenticación, el email y la contraseña deben coincidir con el registro que se encuentra en el backend, la función **login()** espera recibir del backend un token junto con la informacion del usuario donde se espera recibir la siguiente estructura.
 ```
-    token = {
-		ip: 'ipDirection',
-		sub:{
-			name: 'userName',
-			image: 'url/image',
-		},
-    }
+    token = { }
+	user={
+		name: "string",
+		image: "string",
+		role: "string"
+	}
+
 ```
+Si se desea agregar más información, debe dirigirse a *hook/useAuthHook.js* y modificar el objeto user.
+
+Solo 2 páginas se encuentran accesibles sin estar registrado, si se desea agregar otra ruta sin restricciones de acceso deber modificar *components/includes/Navbar;*
+y agregar la ruta en el array dentro de la función **validationSession**
+
+##### Token:
+Para poder hacer peticiones con autorización se debe llamar al contexto y traer la función **getToken** este retornará el token del usuario, listo para ser usado en las peticiones fetch

@@ -118,6 +118,11 @@ function useAuthHook() {
     return 'success'
   }
 
+  const getToken = () => {
+    const token = window.sessionStorage.getItem('token')
+    return token
+  }
+
   return {
     user,
     loading,
@@ -125,6 +130,7 @@ function useAuthHook() {
     login,
     logout,
     register,
+    getToken
   }
 }
 
