@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import categorias from "../../../hooks/dataCategorias";
 import ciudades from "../../../hooks/dataCiudades";
 import paises from "../../../hooks/dataPaises";
@@ -28,7 +28,6 @@ const ContactsModal = ({
     axios
       .put(`${process.env.REACT_APP_SERVIDOR}/api/v1/contacts/`, [form, id])
       .then((res) => {
-        console.log(res.data);
         getAccounts();
         setShowContactModal(false);
         setFondoNegro(false);

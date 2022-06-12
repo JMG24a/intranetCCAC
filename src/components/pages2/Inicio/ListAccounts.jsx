@@ -49,7 +49,7 @@ function ListAccounts(props) {
                   type="text"
                   name="accountValue"
                   id="accountValue"
-                  defaultValue={item.accountValue ? parseInt(item.accountValue).toLocaleString() : 0}
+                  value={item.accountValue ? parseInt(item.accountValue).toLocaleString() : 0}
                   onBlur={(e) => selectHandler("accountValue", e, item.id)}
                 />
               }
@@ -63,7 +63,7 @@ function ListAccounts(props) {
                     type="text"
                     name=""
                     id=""
-                    defaultValue={i.contactName}
+                    value={i.contactName}
                     onClick={() => {
                       setId(i._id);
                       // console.log(i._id);
@@ -96,9 +96,9 @@ function ListAccounts(props) {
                 key={index}
                 className="inputContact"
                 type="text"
-                name=""
-                id=""
-                defaultValue={"Web"}
+                name="origen"
+                id="origen"
+                value={item.website}
               />
             </td>
             <td id="inputDeals">
@@ -142,7 +142,13 @@ function ListAccounts(props) {
               }
             </td>
             <td>
-              <input type="text" name="email" id="products" className="border emailInput"/>
+              <input
+                type="text"
+                name="email"
+                id="products"
+                className="border emailInput"
+                value={item.products}
+              />
             </td>
             <td>{item.comments}</td>
             <td>

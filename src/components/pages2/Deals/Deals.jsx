@@ -25,7 +25,6 @@ const Deals = () => {
   const [dealEdit, setDealEdit] = useState(true);
   const [showModalAccount, setShowModalAccount] = useState(false);
   //jmg24a repairing filters --
-
   const [search, setSearch] = useState([]);
 
   const getDeals = async () => {
@@ -106,7 +105,6 @@ const Deals = () => {
 
   const formHandler = (tipo, e, idDeal) => {
     const form = [{ [e.target.name]: e.target.value }, idDeal];
-    console.log(form);
     axios
       .put(`${process.env.REACT_APP_SERVIDOR}/api/v1/deals`, form)
       .then((res) => {
@@ -377,7 +375,6 @@ const Deals = () => {
                     <td id="expectedCloseDate">
                       <input
                         type="date"
-                        className="form-control"
                         name="expectedCloseDate"
                         id="expectedCloseDate"
                         value={moment(item.expectedCloseDate).format("YYYY-MM-DD")}

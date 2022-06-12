@@ -8,6 +8,7 @@ import ContactsModal from "../modals/ContactModal";
 
 //jmg24a dependencies
 import { ListAccounts } from './ListAccounts'
+import { ModalCalendar } from "../Calendar/ModalCalendar";
 
 const Inicio2 = () => {
   const [id, setId] = useState();
@@ -172,10 +173,12 @@ const Inicio2 = () => {
       </div>
 
       {showNewAccountModal ? (
-        <NewAccount
-          getAccounts={getAccounts}
-          setShowNewAccountModal={setShowNewAccountModal}
-        />
+        <ModalCalendar>
+          <NewAccount
+            getAccounts={getAccounts}
+            setShowNewAccountModal={setShowNewAccountModal}
+          />
+        </ModalCalendar>
       ) : null}
 
       {showEnlazarContacto ? (

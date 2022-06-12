@@ -258,6 +258,7 @@ const NewAccount = ({ getAccounts, setShowNewAccountModal }) => {
               <div className="left-inner-addon input-container">
                 <i className=""></i>
                 <select
+                  style={{ display: "inline-block", verticalAlign: "top", overflow: "hidden", border: "solid grey 1px" }}
                   value={form.partida}
                   name="partida"
                   id="partida"

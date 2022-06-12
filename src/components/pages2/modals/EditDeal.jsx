@@ -40,8 +40,6 @@ const EditDeal = ({ fondoNegro, setFondoNegro, setShowEditDeal, getDeals, idDeal
       tasks: form.get('tasks'),
     }
 
-    console.log(changeDealObject,idDeal)
-
     axios
       .put(`${process.env.REACT_APP_SERVIDOR}/api/v1/deals`, [changeDealObject,idDeal])
       .then((res) => {

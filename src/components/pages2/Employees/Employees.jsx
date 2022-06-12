@@ -1,22 +1,34 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import GetEmployees from "../../../hooks/GetEmployees";
 import { Alert } from "../../response/Alert";
 import { ModalCalendar as Modal} from "../Calendar/ModalCalendar";
 import { EmployeeModal } from "./Modal";
 
 const Employees = () => {
-  const employees = GetEmployees();
-  // const employees = [];
-
   const [form, setForm] = useState({});
   //jmg24a
+  const { getEmpleados } = GetEmployees();
+  const [search, setSearch] = useState([]);
+  const [employee, setEmployee] = useState([]);
   const [modal, setModal] = useState(false);
   const [alert, setAlert] = useState({
     state: false,
     message: "",
     color: "green"
   });
+
+  useEffect(()=>{
+    if(employee.length <= 0){
+      getEmployeesInit()
+    }
+  })
+
+  const getEmployeesInit = async ()  => {
+    const response = await getEmpleados();
+    setEmployee(response.employees)
+    setSearch(response.employees)
+  }
 
   const formHandler = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -45,6 +57,25 @@ const Employees = () => {
     // .catch((err) => console.log(err));
   }
 
+  const onSearching = (e) => {
+    if (e.target.value === "") {
+      setSearch(employee);
+      return 0;
+    }
+    const filter = employee.filter((item) => {
+      if(!item.nameEmployee){
+        return false;
+      }
+      if (item.nameEmployee.length === 0) {
+        return false;
+      } else {
+        const isTrue = item.nameEmployee.toLowerCase().includes(e.target.value.toLowerCase());
+        return isTrue;
+      }
+    })
+    setSearch(filter);
+  };
+
   const submitHandler = () => {
     if(!form.nameEmployee) {
       return 0;
@@ -72,15 +103,33 @@ const Employees = () => {
   };
 
   return (
-    <div className="bg-white p-4">
+    <div className="bg-white py-5 px-4">
       <h1>Listado de Empleados</h1>
-      <button
-        type="button"
-        className="btn btn-primary"
-        onClick={()=>{setModal(!modal)}}
-        >
-        Crear Nuevo
-      </button>
+      <section className="m-3 my-5">
+        <div className="row row-cols-sm-auto">
+          <div className="col me-5">
+            <button
+              type="button"
+              className="btn btn-primary"
+              onClick={()=>{setModal(!modal)}}
+              >
+              Crear Nuevo
+            </button>
+          </div>
+          <div className="col-4">
+            <input
+              className="buscarInput"
+              type="text"
+              name="buscar"
+              id="buscar"
+              placeholder="Ingresa el valor a buscar"
+              onChange={(e) => {
+                onSearching(e)
+              }}
+            />
+          </div>
+        </div>
+      </section>
       <table className="table">
         <thead>
           <tr>
@@ -92,13 +141,13 @@ const Employees = () => {
           </tr>
         </thead>
         <tbody>
-          {employees.map((item, index) => (
+          {search.map((item, index) => (
             <tr key={index}>
-              <td>{item.nameEmployee}</td>
-              <td>{item.email}</td>
-              <td>{item.cc}</td>
-              <td>{item.role}</td>
-              <td>
+              <td><p className="text-center">{item.nameEmployee}</p></td>
+              <td><p className="text-center">{item.email}</p></td>
+              <td><p className="text-center">{item.cc}</p></td>
+              <td><p className="text-center">{item.role}</p></td>
+              <td className="d-flex justify-content-center">
                 <button className="btn btn-danger" onClick={()=>handleDelete(item)}>
                   <i className="fa fa-trash"></i>
                 </button>
@@ -109,7 +158,7 @@ const Employees = () => {
       </table>
 
       {modal &&
-        <Modal>
+        <Modal setModal={setModal}>
           <EmployeeModal
             formHandler={formHandler}
             submitHandler={submitHandler}
