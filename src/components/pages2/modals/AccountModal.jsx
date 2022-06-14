@@ -211,10 +211,10 @@ const AccountModal = ({
             </div>
           </div>
           <div className="row my-4">
-            <label htmlFor="comentarios">Comentarios</label>
+            <label htmlFor="comments">Comentarios</label>
             <textarea
-              name="comentarios"
-              id="comentarios"
+              name="comments"
+              id="comments"
               cols="30"
               rows="5"
               className="form-control"

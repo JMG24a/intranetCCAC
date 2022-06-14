@@ -2,7 +2,6 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import React, { useEffect, useState } from "react";
 import GetEmployees from "../../../hooks/GetEmployees";
-import { Alert } from "../../response/Alert";
 import { ModalCalendar as Modal} from "../Calendar/ModalCalendar";
 import { EmployeeModal } from "./Modal";
 
@@ -13,11 +12,8 @@ const Employees = () => {
   const [search, setSearch] = useState([]);
   const [employee, setEmployee] = useState([]);
   const [modal, setModal] = useState(false);
-  const [alert, setAlert] = useState({
-    state: false,
-    message: "",
-    color: "green"
-  });
+  const [isUpdate, setIsUpdate] = useState(false);
+
 
   useEffect(()=>{
     if(employee.length <= 0){
@@ -27,35 +23,81 @@ const Employees = () => {
 
   const getEmployeesInit = async ()  => {
     const response = await getEmpleados();
-    setEmployee(response.employees)
-    setSearch(response.employees)
+    setEmployee(response?.employees)
+    setSearch(response?.employees)
   }
 
   const formHandler = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
+  const onUpdate = (employ) => {
+    setForm(employ)
+    setIsUpdate(true)
+  }
+
+  const onCreate = () => {
+    setForm({})
+    setModal(true)
+  }
+
+  const handleUpdate = () => {
+    axios
+    .put(`${process.env.REACT_APP_SERVIDOR}/api/v1/employees/edit/${[form,form.id]}`)
+    .then((res) => {
+      if(!!res.data.ok){
+        Swal.fire({
+          icon: "success",
+          title: "Editado con exito",
+          text: "",
+        });
+      }else{
+        Swal.fire({
+          icon: "error",
+          title: "No se pudo editar este perfil",
+          text: "",
+        });
+      }
+      setIsUpdate(false)
+      getEmployeesInit()
+    })
+    .catch((err) => {
+      console.log(err)
+      Swal.fire({
+        icon: "error",
+        title: "La peticion no pudo ser concretada",
+        text: "revisa tu conexion",
+      });
+    });
+  }
+
   const handleDelete = (employ) => {
-    console.log(employ)
-    //esperando endpoint
-    // axios
-    // .post(`${process.env.REACT_APP_SERVIDOR}/api/v1/employees/delete`, employ.id)
-    // .then((res) => {
-    //   if(!!res.data.ok){
-    //     setAlert({
-    //       ...alert,
-    //       state: true,
-    //       message: "Empleado eliminado con exito"
-    //     })
-    //   }else{
-      // Swal.fire({
-      //   icon: "success",
-      //   title: "Eliminado con exito",
-      //   text: "",
-      // });
-    //   }
-    // })
-    // .catch((err) => console.log(err));
+    axios
+    .delete(`${process.env.REACT_APP_SERVIDOR}/api/v1/employees/${employ.id}`)
+    .then((res) => {
+      if(!!res.data.ok){
+        Swal.fire({
+          icon: "success",
+          title: "Eliminado con exito",
+          text: "",
+        });
+      }else{
+        Swal.fire({
+          icon: "error",
+          title: "El perfil no pudo ser eliminado",
+          text: "",
+        });
+      }
+      getEmployeesInit()
+    })
+    .catch((err) => {
+      console.log(err)
+      Swal.fire({
+        icon: "error",
+        title: "La peticion no pudo ser concretada",
+        text: "revisa tu conexion",
+      });
+    });
   }
 
   const onSearching = (e) => {
@@ -113,11 +155,11 @@ const Employees = () => {
             <button
               type="button"
               className="btn btn-primary"
-              onClick={()=>{setModal(!modal)}}
+              onClick={onCreate}
               >
               Crear Nuevo
             </button>
-          </div>
+          </div>setModal
           <div className="col-4">
             <input
               className="buscarInput"
@@ -135,21 +177,43 @@ const Employees = () => {
       <table className="table">
         <thead>
           <tr>
+            <th>Foto</th>
             <th>Nombre</th>
             <th>Email</th>
             <th>CC</th>
             <th>Role</th>
+            <th>Editar</th>
+            <th></th>
             <th>Accion</th>
           </tr>
         </thead>
         <tbody>
           {search.map((item, index) => (
-            <tr key={index}>
+            <tr key={index} className="border-bottom">
+              <td className="border-bottom-0 d-flex justify-content-center">
+                <img
+                  src = {
+                    item?.photo?.length > 28 ? item.photo : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHu9ChhiW6BNfVmsm0VZhJWTcLkyVMYo2D9Q&usqp=CAU"
+                  }
+                  alt="foto del empleado"
+                  style={{
+                    width: "40px",
+                    height: "40px",
+                    borderRadius: "50%",
+                  }}
+                />
+              </td>
               <td><p className="text-center">{item.nameEmployee}</p></td>
               <td><p className="text-center">{item.email}</p></td>
               <td><p className="text-center">{item.cc}</p></td>
               <td><p className="text-center">{item.role}</p></td>
-              <td className="d-flex justify-content-center">
+              <td className="d-flex justify-content-center border-bottom-0">
+                <button className="btn btn-primary" onClick={()=>onUpdate(item)}>
+                  <i className="fa fa-trash"></i>
+                </button>
+              </td>
+              <td></td>
+              <td className="d-flex justify-content-center border-bottom-0">
                 <button className="btn btn-danger" onClick={()=>handleDelete(item)}>
                   <i className="fa fa-trash"></i>
                 </button>
@@ -160,16 +224,25 @@ const Employees = () => {
       </table>
 
       {modal &&
-        <Modal setModal={setModal}>
+        <Modal>
           <EmployeeModal
+            form={form}
             formHandler={formHandler}
             submitHandler={submitHandler}
             setModal={setModal}
           />
         </Modal>
       }
-
-      {alert && <Alert setAlert={setAlert} alert={alert}/>}
+      {isUpdate &&
+        <Modal>
+          <EmployeeModal
+            form={form}
+            formHandler={formHandler}
+            submitHandler={handleUpdate}
+            setModal={setIsUpdate}
+          />
+      </Modal>
+      }
     </div>
   );
 };

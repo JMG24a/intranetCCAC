@@ -1,6 +1,6 @@
 import React from 'react';
 
-function EmployeeModal({submitHandler, formHandler, setModal}) {
+function EmployeeModal({submitHandler, formHandler, form, setModal}) {
     return (
       <div className="modal-dialog" style={{marginTop: "170px"}}>
         <div className="modal-content">
@@ -18,19 +18,47 @@ function EmployeeModal({submitHandler, formHandler, setModal}) {
 
             <div className="col mt-4">
               <label htmlFor="Nombre">Nombre</label>
-              <input type="text" name="nameEmployee" id="nameEmployee" className="form-control" onChange={(e) => formHandler(e)} />
+              <input
+                type="text"
+                name="nameEmployee"
+                id="nameEmployee"
+                placeholder={`${form.nameEmployee ? form.nameEmployee : "nombre"}`}
+                className="form-control"
+                onChange={(e) => formHandler(e)}
+              />
             </div>
             <div className="col mt-4">
               <label htmlFor="Nombre">Cargo</label>
-              <input type="text" name="title" id="title" className="form-control" onChange={(e) => formHandler(e)} />
+              <input
+                type="text"
+                name="title"
+                id="title"
+                placeholder={`${form.title ? form.title : "Cargo"}`}
+                className="form-control"
+                onChange={(e) => formHandler(e)}
+              />
             </div>
             <div className="col">
               <label htmlFor="CC">CC</label>
-              <input name="cc" id="cc" type="text" className="form-control" onChange={(e) => formHandler(e)} />
+              <input
+                name="cc"
+                id="cc"
+                type="text"
+                placeholder={`${form.cc ? form.cc : "cc"}`}
+                className="form-control"
+                onChange={(e) => formHandler(e)}
+              />
             </div>
             <div className="col">
               <label htmlFor="Email">Email</label>
-              <input type="text" name="email" id="email" className="form-control" onChange={(e) => formHandler(e)} />
+              <input
+                type="text"
+                name="email"
+                id="email"
+                placeholder={`${form.email ? form.email : "email"}`}
+                className="form-control"
+                onChange={(e) => formHandler(e)}
+              />
             </div>
             <div className="col">
               <label htmlFor="Contrasena">Contrasena</label>

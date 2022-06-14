@@ -15,7 +15,7 @@ function ListAccounts(props) {
     setAccount,
     setshowAccountModal,
   } = props;
-
+  console.log(accounts)
   return (
     <>
       <tbody>

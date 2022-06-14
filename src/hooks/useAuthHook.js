@@ -4,6 +4,7 @@ import { useState } from "react";
 function useAuthHook() {
   const [user, setUser] = useState({
     isLogin: false,
+    email: '',
     name: '',
     image: '',
   });
@@ -16,6 +17,7 @@ function useAuthHook() {
     if(body.email === 'admin@mail.com' && body.password === 'admin_intranet') {
       setUser({
         isLogin: true,
+        email: '',
         name: 'User Admin',
         image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHu9ChhiW6BNfVmsm0VZhJWTcLkyVMYo2D9Q&usqp=CAU',
       })
@@ -78,6 +80,7 @@ function useAuthHook() {
     if(token){
       setUser({
         isLogin: true,
+        email: '',
         name: 'User Admin',
         image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHu9ChhiW6BNfVmsm0VZhJWTcLkyVMYo2D9Q&usqp=CAU',
       })
@@ -85,6 +88,7 @@ function useAuthHook() {
     }else{
       setUser({
         isLogin: false,
+        email: '',
         name: '',
         image: '',
       })
