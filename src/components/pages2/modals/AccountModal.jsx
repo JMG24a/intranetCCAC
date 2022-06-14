@@ -1,4 +1,5 @@
 import axios from "axios";
+import Swal from "sweetalert2";
 import React, { useState } from "react";
 import categorias from "../../../hooks/dataCategorias";
 import ciudades from "../../../hooks/dataCiudades";
@@ -30,6 +31,11 @@ const AccountModal = ({
         getAccounts();
         setshowAccountModal(false);
         setFondoNegro(false);
+        Swal.fire({
+          icon: "success",
+          title: "Editado con exito",
+          text: "",
+        });
       })
       .catch((err) => console.log(err));
   };

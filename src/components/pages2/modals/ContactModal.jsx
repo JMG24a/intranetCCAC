@@ -1,4 +1,5 @@
 import axios from "axios";
+import Swal from "sweetalert2";
 import React, { useEffect, useState } from "react";
 import categorias from "../../../hooks/dataCategorias";
 import ciudades from "../../../hooks/dataCiudades";
@@ -23,14 +24,19 @@ const ContactsModal = ({
   };
 
   const submitHandler = (id) => {
+    console.log("ENVIADO", form)
     console.log(id);
-    console.log(form);
     axios
       .put(`${process.env.REACT_APP_SERVIDOR}/api/v1/contacts/`, [form, id])
       .then((res) => {
         getAccounts();
         setShowContactModal(false);
         setFondoNegro(false);
+        Swal.fire({
+          icon: "success",
+          title: "Editado con exito",
+          text: "",
+        });
       })
       .catch((err) => console.log(err));
   };

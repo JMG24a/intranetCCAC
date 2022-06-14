@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
+import Swal from "sweetalert2";
 import categorias from "../../../hooks/dataCategorias";
 import subCategorias from "../../../hooks/dataSubCategorias";
-import Swal from "sweetalert2";
 import axios from "axios";
 import typeF from "../../../hooks/dataTipo";
 import { useGetPartida } from "../../../hooks/useGetPartida";
@@ -93,13 +93,27 @@ const NewAccount = ({ getAccounts, setShowNewAccountModal }) => {
       });
     }
 
-    // guardo en DB
+    //guardo en DB
     console.log(form)
 
-    // await axios
-    //   .post(`${process.env.REACT_APP_SERVIDOR}/api/v1/accounts/new`, form)
-    //   .then((event) => console.log(event.data))
-    //   .catch((err) => console.error(err));
+    await axios
+      .post(`${process.env.REACT_APP_SERVIDOR}/api/v1/accounts/new`, form)
+      .then((event) => {
+        console.log(event.data)
+        Swal.fire({
+          icon: "success",
+          title: "Creado con exito",
+          text: "",
+        });
+      })
+      .catch((err) => {
+        console.error(err)
+        Swal.fire({
+          icon: "Error",
+          title: "Error de conexión",
+          text: "",
+        });
+      });
     // Cerrado del modal y vaciado del doc
 
     setForm({

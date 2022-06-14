@@ -47,9 +47,7 @@ const CreateContact = ({
   };
 
   const closeModal = () => {
-    console.log(showEnlazarContacto);
-    // setShowModalContact(false);
-    setShowModalContact(false);
+    setShowEnlazarContacto(false);
     if (dealEdit) {
       getDeals();
       return;
@@ -94,7 +92,7 @@ const CreateContact = ({
         getAccounts();
       })
       .catch((err) => console.log(err));
-    setShowEnlazarContacto(false);
+      setShowEnlazarContacto(false);
   };
 
   // const searchContactHandler = (e) => {

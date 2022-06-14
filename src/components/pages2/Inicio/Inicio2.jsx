@@ -59,11 +59,11 @@ const Inicio2 = () => {
     }
   }
 
-  const showNewAccount = () => {
-    setShowEnlazarContacto(true);
-    // document.getElementById("newAccountModal").classList.add("active");
-    // document.getElementById("fondoBlack").classList.add("fondoBlack");
-  };
+  // const showNewAccount = () => {
+  //   setShowEnlazarContacto(true);
+  //   // document.getElementById("newAccountModal").classList.add("active");
+  //   // document.getElementById("fondoBlack").classList.add("fondoBlack");
+  // };
 
   const onSearching = (e) => {
     if (e.target.value === "") {
@@ -186,7 +186,6 @@ const Inicio2 = () => {
           id={id}
           getAccounts={getAccounts}
           setShowEnlazarContacto={setShowEnlazarContacto}
-          showEnlazarContacto={showEnlazarContacto}
         />
       ) : null}
       {showAccountModal === true ? (

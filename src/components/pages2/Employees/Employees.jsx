@@ -1,4 +1,5 @@
 import axios from "axios";
+import Swal from "sweetalert2";
 import React, { useEffect, useState } from "react";
 import GetEmployees from "../../../hooks/GetEmployees";
 import { Alert } from "../../response/Alert";
@@ -47,11 +48,11 @@ const Employees = () => {
     //       message: "Empleado eliminado con exito"
     //     })
     //   }else{
-    //     setAlert({
-    //       state: false,
-    //       message: "El empleado no pudo ser eliminado",
-    //       color: "red",
-    //     })
+      // Swal.fire({
+      //   icon: "success",
+      //   title: "Eliminado con exito",
+      //   text: "",
+      // });
     //   }
     // })
     // .catch((err) => console.log(err));
@@ -86,17 +87,18 @@ const Employees = () => {
       .then((res) => {
         setModal(false);
         if(!!res.data.ok){
-          setAlert({
-            ...alert,
-            state: true,
-            message: "Empleado creado con exito"
-          })
+          Swal.fire({
+            icon: "success",
+            title: "Empleado creado con exito",
+            text: "",
+          });
+          getEmployeesInit()
         }else{
-          setAlert({
-            state: false,
-            message: "El empleado no pudo ser creado",
-            color: "red",
-          })
+          Swal.fire({
+            icon: "Error",
+            title: "El empleado no pudo ser creado",
+            text: "",
+          });
         }
       })
       .catch((err) => console.log(err));
