@@ -11,9 +11,9 @@ tareas a realizar para **arab colombian**
 -	Cambiar el campo ciudad de las cuentas y contacto y poner el campo como text mas no como select
 -	Revisar CSS para mejorar la interfaz
 -	En el Nav, hacer servir las fotos de perfil (arreglarlas dentro de employees)
--	Revisar la parte de comentarios o tareas
--	Crear un campo llamado productos en las cuentas tipo texto
--	En Accounts al crear 2 nuevos campos, uno que diga Partida y otro Productos
+-	Revisar la parte de comentarios o tareas (El back no recibe ni envia las tareas)
+-	Crear un campo llamado productos en las cuentas tipo texto (backend no recibe ni envía el campo productos)
+-	En Accounts al crear 2 nuevos campos, uno que diga Partida y otro Productos ()
 -	Sistema de login
 
 ### 1. Al editar deal falta funcion
@@ -88,7 +88,9 @@ A lo largo del desarrollo se encontró diversas fallas de presentación de los e
 - función de eliminar employee
 - la lista de contactos colapsaba al tener nombres cortos
 - corrección en el posicionamiento de los modales
-- corrigiendo la diferencia de colores en los formularios
+- corrigiendo la diferencia de colores en los formulario
+- despues de completar un formulario no da respuesta de exito
+- al crear una cuenta, y no agregarle un contacto la app, se bugea
 
 ### 15 Login
 Para este sistema se modificó el contextCalendar ahora llamado Context, para poder albergar el flujo de auth este context ahora retorna funcionalidades para el auth.
@@ -110,3 +112,15 @@ y agregar la ruta en el array dentro de la función **validationSession**
 
 ##### Token:
 Para poder hacer peticiones con autorización se debe llamar al contexto y traer la función **getToken** este retornará el token del usuario, listo para ser usado en las peticiones fetch
+
+### Backend:
+- 12 (El back no recibe ni envía las tareas)
+- 13 (backend no recibe ni envía el campo productos)
+- (Al crear una cuenta no recibe el producto y posiblemente tampoco la partida)
+- (Accounts no recibe el campo comentarios que debe ser mostrado)
+- (No se pueden eliminar los employee)
+- (No se pueden editar los employee sugerencia de funcionalidad)
+- (No se pueden eliminar los eventos del calendario)
+- (En cuentas el back no envía la información de negocios activos)
+- (Proteger los endpoints con el token que se generara al iniciar sesión)
+- (crear un endpoint para refrescar el token)
