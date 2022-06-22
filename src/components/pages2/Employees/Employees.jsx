@@ -23,8 +23,13 @@ const Employees = () => {
 
   const getEmployeesInit = async ()  => {
     const response = await getEmpleados();
-    setEmployee(response?.employees)
-    setSearch(response?.employees)
+
+    const data = response?.employees.map(item => {
+      console.log(item)
+    })
+
+    setEmployee(data)
+    setSearch(data)
   }
 
   const formHandler = (e) => {
@@ -41,7 +46,12 @@ const Employees = () => {
     setModal(true)
   }
 
+  const handlePhoto = (item) => {
+    console.log(item)
+  }
+
   const handleUpdate = () => {
+    console.log('update: ',form)
     axios
     .put(`${process.env.REACT_APP_SERVIDOR}/api/v1/employees/edit`,[form,form.id])
     .then((res) => {
@@ -192,9 +202,7 @@ const Employees = () => {
             <tr key={index} className="border-bottom">
               <td className="border-bottom-0 d-flex justify-content-center">
                 <img
-                  src = {
-                    item?.photo?.length > 28 ? item.photo : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHu9ChhiW6BNfVmsm0VZhJWTcLkyVMYo2D9Q&usqp=CAU"
-                  }
+                  src = {""}
                   alt="foto del empleado"
                   style={{
                     width: "40px",

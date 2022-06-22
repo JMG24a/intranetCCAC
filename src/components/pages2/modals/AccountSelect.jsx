@@ -11,20 +11,23 @@ const AccountSelect = ({
 }) => {
   const accounts = GetAccounts();
   const [acc, setAcc] = useState([]);
+  const [search, setSearch] = useState([]);
+  console.log(acc)
 
-  const searchHandler = (e) => {
-    if (e.target.value.split("").length > 2) {
-      axios
-        .get(
-          `${process.env.REACT_APP_SERVIDOR}/api/v1/accounts/${e.target.value}`
-        )
-        .then((res) => setAcc(res.data.Acc))
-        .catch((err) => console.error(err));
-      return;
-    } else if (e.target.value.split("").length === 0) {
-      console.log("buscar esta vacio");
-      setAcc(accounts);
+  const onSearching = (e) => {
+    if (e.target.value === "") {
+      setSearch(accounts);
+      return 0;
     }
+    const filter = accounts.filter((item) => {
+      if (item.accountName.length === 0) {
+        return false;
+      } else {
+        const isTrue = item.accountName.toLowerCase().includes(e.target.value.toLowerCase());
+        return isTrue;
+      }
+    })
+    setSearch(filter);
   };
 
   const selectHandler = (idAccount, idDeal) => {
@@ -43,8 +46,9 @@ const AccountSelect = ({
 
   useEffect(() => {
     // getAccounts();
+    setSearch(accounts)
     setFondoNegro(true);
-  }, []);
+  }, [accounts]);
 
   return (
     <div>
@@ -63,6 +67,7 @@ const AccountSelect = ({
         className="accountSelect"
         style={{
           maxHeight: "700px",
+          maxWidth: "100%",
           overflowY: "hidden"
         }}
       >
@@ -71,12 +76,13 @@ const AccountSelect = ({
           className="bg-white p-4 rounded"
           style={{
             maxHeight: "500px",
+            maxWidth: "100%",
             overflowY: "scroll"
           }}
         >
           <div
             className="form-group mb-4"
-            style={{maxHeight: "300px", overflow: "hidden"}}
+            style={{maxHeight: "300px", maxWidth: "100%", overflow: "hidden"}}
           >
             <input
               className="form-control"
@@ -84,7 +90,7 @@ const AccountSelect = ({
               name="search"
               id="search"
               placeholder="Ingrese Busqueda"
-              onChange={(e) => searchHandler(e)}
+              onChange={(e) => onSearching(e)}
             />
           </div>
           <table className="table">
@@ -103,7 +109,7 @@ const AccountSelect = ({
                       </td>
                     </tr>
                   ))
-                : accounts.map((item, index) => (
+                : search.map((item, index) => (
                     <tr key={index}>
                       <td>{item.accountName}</td>
                       <td>
