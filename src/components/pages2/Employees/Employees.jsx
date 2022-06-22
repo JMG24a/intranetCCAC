@@ -14,7 +14,7 @@ const Employees = () => {
   const [modal, setModal] = useState(false);
   const [isUpdate, setIsUpdate] = useState(false);
 
-
+  console.log(employee)
   useEffect(()=>{
     if(employee.length <= 0){
       getEmployeesInit()
@@ -159,7 +159,7 @@ const Employees = () => {
               >
               Crear Nuevo
             </button>
-          </div>setModal
+          </div>
           <div className="col-4">
             <input
               className="buscarInput"
