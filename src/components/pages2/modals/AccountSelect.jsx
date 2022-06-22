@@ -51,6 +51,7 @@ const AccountSelect = ({
       {fondoNegro ? (
         <div
           className="fondoNegro"
+          style={{marginLeft: "2px" }}
           onClick={() => {
             setFondoNegro(false);
             setShowModalAccount(false);

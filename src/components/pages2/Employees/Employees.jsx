@@ -43,7 +43,7 @@ const Employees = () => {
 
   const handleUpdate = () => {
     axios
-    .put(`${process.env.REACT_APP_SERVIDOR}/api/v1/employees/edit/${[form,form.id]}`)
+    .put(`${process.env.REACT_APP_SERVIDOR}/api/v1/employees/edit`,[form,form.id])
     .then((res) => {
       if(!!res.data.ok){
         Swal.fire({
