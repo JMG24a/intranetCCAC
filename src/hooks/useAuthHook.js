@@ -14,39 +14,40 @@ function useAuthHook() {
   const login = async (body) => {
     loading = true
 
-    if(body.email === 'admin@mail.com' && body.password === 'admin_intranet') {
-      setUser({
-        isLogin: true,
-        email: '',
-        name: 'User Admin',
-        image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHu9ChhiW6BNfVmsm0VZhJWTcLkyVMYo2D9Q&usqp=CAU',
-      })
-      window.sessionStorage.setItem('token', 'este es mi token 00')
-      return 'Success';
-    }
-
-    // try{
-    //   loading = true
-    //   const { data } = await axios({
-    //     method: 'POST',
-    //     url: 'URL',
-    //     data: body,
+    // if(body.email === 'admin@mail.com' && body.password === 'admin_intranet') {
+    //   setUser({
+    //     isLogin: true,
+    //     email: '',
+    //     name: 'User Admin',
+    //     image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHu9ChhiW6BNfVmsm0VZhJWTcLkyVMYo2D9Q&usqp=CAU',
     //   })
-
-    //   if(data){
-    //     setUser({
-    //       isLogin: true,
-    //       name: data.user.name,
-    //       image: data.user.image,
-    //     })
-    //     window.sessionStorage.setItem('key', 'data.token')
-    //   }
-
-    //   loading = false
-    //   return data.msg
-    // }catch (e) {
-    //   console.error(e)
+    //   window.sessionStorage.setItem('token', 'este es mi token 00')
+    //   return 'Success';
     // }
+
+    try{
+      loading = true
+      const { data } = await axios({
+        method: 'POST',
+        url: `${process.env.REACT_APP_SERVIDOR}/api/v1/login`,
+        data: body,
+      })
+
+      if(data){
+        setUser({
+          isLogin: true,
+          email: data.user.email,
+          name: data.user.nameEmployee,
+          image: data.user.photo,
+        })
+        window.sessionStorage.setItem('key', `${data.token}`)
+      }
+
+      loading = false
+      return data.msg
+    }catch (e) {
+      console.error(e)
+    }
 
     loading = false
     return 'incorrect Auth';
@@ -54,7 +55,7 @@ function useAuthHook() {
 
   const getUser = async() => {
     loading = true;
-    const token = window.sessionStorage.getItem('token')
+    const token = window.sessionStorage.getItem('key')
 
     // try{
     //   const { data } = await axios({
@@ -102,7 +103,7 @@ function useAuthHook() {
       name: '',
       image: '',
     })
-    window.sessionStorage.removeItem('token')
+    window.sessionStorage.removeItem('key')
   }
 
 
@@ -123,7 +124,7 @@ function useAuthHook() {
   }
 
   const getToken = () => {
-    const token = window.sessionStorage.getItem('token')
+    const token = window.sessionStorage.getItem('key')
     return token
   }
 
