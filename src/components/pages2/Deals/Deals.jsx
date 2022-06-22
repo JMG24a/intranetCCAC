@@ -27,7 +27,7 @@ const Deals = () => {
   const [showModalAccount, setShowModalAccount] = useState(false);
   //jmg24a repairing filters --
   const [search, setSearch] = useState([]);
-  console.log(deals)
+
   const getDeals = async () => {
     await axios
       .get(`${process.env.REACT_APP_SERVIDOR}/api/v1/deals`)
@@ -290,7 +290,13 @@ const Deals = () => {
         />
       ) : null}
       {showModalContact ? (
-        <CreateContact setShowModalContact={setShowModalContact} id={idDeal} setDealEdit={setDealEdit} dealEdit={dealEdit} getDeals={getDeals} />
+        <CreateContact
+          setShowEnlazarContacto={setShowModalContact}
+          id={idDeal}
+          setDealEdit={setDealEdit}
+          dealEdit={dealEdit}
+          getDeals={getDeals}
+        />
       ) : null}
       {showModalAccount ? (
         <AccountSelect
