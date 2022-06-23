@@ -24,6 +24,7 @@ const AccountModal = ({
   };
 
   const submitHandler = (id) => {
+    console.log(form)
     axios
       .put(`${process.env.REACT_APP_SERVIDOR}/api/v1/accounts/`, [form, id])
       .then((res) => {
@@ -186,6 +187,19 @@ const AccountModal = ({
                     </option>
                   ))}
                 </select>
+              </div>
+            </div>
+            <div className="col-md-6">
+              <div className="fila">
+                <label htmlFor="origen">Origen</label>
+                <input
+                  type="text"
+                  name="origen"
+                  id="origen"
+                  className="form-control"
+                  value={account.origen}
+                  onChange={(e) => formHandler(e)}
+                />
               </div>
             </div>
           </div>

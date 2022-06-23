@@ -1,19 +1,16 @@
 import { Context } from "../../context/Context";
-import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-import Cookies from "universal-cookie";
 import Swal from "sweetalert2";
 
 const Login = () => {
-  const cookies = new Cookies();
   const { auth: { login, user } } = useContext(Context)
   const history = useHistory();
   const [form, setForm] = useState([]);
 
   useEffect(()=>{
     if(user.isLogin){
-      history.replace("/");
+      history.replace(`${user.root}`);
     }
   },[user])
 
@@ -27,7 +24,6 @@ const Login = () => {
     const regex = /\incorrect/g
 
     if(regex.test(response)){
-      console.log(response)
       Swal.fire({
         icon: "error",
         title: "Error de inicio",
@@ -35,40 +31,6 @@ const Login = () => {
       });
     }
   }
-
-  // const loginHandler = (e) => {
-  //   e.preventDefault();
-
-  //   const body = form;
-
-  //   axios
-  //     .post(`${process.env.REACT_APP_SERVIDOR}/api/usuarios`, body, {
-  //       headers: {
-  //         token: "JaRvIs92!",
-  //         correo: form.correo,
-  //         password: form.password,
-  //       },
-  //     })
-  //     .then((e) => {
-  //       const token = e.data.token;
-  //       const tokenAuth = token.slice(0, 1) * 3;
-  //       if (tokenAuth === 0) {
-  //         console.log("autenticado");
-  //         cookies.set(
-  //           "token",
-  //           "3d33c77f6aba01680fce7ec86557886856f6e75392fc3d7e79566fd0980b6c03",
-  //           { path: "/", maxAge: 2592000 }
-  //         );
-  //         cookies.set("usuario", e.data.nombre);
-
-  //         cookies.set("userId", e.data.id);
-  //         history.replace("/");
-  //       } else {
-  //         return console.log("Error de autenticacion 2");
-  //       }
-  //     })
-  //     .catch((e) => console.log(e));
-  // };
 
   return (
     <div>

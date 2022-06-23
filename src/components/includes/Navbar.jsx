@@ -1,8 +1,6 @@
 import { Context } from "../../context/Context";
-import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import { Link, useHistory, useLocation } from "react-router-dom";
-import Cookies from "universal-cookie";
 import { MenuAdmin } from "./MenuAdmin";
 
 const Navbar = () => {
@@ -20,6 +18,7 @@ const Navbar = () => {
 
   const validationSession = async () => {
     const success = await getUser();
+
     const router = locate.pathname.replace('/', '');
     const isValid = ['login','register'].includes(router);
 

@@ -13,7 +13,6 @@ const NewAccount = ({ getAccounts, setShowNewAccountModal }) => {
   const [isPartida, setIsPartida] = useState(false);
   const [form, setForm] = useState({
     type: "",
-    priority: "",
     accountName: "",
     email: "",
     categoria: "",
@@ -41,13 +40,6 @@ const NewAccount = ({ getAccounts, setShowNewAccountModal }) => {
         icon: "error",
         title: "Oops...",
         text: "Revisa el campo Tipo!",
-      });
-      return;
-    } else if (form.priority === "" || form.priority === "- Seleccione -") {
-      Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "Revisa el campo Prioridad!",
       });
       return;
     } else if (form.accountName === "") {
@@ -94,8 +86,6 @@ const NewAccount = ({ getAccounts, setShowNewAccountModal }) => {
     }
 
     //guardo en DB
-    console.log(form)
-
     await axios
       .post(`${process.env.REACT_APP_SERVIDOR}/api/v1/accounts/new`, form)
       .then((event) => {
@@ -151,26 +141,35 @@ const NewAccount = ({ getAccounts, setShowNewAccountModal }) => {
         </div>
         <h2 className="mb-4">CREAR NUEVA CUENTA</h2>
         <div className="contenedorSubNewACC position-relative">
-          <div className="form-group" style={{marginBottom: "20px", marginTop: "-20px"}}>
-            <label htmlFor="type" className="labelNewAccount">
-              PRIORIDAD
-            </label>
-            <select
-              className="form-control"
-              style={{textAlign: "center"}}
-              name="priority"
-              id="priority"
-              onChange={(e) => {
-                formHandler(e);
-              }}
-              value={form.priority}
-            >
-              <option>- Seleccione -</option>
-              <option value="Alta">Alta</option>
-              <option value="Media">Media</option>
-              <option value="Baja">Baja</option>
-            </select>
-          </div>
+          <div
+            className="form-group"
+            style={{
+              marginBottom: "20px",
+              marginTop: "-20px",
+              textAlign: "center"
+            }}
+          >
+              <label htmlFor="type" className="labelNewAccount">
+                TIPO
+              </label>
+              <select
+                className="form-control"
+                style={{
+                  textAlign: "center"
+                }}
+                name="type"
+                id="type"
+                onChange={(e) => {
+                  formHandler(e);
+                }}
+                value={form.type}
+              >
+                <option>- Seleccione -</option>
+                <option value="Client">Client</option>
+                <option value="Partner">Partner</option>
+                <option value="Vendor">Vendor</option>
+              </select>
+            </div>
 
           <div className="row  position-relative">
             <div className="col">

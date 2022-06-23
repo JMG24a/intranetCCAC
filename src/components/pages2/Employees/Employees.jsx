@@ -16,7 +16,7 @@ const Employees = () => {
   const [image, setImage] = useState(null)
 
   useEffect(()=>{
-    if(employee.length <= 0){
+    if(employee?.length <= 0){
       getEmployeesInit()
     }
   })
@@ -215,7 +215,7 @@ const Employees = () => {
           </tr>
         </thead>
         <tbody>
-          {search.map((item, index) => (
+          {search?.map((item, index) => (
             <tr key={index} className="border-bottom">
               <td className="border-bottom-0 d-flex justify-content-center">
                 <img

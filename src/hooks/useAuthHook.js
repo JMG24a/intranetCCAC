@@ -3,6 +3,7 @@ import { useState } from "react";
 
 function useAuthHook() {
   const [user, setUser] = useState({
+    root: '/',
     isLogin: false,
     email: '',
     name: '',
@@ -24,6 +25,7 @@ function useAuthHook() {
 
       if(data){
         setUser({
+          root: `/`,
           isLogin: true,
           email: data.user.email,
           name: data.user.nameEmployee,
@@ -42,7 +44,7 @@ function useAuthHook() {
     return 'incorrect Auth';
   }
 
-  const getUser = async() => {
+  const getUser = async(root) => {
     loading = true;
     const jwt = window.sessionStorage.getItem('key')
     const token = {
@@ -55,9 +57,10 @@ function useAuthHook() {
         url: `${process.env.REACT_APP_SERVIDOR}/api/v1/authorization`,
         data: token
       })
-      console.log(data)
+
       if(data){
         setUser({
+          root: `${root}`,
           isLogin: true,
           name: data?.employee?.nameEmployee,
           email: data?.employee?.email,
@@ -68,7 +71,7 @@ function useAuthHook() {
       }
 
       loading = false;
-      return data.success
+      return data
     }catch(e){
       console.error(e)
     }
