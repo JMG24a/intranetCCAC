@@ -41,7 +41,7 @@ const Deals = () => {
       })
       .catch((err) => console.log(err));
   };
-  console.log(deals)
+
   const onSearching = (e) => {
     if (e.target.value === "") {
       setSearch(deals);
@@ -60,15 +60,20 @@ const Deals = () => {
 
   const stageFilter = (e) => {
     if (e.target.name === "owner") {
-      if (e.target.value === "KAM") {
-        console.log("first", filteredDeals);
+      if (e.target.value === "KAM"){
         setSearch(filteredDeals);
         return;
       }
-      const filtrado = filteredDeals.filter((item) => item.owner[0].nameEmployee === e.target.value);
+
+      const filtrado = filteredDeals.filter((item) => {
+        const data = item.owner[0].nameEmployee
+        const isTrue = data.includes(e.target.value)
+        return isTrue;
+      });
+
       setSearch(filtrado);
-      console.log(filtrado);
-      return;
+
+      return 0;
     }
 
     if (e.target.value === "priority" || e.target.value === "stage") {
@@ -87,22 +92,22 @@ const Deals = () => {
     setSearch(filtrado);
   };
 
-  // const searchHandler = (e) => {
-  //   if (e.target.value.split("").length > 3) {
-  //     axios
-  //       .get(`${process.env.REACT_APP_SERVIDOR}/api/v1/deals/${e.target.value}`)
-  //       .then((res) => {
-  //         console.log('??: ', res.data.deals);
-  //         setDeals(res.data.deals);
-  //         setSearch(res.data.deals);
-  //       })
-  //       .catch((err) => console.error(err));
-  //     return;
-  //   } else if (e.target.value.split("").length === 0) {
-  //     console.log("buscar esta vacio");
-  //     getDeals();
-  //   }
-  // };
+  const searchHandler = (e) => {
+    if (e.target.value.split("").length > 3) {
+      axios
+        .get(`${process.env.REACT_APP_SERVIDOR}/api/v1/deals/${e.target.value}`)
+        .then((res) => {
+          console.log('??: ', res.data.deals);
+          setDeals(res.data.deals);
+          setSearch(res.data.deals);
+        })
+        .catch((err) => console.error(err));
+      return;
+    } else if (e.target.value.split("").length === 0) {
+      console.log("buscar esta vacio");
+      getDeals();
+    }
+  };
 
   const formHandler = (tipo, e, idDeal) => {
     const form = [{ [e.target.name]: e.target.value }, idDeal];

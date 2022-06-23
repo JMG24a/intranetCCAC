@@ -149,55 +149,29 @@ const NewAccount = ({ getAccounts, setShowNewAccountModal }) => {
         >
           <i className="fa fa-times fa-2x"></i>
         </div>
-        <h2 className="mb-4 mt-3">CREAR NUEVA CUENTA</h2>
+        <h2 className="mb-4">CREAR NUEVA CUENTA</h2>
         <div className="contenedorSubNewACC position-relative">
-          <div className="row mb-4 firstSelect">
-            <div className="col-md-6">
-              <div className="form-group">
-                <label htmlFor="type" className="labelNewAccount">
-                  TIPO
-                </label>
-                <select
-                  className="form-control"
-                  name="type"
-                  id="type"
-                  onChange={(e) => {
-                    formHandler(e);
-                  }}
-                  value={form.type}
-                >
-                  <option>- Seleccione -</option>
-
-                  {typeF.map((i, index) => (
-                    <option key={index} value={i}>
-                      {i}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            </div>
-            <div className="col-md-6">
-              <div className="form-group">
-                <label htmlFor="type" className="labelNewAccount">
-                  PRIORIDAD
-                </label>
-                <select
-                  className="form-control"
-                  name="priority"
-                  id="priority"
-                  onChange={(e) => {
-                    formHandler(e);
-                  }}
-                  value={form.priority}
-                >
-                  <option>- Seleccione -</option>
-                  <option value="Alta">Alta</option>
-                  <option value="Media">Media</option>
-                  <option value="Baja">Baja</option>
-                </select>
-              </div>
-            </div>
+          <div className="form-group" style={{marginBottom: "20px", marginTop: "-20px"}}>
+            <label htmlFor="type" className="labelNewAccount">
+              PRIORIDAD
+            </label>
+            <select
+              className="form-control"
+              style={{textAlign: "center"}}
+              name="priority"
+              id="priority"
+              onChange={(e) => {
+                formHandler(e);
+              }}
+              value={form.priority}
+            >
+              <option>- Seleccione -</option>
+              <option value="Alta">Alta</option>
+              <option value="Media">Media</option>
+              <option value="Baja">Baja</option>
+            </select>
           </div>
+
           <div className="row  position-relative">
             <div className="col">
               <div className="left-inner-addon input-container">

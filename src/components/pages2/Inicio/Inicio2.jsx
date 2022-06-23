@@ -31,7 +31,7 @@ const Inicio2 = () => {
         setSearchPriory(e.data.accounts);
       })
       .catch((err) => {
-        console.log(err);
+        console.error(err);
       });
   };
 
@@ -88,11 +88,11 @@ const Inicio2 = () => {
       .put(`${process.env.REACT_APP_SERVIDOR}/api/v1/accounts`, form)
       .then((res) => {
         // alert("actualizado correctamente");
-        console.log(res.data);
+
         getAccounts();
       })
       .catch((err) => {
-        console.log(err);
+        console.error(err);
       });
   };
 
@@ -137,8 +137,8 @@ const Inicio2 = () => {
                 <th>TIPO</th>
                 <th>VALOR DE LA CUENTA</th>
                 <th>CONTACTOS</th>
+                <th>WEBSITE</th>
                 <th>ORIGEN</th>
-                <th>NEGOCIOS ACTIVOS</th>
                 <th>
                   <select name="categories" id="" onChange={(e)=>searchPriorities(e)}>
                     <option value='Todo'>Categorias</option>

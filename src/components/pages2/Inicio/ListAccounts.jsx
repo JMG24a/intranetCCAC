@@ -15,7 +15,7 @@ function ListAccounts(props) {
     setAccount,
     setshowAccountModal,
   } = props;
-  console.log(accounts)
+
   return (
     <>
       <tbody>
@@ -28,8 +28,21 @@ function ListAccounts(props) {
               {
                 <select
                   className={
-                    item.type === "Client" ? "typeCustomer" : item.type === "Partner" ? "typePartner" : item.type === "Vendor" ? "typeVendor" : ""
+                    item.type === "Vendedor"
+                      ? "stageLead"
+                      : item.type === "Vendor"
+                      ? "stageProposal"
+                      : item.type === "Academia"
+                      ? "stageNegotiation"
+                      : item.type === "Partner"
+                      ? "stageContract"
+                      : item.type === "Client"
+                      ? "stageWon"
+                      : item.type === "Comprador"
+                      ? "inputPriorityAlta"
+                      : ""
                   }
+                  style={{borderRadius: "10px", border: "none"}}
                   name="type"
                   id="type"
                   value={item.type}
@@ -60,17 +73,17 @@ function ListAccounts(props) {
                   <input
                     key={index}
                     className="inputContact"
+                    style={{minWidth: "200px"}}
                     type="text"
                     name=""
                     id=""
                     value={i.contactName}
                     onClick={() => {
                       setId(i._id);
-                      // console.log(i._id);
                       axios
                         .get(`${process.env.REACT_APP_SERVIDOR}/api/v1/contacts/id/${i._id}`)
                         .then((res) => setClient(res.data.contact))
-                        .catch((err) => console.log(err));
+                        .catch((err) => console.error(err));
 
                       setFondoNegro(true);
                       setShowContactModal(true);
@@ -95,17 +108,23 @@ function ListAccounts(props) {
               <input
                 key={index}
                 className="inputContact"
+                style={{minWidth: "100px"}}
+                type="text"
+                name="website"
+                id="website"
+                value={item.website}
+              />
+              </td>
+            <td>
+              <input
+                key={index}
+                className="inputContact"
+                style={{minWidth: "100px"}}
                 type="text"
                 name="origen"
                 id="origen"
-                value={item.website}
+                value={item?.origen}
               />
-            </td>
-            <td id="inputDeals">
-              {item.deals // jmg24a deals array does not exist
-                ? JSON.parse(item.deals)
-                  .map((i, index) => <input key={index} className="inputDeals" type="text" name="" id="" value={i} readOnly />)
-                : "inactivo"}
             </td>
             <td id="subCategoria" style={{ minWidth: "200px", textAlign: "left" }}>
               {
@@ -148,6 +167,7 @@ function ListAccounts(props) {
                 id="products"
                 className="border emailInput"
                 value={item.products}
+                readOnly={true}
               />
             </td>
             <td>{item.comments}</td>
@@ -159,7 +179,7 @@ function ListAccounts(props) {
                   axios
                     .get(`${process.env.REACT_APP_SERVIDOR}/api/v1/accounts/id/${item.id}`)
                     .then((res) => setAccount(res.data.Acc))
-                    .catch((err) => console.log(err));
+                    .catch((err) => console.error(err));
 
                   setFondoNegro(true);
                   setshowAccountModal(true);

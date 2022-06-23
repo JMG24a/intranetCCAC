@@ -14,17 +14,6 @@ function useAuthHook() {
   const login = async (body) => {
     loading = true
 
-    // if(body.email === 'admin@mail.com' && body.password === 'admin_intranet') {
-    //   setUser({
-    //     isLogin: true,
-    //     email: '',
-    //     name: 'User Admin',
-    //     image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHu9ChhiW6BNfVmsm0VZhJWTcLkyVMYo2D9Q&usqp=CAU',
-    //   })
-    //   window.sessionStorage.setItem('token', 'este es mi token 00')
-    //   return 'Success';
-    // }
-
     try{
       loading = true
       const { data } = await axios({
@@ -55,45 +44,33 @@ function useAuthHook() {
 
   const getUser = async() => {
     loading = true;
-    const token = window.sessionStorage.getItem('key')
+    const jwt = window.sessionStorage.getItem('key')
+    const token = {
+      token: `${jwt}`
+    }
 
-    // try{
-    //   const { data } = await axios({
-    //     method: 'POST',
-    //     url: 'URL',
-    //     data: token,
-    //   })
-
-    //   if(data.success){
-    //     setUser({
-    //        isLogin: true,
-    //        name: data.user.name,
-    //        image: data.user.image,
-    //      })
-    //   }
-
-    //   loading = false;
-    //   return data.success
-    // }catch(e){
-    //   console.error(e)
-    // }
-
-    if(token){
-      setUser({
-        isLogin: true,
-        email: '',
-        name: 'User Admin',
-        image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHu9ChhiW6BNfVmsm0VZhJWTcLkyVMYo2D9Q&usqp=CAU',
+    try{
+      const { data } = await axios({
+        method: 'POST',
+        url: `${process.env.REACT_APP_SERVIDOR}/api/v1/authorization`,
+        data: token
       })
-      return true
-    }else{
-      setUser({
-        isLogin: false,
-        email: '',
-        name: '',
-        image: '',
-      })
-      return false
+      console.log(data)
+      if(data){
+        setUser({
+          isLogin: true,
+          name: data?.employee?.nameEmployee,
+          email: data?.employee?.email,
+          image: data?.employee?.photo,
+        })
+        window.sessionStorage.removeItem('key')
+        window.sessionStorage.setItem('key', `${data.token}`)
+      }
+
+      loading = false;
+      return data.success
+    }catch(e){
+      console.error(e)
     }
   }
 
@@ -101,6 +78,7 @@ function useAuthHook() {
     setUser({
       isLogin: false,
       name: '',
+      email: '',
       image: '',
     })
     window.sessionStorage.removeItem('key')

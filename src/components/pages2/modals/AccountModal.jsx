@@ -27,7 +27,6 @@ const AccountModal = ({
     axios
       .put(`${process.env.REACT_APP_SERVIDOR}/api/v1/accounts/`, [form, id])
       .then((res) => {
-        console.log(res.data);
         getAccounts();
         setshowAccountModal(false);
         setFondoNegro(false);
@@ -37,7 +36,7 @@ const AccountModal = ({
           text: "",
         });
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.error(err));
   };
 
   return (
@@ -54,30 +53,10 @@ const AccountModal = ({
       ) : null}
       <div className="fondoContacts py-5" id="contactModal">
         <h1 className="text-white my-3">Informacion de la Cuenta</h1>
-        <div className="bg-white p-4 rounded">
+        <div className="bg-white p-4 rounded d-flex justify-content-around">
           <div className="row">
             <div className="col-md-6">
-              <div className="fila">
-                <label htmlFor="priority">Prioridad</label>
-                <select
-                  name="priority"
-                  id="priority"
-                  className="form-control"
-                  onChange={(e) => formHandler(e)}
-                >
-                  <option defaultValue={account.priority}>
-                    {account.priority}
-                  </option>
-                  {priority.map((item, index) => (
-                    <option value={item} key={index}>
-                      {item}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            </div>
-            <div className="col-md-6">
-              <div className="fila">
+              <div className="fila" style={{minWidth: "150px", marginRight: "50px", marginLeft: "50px"}}>
                 <label htmlFor="type">Tipo</label>
                 <select
                   name="type"
@@ -97,7 +76,7 @@ const AccountModal = ({
           </div>
           <div className="row">
             <div className="col-md-6">
-              <div className="fila">
+              <div className="fila" style={{minWidth: "150px", marginLeft: "170px"}}>
                 <label htmlFor="accountValue">Account Value</label>
                 <input
                   type="text"
@@ -270,19 +249,12 @@ const AccountModal = ({
                   <div className="col-md-6">
                     <div className="fila">
                       <label htmlFor="city">Ciudad</label>
-                      <select
+                      <input
                         name="city"
                         id="city"
                         className="form-control"
                         onChange={(e) => formHandler(e)}
-                      >
-                        <option value={account.city}>{account.city}</option>
-                        {ciudades.map((item, index) => (
-                          <option value={item} key={index}>
-                            {item}
-                          </option>
-                        ))}
-                      </select>
+                      />
                     </div>
                   </div>
                 </div>
