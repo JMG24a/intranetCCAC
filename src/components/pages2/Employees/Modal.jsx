@@ -1,6 +1,32 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useEffect } from 'react';
+import { useRef } from 'react';
 
-function EmployeeModal({submitHandler, formHandler, form, setModal}) {
+function EmployeeModal({submitHandler, formHandler, form, setModal, setImage,image}) {
+
+  const [preview, setPreview] = useState(null)
+  const fileRef = useRef();
+
+  useEffect(()=>{
+    if(image){
+      const reader = new FileReader()
+      reader.onloadend = () => {
+        setPreview(reader.result)
+      }
+      reader.readAsDataURL(image)
+    }else{
+      setPreview(null)
+    }
+  },[image])
+
+  const handleImage = (e) => {
+    const file = e.target.files[0];
+    if(file && file.type.substr(0,5) === "image"){
+      setImage(file)
+    }else{
+      setImage(null)
+    }
+  }
     return (
       <div className="modal-dialog" style={{marginTop: "170px"}}>
         <div className="modal-content">
@@ -12,10 +38,19 @@ function EmployeeModal({submitHandler, formHandler, form, setModal}) {
           </div>
           <div className="modal-body">
             <div className="col-md-6">
-              <img src="https://via.placeholder.com/400x400.png" className="img-fluid" alt="" />
+            {preview ?
+                <img src={preview} className="img-fluid" alt="su avatar" width={"400px"} height={"400px"}/>
+                :
+                <img src="https://via.placeholder.com/400x400.png" className="img-fluid" alt="su avatar" width={"400px"} height={"400px"}/>
+            }
             </div>
-            <input type="file" name="" id="" />
-
+            <input
+              type="file"
+              name="photo"
+              ref={fileRef}
+              accept="image/*"
+              onChange={(e)=>{handleImage(e)}}
+            />
             <div className="col mt-4">
               <label htmlFor="Nombre">Nombre</label>
               <input

@@ -13,8 +13,8 @@ const Employees = () => {
   const [employee, setEmployee] = useState([]);
   const [modal, setModal] = useState(false);
   const [isUpdate, setIsUpdate] = useState(false);
+  const [image, setImage] = useState(null)
 
-  console.log(employee)
   useEffect(()=>{
     if(employee.length <= 0){
       getEmployeesInit()
@@ -24,12 +24,12 @@ const Employees = () => {
   const getEmployeesInit = async ()  => {
     const response = await getEmpleados();
 
-    const data = response?.employees.map(item => {
-      console.log(item)
-    })
+    // const data = response?.employees.map(item => {
+    //   console.log(item)
+    // })
 
-    setEmployee(data)
-    setSearch(data)
+    setEmployee(response?.employees)
+    setSearch(response?.employees)
   }
 
   const formHandler = (e) => {
@@ -46,14 +46,20 @@ const Employees = () => {
     setModal(true)
   }
 
-  const handlePhoto = (item) => {
-    console.log(item)
-  }
-
   const handleUpdate = () => {
-    console.log('update: ',form)
+    const f = new FormData()
+    f.append('cc', form.cc)
+    f.append('email',form.email)
+    f.append('id', form.id)
+    f.append('nameEmployee', form.nameEmployee)
+    f.append('password', form.password)
+
+    if(image) {
+      f.append('photo', image, 'form-data')
+    }
+
     axios
-    .put(`${process.env.REACT_APP_SERVIDOR}/api/v1/employees/edit`,[form,form.id])
+    .put(`${process.env.REACT_APP_SERVIDOR}/api/v1/employees/edit`,[f,form.id])
     .then((res) => {
       if(!!res.data.ok){
         Swal.fire({
@@ -134,6 +140,17 @@ const Employees = () => {
       return 0;
     }
 
+    const f = new FormData()
+    f.append('cc', form.cc)
+    f.append('email',form.email)
+    f.append('id', form.id)
+    f.append('nameEmployee', form.nameEmployee)
+    f.append('password', form.password)
+
+    if(image) {
+      f.append('photo', image, 'form-data')
+    }
+
     axios
       .post(`${process.env.REACT_APP_SERVIDOR}/api/v1/employees/new`, form)
       .then((res) => {
@@ -202,7 +219,7 @@ const Employees = () => {
             <tr key={index} className="border-bottom">
               <td className="border-bottom-0 d-flex justify-content-center">
                 <img
-                  src = {""}
+                  src = {item.photo}
                   alt="foto del empleado"
                   style={{
                     width: "40px",
@@ -222,7 +239,7 @@ const Employees = () => {
               </td>
               <td></td>
               <td className="d-flex justify-content-center border-bottom-0">
-                <button className="btn btn-danger" onClick={()=>handleDelete(item)}>
+                <button className="btn btn-danger" onDoubleClick={()=>handleDelete(item)}>
                   <i className="fa fa-trash"></i>
                 </button>
               </td>
@@ -238,6 +255,8 @@ const Employees = () => {
             formHandler={formHandler}
             submitHandler={submitHandler}
             setModal={setModal}
+            setImage={setImage}
+            image={image}
           />
         </Modal>
       }
@@ -248,6 +267,8 @@ const Employees = () => {
             formHandler={formHandler}
             submitHandler={handleUpdate}
             setModal={setIsUpdate}
+            setImage={setImage}
+            image={image}
           />
       </Modal>
       }

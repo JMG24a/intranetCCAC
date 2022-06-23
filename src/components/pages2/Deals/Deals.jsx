@@ -41,7 +41,7 @@ const Deals = () => {
       })
       .catch((err) => console.log(err));
   };
-
+  console.log(deals)
   const onSearching = (e) => {
     if (e.target.value === "") {
       setSearch(deals);

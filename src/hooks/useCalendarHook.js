@@ -71,7 +71,7 @@ function useCalendarHook() {
     try {
       await axios({
         method: "PUT",
-        url: "https://ccacback.com/api/v1/calendar",
+        url: `${process.env.REACT_APP_SERVIDOR}/api/v1/calendar`,
         data: edit,
       });
 
@@ -84,14 +84,14 @@ function useCalendarHook() {
 
   const removed = async (data) => {
     setIsLoading(true);
-    const id = { id: data.id };
+    const id = data.id;
     try {
-      await axios({
+      const {data} = await axios({
         method: "DELETE",
-        url: "https://ccacback.com/api/v1/calendar",
-        data: id,
+        url: `${process.env.REACT_APP_SERVIDOR}/api/v1/calendar`,
+        data: id
       });
-
+      console.log(data)
       await getEvents();
       setIsLoading(false);
     } catch (e) {
