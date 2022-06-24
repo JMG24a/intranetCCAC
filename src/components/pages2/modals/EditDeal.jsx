@@ -1,4 +1,5 @@
 import axios from "axios";
+import Swal from "sweetalert2";
 import React, { useEffect, useRef, useState } from "react";
 import { DataEmployees } from "../../../hooks/DataEmployees.jsx";
 import stage from "../../../hooks/dataStage";
@@ -46,6 +47,11 @@ const EditDeal = ({ fondoNegro, setFondoNegro, setShowEditDeal, getDeals, idDeal
         // console.log(res.data.newDeal);
         setFondoNegro(false)
         setShowEditDeal(false)
+        Swal.fire({
+          icon: "success",
+          title: "Editado con exito",
+          text: "",
+        });
         getDeals();
       })
       .catch((err) => {

@@ -101,7 +101,7 @@ const NewAccount = ({ getAccounts, setShowNewAccountModal }) => {
         Swal.fire({
           icon: "Error",
           title: "Error de conexión",
-          text: "",
+          text: "No se pudo resolver la consulta",
         });
       });
     // Cerrado del modal y vaciado del doc
