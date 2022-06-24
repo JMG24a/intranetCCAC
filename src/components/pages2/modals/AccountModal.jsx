@@ -197,7 +197,7 @@ const AccountModal = ({
                   name="origen"
                   id="origen"
                   className="form-control"
-                  value={account.origen}
+                  defaultValue={account.origen}
                   onChange={(e) => formHandler(e)}
                 />
               </div>
@@ -268,6 +268,7 @@ const AccountModal = ({
                         id="city"
                         className="form-control"
                         onChange={(e) => formHandler(e)}
+                        defaultValue={account.city}
                       />
                     </div>
                   </div>
